@@ -1,4 +1,4 @@
-<a href="http://bestwebsoft.com/plugin/bws-google-analytics/" target=_blank>Bestwebsoft Google Analytics Plugin</a>
+<a href="http://bestwebsoft.com/plugin/bws-google-analytics/" target=_blank>BestWebSoft Google Analytics Plugin</a>
 =============================================
 
 This plugin establishes a connection with your Google Analytics account and allows you to retrieve basic metrics from webproperties you have on this account. Statistical report appears as a table or as a line chart on the plugin settings page in the Wordpress Admin area. User is able to select which information to display in the report. Presently a full report comprises following metrics: total number of visitors for the requested time period, the percentage of visits by people who have never visited your property before, total number of sessions, the percentage of single-page visits, the average visit duration, the total number of pageviews, the average number of pages viewed during a visit. Moreover, this plugin makes it easy to place the necessary tracking code to enable Google Analytics logging on your WordPress blog. 
