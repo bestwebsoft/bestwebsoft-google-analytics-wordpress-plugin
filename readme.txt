@@ -1,10 +1,10 @@
 === BestWebSoft Google Analytics ===
 Contributors: bestwebsoft
-Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=10&product_id=13
-Tags: analytics, google, statistic, tracking, visits, visitors
+Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&product_id=94
+Tags: add tracking code, analytics, analitics, display statistics report, googel, googgle, gogle, gogole, google, google analytics, google analytics loggins, google analytics plugin, google analytics stats, group stats, group statistics, metrics, page views, retrieve metrics, statistics, statistics report, stats, tracking, visit duration, visits statistics, visitors, visits, webproperties.
 Requires at least: 3.3
-Tested up to: 3.8.1
-Stable tag: 1.4
+Tested up to: 3.9.1
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,10 @@ This plugin allows you to retrieve basic stats from Google Analytics account and
 
 This plugin establishes a connection with your Google Analytics account and allows you to retrieve basic metrics from webproperties you have on this account. Statistical report appears as a table or as a line chart on the plugin settings page in the Wordpress Admin area. User is able to select which information to display in the report. Presently a full report comprises following metrics: total number of visitors for the requested time period, the percentage of visits by people who have never visited your property before, total number of sessions, the percentage of single-page visits, the average visit duration, the total number of pageviews, the average number of pages viewed during a visit. Moreover, this plugin makes it easy to place the necessary tracking code to enable Google Analytics logging on your WordPress blog.
 
+http://www.youtube.com/watch?v=u6GCmG2SYIg
+
 <a href="http://wordpress.org/plugins/bws-google-analytics/faq/" target="_blank">FAQ</a>
+
 <a href="http://support.bestwebsoft.com" target="_blank">Support</a>
 
 = Features = 
@@ -27,6 +30,7 @@ This plugin establishes a connection with your Google Analytics account and allo
 = Translation =
 
 * Russian (ru_RU)
+* Ukrainian (uk)
 
 If you would like to create your own language pack or update the existing one, you can send <a href="http://codex.wordpress.org/Translating_WordPress" target="_blank">the text of PO and MO files</a> for <a href="http://support.bestwebsoft.com" target="_blank">BestWebSoft</a> and we'll add it to the plugin. You can download the latest version of the program for work with PO and MO files  <a href="http://www.poedit.net/download.php" target="_blank">Poedit</a>.
 
@@ -88,7 +92,7 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 1. the link to the page where the problem occurs
 2. the name of the plugin and its version. If you are using a pro version - your order number.
 3. the version of your WordPress installation
-4. copy and paste into the message your system status report. Please read more here: <a href="https://docs.google.com/document/d/1Wi2X8RdRGXk9kMszQy1xItJrpN0ncXgioH935MaBKtc/edit" target="_blank">System_Status.pdf</a>
+4. copy and paste into the message your system status report. Please read more here: <a href="https://docs.google.com/document/d/1Wi2X8RdRGXk9kMszQy1xItJrpN0ncXgioH935MaBKtc/edit" target="_blank">Instuction on System Status</a>
 
 == Screenshots ==
 
@@ -98,6 +102,10 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 4. Tracking Code and Reset Tab in the plugin settings page.
 
 == Changelog == 
+
+= V1.5  - 13.05.2014 =
+* New : We added Ukrainian language.
+* Update : We updated all functionality for wordpress 3.9.1.
 
 = V1.4  - 12.03.2014 =
 * Update: Screenshots were updated.
@@ -122,6 +130,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.5 =
+We added Ukrainian language. We updated all functionality for wordpress 3.9.1.
 
 = V1.4 =
 Plugin optimization was done. BWS plugins section was updated. Readme file was updated. Screenshots were updated.

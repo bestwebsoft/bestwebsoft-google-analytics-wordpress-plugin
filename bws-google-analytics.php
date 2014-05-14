@@ -4,7 +4,7 @@ Plugin Name: BestWebSoft Google Analytics
 Plugin URI: http://bestwebsoft.com/plugin/
 Description: This plugin allows you to retrieve basic stats from Google Analytics account and adds the necessary tracking code to your blog.
 Author: BestWebSoft
-Version: 1.4
+Version: 1.5
 Author URI: http://bestwebsoft.com/
 License: GPLv2 or later
 */
@@ -28,7 +28,8 @@ License: GPLv2 or later
 if ( ! function_exists( 'gglnltcs_add_admin_menu' ) ) {
 	function gglnltcs_add_admin_menu() {
 		global $bstwbsftwppdtplgns_options, $wpmu, $bstwbsftwppdtplgns_added_menu;
-		$bws_menu_version = '1.2.2';
+		$bws_menu_version = get_plugin_data( plugin_dir_path( __FILE__ ) . "bws_menu/bws_menu.php" );
+		$bws_menu_version =	$bws_menu_version["Version"];
 		$base = plugin_basename( __FILE__ );
 
 		if ( ! isset( $bstwbsftwppdtplgns_options ) ) {
@@ -69,10 +70,7 @@ if ( ! function_exists( 'gglnltcs_add_admin_menu' ) ) {
 		}
 
 		add_menu_page( 'BestWebSoft Google Analytics', 'BWS Plugins', 'manage_options', 'bws_plugins', 'bws_add_menu_render', plugins_url( "images/px.png", __FILE__ ), 1001 ); 
-		$page = add_submenu_page( 'bws_plugins', __( 'BWS Google Analytics', 'gglnltcs' ), __( 'BWS Google Analytics', 'gglnltcs' ), 'manage_options', 'bws-google-analytics.php', 'gglnltcs_settings_page' );
-		/* Load plugin styles and scripts only on the plugin settings page */
-		add_action( 'admin_print_styles-' . $page, 'gglnltcs_styles' );
-		add_action( 'admin_print_scripts-' . $page, 'gglnltcs_scripts' );
+		add_submenu_page( 'bws_plugins', __( 'BWS Google Analytics', 'gglnltcs' ), __( 'BWS Google Analytics', 'gglnltcs' ), 'manage_options', 'bws-google-analytics.php', 'gglnltcs_settings_page' );
 	}
 }
 
@@ -297,33 +295,31 @@ if ( ! function_exists( 'gglnltcs_past_tracking_code' ) ) {
 	}
 }
 
-/* Load Plugin Styles For Settings Page */
-if ( ! function_exists( 'gglnltcs_styles' ) ) {
-	function gglnltcs_styles() {
-		/* This function is called from the inside of the function "gglnltcs_add_admin_menu" */
-		wp_enqueue_style( 'gglnltcs_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
-		wp_enqueue_style( 'gglnltcs_jquery_ui_stylesheet', plugins_url( 'css/jquery-ui.css', __FILE__ ) );
-	}
-}
-
 /* Load Plugin Scripts For Settings Page */
 if ( ! function_exists( 'gglnltcs_scripts' ) ) {
 	function gglnltcs_scripts() {
-		wp_enqueue_script( 'gglnltcs_google_js_api', 'http://www.google.com/jsapi' ); /* Load Google object. It will be used for visualization.*/
-		wp_enqueue_script( 'gglnltcs_script', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery-ui-datepicker' ) ); /* Load main plugin script. It is important to load google object first.*/
-		/* Script Localization */
-		wp_localize_script( 'gglnltcs_script', 'gglnltcsLocalize', array(
-			'matchPattern' 		=> 	__( 'Date values must match the pattern YYYY-MM-DD.', 'gglnltcs' ),
-			'metricsValidation' => 	__( 'Any request must supply at least one metric.', 'gglnltcs' ),
-			'invalidDateRange'  => 	__( 'Invalid Date Range.', 'gglnltcs' ),
-			'chartVisitors' 	=> 	__( 'Unique Visitors', 'gglnltcs' ),
-			'chartNewVisits'	=> 	__( 'New Visits', 'gglnltcs' ),
-			'chartVisits' 		=> 	__( 'Visits', 'gglnltcs' ),
-			'chartBounceRate'	=> 	__( 'Bounce Rate', 'gglnltcs' ),
-			'chartAvgTime' 		=> 	__( 'Average Visit Duration', 'gglnltcs' ),
-			'chartPageviews' 	=> 	__( 'Pageviews', 'gglnltcs' ),
-			'chartPerVisit' 	=> 	__( 'Pages / Visit', 'gglnltcs' )
-		));
+		/* Load plugin styles and scripts only on the plugin settings page */
+		if ( isset( $_REQUEST['page'] ) && "bws-google-analytics.php" == $_REQUEST['page'] ) {
+			/* This function is called from the inside of the function "gglnltcs_add_admin_menu" */
+			wp_enqueue_style( 'gglnltcs_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
+			wp_enqueue_style( 'gglnltcs_jquery_ui_stylesheet', plugins_url( 'css/jquery-ui.css', __FILE__ ) );
+
+			wp_enqueue_script( 'gglnltcs_google_js_api', 'http://www.google.com/jsapi' ); /* Load Google object. It will be used for visualization.*/
+			wp_enqueue_script( 'gglnltcs_script', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery-ui-datepicker' ) ); /* Load main plugin script. It is important to load google object first.*/
+			/* Script Localization */
+			wp_localize_script( 'gglnltcs_script', 'gglnltcsLocalize', array(
+				'matchPattern' 		=> 	__( 'Date values must match the pattern YYYY-MM-DD.', 'gglnltcs' ),
+				'metricsValidation' => 	__( 'Any request must supply at least one metric.', 'gglnltcs' ),
+				'invalidDateRange'  => 	__( 'Invalid Date Range.', 'gglnltcs' ),
+				'chartVisitors' 	=> 	__( 'Unique Visitors', 'gglnltcs' ),
+				'chartNewVisits'	=> 	__( 'New Visits', 'gglnltcs' ),
+				'chartVisits' 		=> 	__( 'Visits', 'gglnltcs' ),
+				'chartBounceRate'	=> 	__( 'Bounce Rate', 'gglnltcs' ),
+				'chartAvgTime' 		=> 	__( 'Average Visit Duration', 'gglnltcs' ),
+				'chartPageviews' 	=> 	__( 'Pageviews', 'gglnltcs' ),
+				'chartPerVisit' 	=> 	__( 'Pages / Visit', 'gglnltcs' )
+			));
+		}
 	}
 }
 
@@ -364,6 +360,7 @@ if ( ! function_exists( 'gglnltcs_main_func' ) ) {
 			<a id="gglnltcs-line-nav-tab" class="nav-tab<?php if ( ! isset( $_GET['action'] ) ) echo ' nav-tab-active'; ?>" href="admin.php?page=bws-google-analytics.php"><?php _e( 'Line Chart', 'gglnltcs' ); ?></a>
 			<a id="gglnltcs-table-nav-tab" class="nav-tab<?php if ( isset( $_GET['action'] ) && 'table-tab' == $_GET['action'] ) echo ' nav-tab-active'; ?>" href="admin.php?page=bws-google-analytics.php&amp;action=table-tab"><?php _e( 'Table Chart', 'gglnltcs' ); ?></a>
 			<a id="gglnltcs-tracking-code-nav-tab" class="nav-tab<?php if ( isset( $_GET['action'] ) && 'tracking-code-tab' == $_GET['action'] ) echo ' nav-tab-active'; ?>" href="admin.php?page=bws-google-analytics.php&amp;action=tracking-code-tab"><?php _e( 'Tracking Code & Reset', 'gglnltcs' ); ?></a>
+			<a id="gglnltcs-faq" class="nav-tab" href="http://bestwebsoft.com/plugin/bws-google-analytics/#faq" target="_blank"><?php _e( 'FAQ', 'gglnltcs' ); ?></a>
 		</h2>
 		<div id="gglnltcs-main-content"><?php
 			/* Line Chart Tab */
@@ -1364,9 +1361,10 @@ if ( ! function_exists( 'gglnltcs_delete_options' ) ) {
 	}
 }
 
-add_action( 'admin_init', 'gglnltcs_admin_init' ); /* bws_plugin_info, gglnltcs_plugin_info, check WP version, plugin localization */
 add_action( 'init', 'gglnltcs_init' ); /* Load database options.*/
+add_action( 'admin_init', 'gglnltcs_admin_init' ); /* bws_plugin_info, gglnltcs_plugin_info, check WP version, plugin localization */
 add_action( 'admin_menu', 'gglnltcs_add_admin_menu' ); /* Add menu page, add submenu page.*/
+add_action( 'admin_enqueue_scripts', 'gglnltcs_scripts' );
 add_filter( 'plugin_action_links', 'gglnltcs_plugin_action_links', 10, 2 ); /* Add "Settings" link to the plugin action page.*/
 add_filter( 'plugin_row_meta', 'gglnltcs_register_plugin_links', 10, 2 ); /* Additional links on the plugin page - "Settings", "FAQ", "Support".*/
 add_action( 'wp_head', 'gglnltcs_past_tracking_code' ); /* Insert tracking code when front page loads.*/
