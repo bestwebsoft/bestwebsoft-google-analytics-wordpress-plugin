@@ -1,10 +1,10 @@
 === BestWebSoft Google Analytics ===
 Contributors: bestwebsoft
 Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&product_id=94
-Tags: add tracking code, analytics, analitics, display statistics report, googel, googgle, gogle, gogole, google, google analytics, google analytics loggins, google analytics plugin, google analytics stats, group stats, group statistics, metrics, page views, retrieve metrics, statistics, statistics report, stats, tracking, visit duration, visits statistics, visitors, visits, webproperties.
+Tags: add tracking code, analytics, analitics, display statistics report, googel, googgle, gogle, gogole, google, google analytics, google analytics loggins, google analytics plugin, google analytics stats, group stats, group statistics, metrics, page views, retrieve metrics, statistics, statistics report, stats, tracking, visit duration, visits statistics, visitors, visits, web properties, webproperties.
 Requires at least: 3.3
-Tested up to: 3.9.1
-Stable tag: 1.5
+Tested up to: 4.0
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ This plugin allows you to retrieve basic stats from Google Analytics account and
 
 == Description ==
 
-This plugin establishes a connection with your Google Analytics account and allows you to retrieve basic metrics from webproperties you have on this account. Statistical report appears as a table or as a line chart on the plugin settings page in the Wordpress Admin area. User is able to select which information to display in the report. Presently a full report comprises following metrics: total number of visitors for the requested time period, the percentage of visits by people who have never visited your property before, total number of sessions, the percentage of single-page visits, the average visit duration, the total number of pageviews, the average number of pages viewed during a visit. Moreover, this plugin makes it easy to place the necessary tracking code to enable Google Analytics logging on your WordPress blog.
+This plugin establishes a connection with your Google Analytics account and allows you to retrieve basic metrics from web properties you have on this account. Statistical report appears as a table or as a line chart on the plugin settings page in the WordPress Admin area. User is able to select which information to display in the report. Presently a full report comprises the following metrics: total number of visitors for the requested time period, the percentage of visits by people who have never visited your property before, total number of sessions, the percentage of single-page visits, the average visit duration, the total number of pageviews, the average number of pages viewed during a visit. Moreover, this plugin makes it easy to place the necessary tracking code to enable Google Analytics logging on your WordPress blog.
 
 http://www.youtube.com/watch?v=u6GCmG2SYIg
 
@@ -60,7 +60,7 @@ No, you can't. Google Analytics provides developer access to the configuration d
 
 = How can I add tracking code? =
 
-After you have created a new webroperty you will get a tracking code. If you want to add tracking code to your blog you will need to copy Tracking ID that looks like UA-xxxxx-y, paste it to the Blog Tracking field and click the Enable Tracking button.
+After you have created a new webroperty you will get a tracking code. If you want to add tracking code to your blog you will need to copy Tracking ID that looks like UA-xxxxx-y, paste it to the "Tracking Code" field, check "Add tracking Code To Your Blog" checkbox (if not checked) and click "Save Changes" button.
 
 = I want to collect statistic from my blog, what should I do? =
 
@@ -71,12 +71,12 @@ If you want to enable tracking and collect statistics from your blog, you need t
 4. Select Website
 5. Select the tracking method. Click either Universal Analytics or Classic Analytics. We strongly recommend Universal Analytics.
 6. Enter the name of your Wordpress blog.
-7. Enter the Website URL of your blog task3.eda.loc
+7. Enter the Website URL of your blog
 8. Select the Industry Category.
 9. Select the Reporting Time Zone.
 10. Click Get Tracking ID.
-11. Copy Tracking ID that looks like UA-xxxxx-y and past it to the "Past Tracking Code To Your Blog" field in the "Tracking Code & Reset" tab of this plugin.
-11. Click Past Code button.
+11. Copy Tracking ID that looks like UA-xxxxx-y and past it to the "Tracking Code" field in the "Tracking Code & Reset" tab of this plugin.
+12. Check "Add tracking Code To Your Blog" checkbox (if not checked) and click "Save Changes" button.
 
 = I have added tracking code to my blog using this plugin. Now if I deactivate this plugin, will Google Analytics continue logging my blog? =
 
@@ -89,10 +89,10 @@ Line chart displays stats for the last year, 6 months, 3 months, 1 month, 5 days
 = I have some problems with the plugin's work. What Information should I provide to receive proper support? =
 
 Please make sure that the problem hasn't been discussed yet on our forum (<a href="http://support.bestwebsoft.com" target="_blank">http://support.bestwebsoft.com</a>). If no, please provide the following data along with your problem's description:
-1. the link to the page where the problem occurs
-2. the name of the plugin and its version. If you are using a pro version - your order number.
-3. the version of your WordPress installation
-4. copy and paste into the message your system status report. Please read more here: <a href="https://docs.google.com/document/d/1Wi2X8RdRGXk9kMszQy1xItJrpN0ncXgioH935MaBKtc/edit" target="_blank">Instuction on System Status</a>
+1. The link to the page where the problem occurs
+2. The name of the plugin and its version. If you are using a pro version - your order number.
+3. The version of your WordPress installation
+4. Copy and paste into the message your system status report. Please read more here: <a href="https://docs.google.com/document/d/1Wi2X8RdRGXk9kMszQy1xItJrpN0ncXgioH935MaBKtc/edit" target="_blank">Instuction on System Status</a>
 
 == Screenshots ==
 
@@ -103,33 +103,42 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 
 == Changelog == 
 
-= V1.5  - 13.05.2014 =
+= V1.6 - 26.09.2014 =
+* New : We added an option to save tracking code without adding it to blog.
+* Update : We updated all functionality for WordPress 4.0.
+* Bugfix : We fixed the script that adds tracking code and moved it to the bottom of a page to speed the page loading process.
+* Bugfix : Security Exploit was fixed.
+
+= V1.5 - 13.05.2014 =
 * New : We added Ukrainian language.
 * Update : We updated all functionality for wordpress 3.9.1.
 
-= V1.4  - 12.03.2014 =
+= V1.4 - 12.03.2014 =
 * Update: Screenshots were updated.
 * Update: Readme file was updated.
 * Bugfix: Plugin optimization was done.
 * Update: BWS plugins section was updated.
 
-= V1.3  - 06.03.2014 = 
+= V1.3 - 06.03.2014 = 
 * Bugfix: Fixed fatal error that occured during the plugin activation.
 
-= V1.2  - 28.02.2014 = 
+= V1.2 - 28.02.2014 = 
 * Update: Updated UI.
 * Bugfix: Fixed ajax functions issues.
 * Update: Updated instructions.
 
-= V1.1  - 20.02.2014 = 
+= V1.1 - 20.02.2014 = 
 * Update: Updated UI.
 * Bugfix: Fixed form validation issues.
 * Update: Updated instructions.
 
-= V1.0  - 13.02.2014 = 
+= V1.0 - 13.02.2014 = 
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.6 =
+We added an option to save tracking code without adding it to blog. We updated all functionality for WordPress 4.0. We fixed the script that adds tracking code and moved it to the bottom of a page to speed the page loading process. Security Exploit was fixed.
 
 = V1.5 =
 We added Ukrainian language. We updated all functionality for wordpress 3.9.1.

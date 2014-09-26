@@ -49,12 +49,21 @@ function setViewID() {
 			} else if ( activeTab == 'gglnltcs-tracking-code-nav-tab' ) {
 				ajaxTabContent( 'tracking_code' ); /* Print content for Tracking Code $ Reset Tab. */
 			}
+			$( '#gglnltcs-settings-message, #gglnltcs-settings-error, #gglnltcs-settings-notice' ).fadeOut( 500 );
 		});
 		contentProcessing(); /* Content Processing */
- 	});
+	});
+
 /************************************************************************/
 	/* Content Processing. This functions will be recalled every time user selects new tab. */
 	function contentProcessing() {
+		/* add notice about changing in the settings page */
+		$( 'input[name="gglnltcs_tracking_id"], #gglnltcs-add-tracking-code-checkbox input' ).on( "change click select", function() {
+			if ( $( this ).attr( 'type' ) != 'submit' ) {
+				$( '.updated.fade' ).css( 'display', 'none' );
+				$( '#gglnltcs-settings-notice' ).css( 'display', 'block' );
+			};
+		});
 		/* Accounts on change */
 		$( '#gglnltcs-accounts' ).on( 'change', function() {
 			getWebproperties();
@@ -157,22 +166,18 @@ function setViewID() {
 			} else if ( $( '#gglnltcs-get-statistics-button-line-chart' ).length ) {
 				event.preventDefault();
 				ajaxBuildLineChart();
-			} else if ( $( 'input[name="gglnltcs_tracking_id"]' ).length ) {
-				var trackingIdVal  = $( 'input[name="gglnltcs_tracking_id"]' ).val();
-				if ( ! trackingIdVal ) {
-					event.preventDefault();
-					$( 'input[name="gglnltcs_tracking_id"]' ).addClass( 'gglnltcs-validation-failed' );
-					console.log( trackingIdVal );
-				}
 			}
 		});
-		/* Tracking ID form preventing submit */
-		$( '#gglnltcs-tracking-id-form' ).on( 'submit', function( event ) {
-			event = event || window.event;
-			var input = $( this ).find( 'input[name="gglnltcs_tracking_id"]' )
-			if ( input.val() == 0 ) {
-				input.addClass( 'gglnltcs-validation-failed' );
-				event.preventDefault();
+		/* uncheck "Add tracking Code To Your Blog" checkbox if tracking code is empty */
+		if ( $( 'input[name="gglnltcs_tracking_id"]' ).val() == 0 ) {
+			$( '#gglnltcs-add-tracking-code-input' ).prop( "checked", false );
+		};
+		/* check/uncheck "Add tracking Code To Your Blog" checkbox depending whether tracking code field is empty */
+		$( 'input[name="gglnltcs_tracking_id"]' ).change( function(){
+			if ( $( 'input[name="gglnltcs_tracking_id"]' ).val() == 0 ) {
+				$( '#gglnltcs-add-tracking-code-input' ).prop( "checked", false );
+			} else {
+				$( '#gglnltcs-add-tracking-code-input' ).prop( "checked", true );
 			}
 		});
 		$( '#gglnltcs-tracking-id-form input[name="gglnltcs_tracking_id"], input[name="gglnltcs_tracking_id"], #gglnltcs-authentication-code-input' ).on( 'keypress', function() {
@@ -295,13 +300,14 @@ function setViewID() {
 	function ajaxTabContent( tabName ) {
 		var loadingCircle = $( '<div>', { 'class': 'gglnltcs-loading-icon' } ).hide().appendTo( '.nav-tab-wrapper' ).fadeIn( 1000 );
 		var data = {
-		 	action: 'gglnltcs_print_tab_content',
-		 	tab: tabName,
-		 	page: 'bws-google-analytics.php'
+			action: 'gglnltcs_print_tab_content',
+			tab: tabName,
+			page: 'bws-google-analytics.php',
+			'gglnltcs_nonce' : gglnltcsLocalize.gglnltcs_ajax_nonce
 		};
 		$.post( ajaxurl, data, function( data ) {
-		 	$( '#gglnltcs-main-content' ).html( data ).fadeTo( 200, 1 );
-		 	loadingCircle.remove(); /* Remove loading circle gif. */
+			$( '#gglnltcs-main-content' ).html( data ).fadeTo( 200, 1 );
+			loadingCircle.remove(); /* Remove loading circle gif. */
 			contentProcessing(); /* Update all scripts in order to apply them to new page content */
 		});
 	}
@@ -323,7 +329,7 @@ function setViewID() {
 			/* First we need to hide error message that asks us to choos at least one metric */
 			if ( $( '#gglnltcs-continuous_chart_div_container .gglnltcs-error-message' ).length ) {
 				$( '#gglnltcs-continuous_chart_div_container .gglnltcs-error-message' ).fadeOut( 500, function() { 
-				 	$( this ).remove(); 
+					$( this ).remove(); 
 				});
 			}
 			var viewProfileId = $( '#gglnltcs-view-id' ).val();
@@ -332,51 +338,61 @@ function setViewID() {
 				viewProfileId: viewProfileId,
 				settings: settings,
 				tab: 'line_chart',
-				page: 'bws-google-analytics.php'
+				page: 'bws-google-analytics.php',
+				'gglnltcs_nonce' : gglnltcsLocalize.gglnltcs_ajax_nonce
 			};
 			$.post( ajaxurl, data, function( data ) {
-				data = $.parseJSON( data );
-				var chartCurves = $( '#gglnltcs-metrics-line-chart' ).data( 'chartCurves' );
-				var chartRows = [];
-				var chartDate = data[0];
-				if ( chartCurves.visitors 		   ) { var visitors   = data[1]; }
-				if ( chartCurves.newVisits		   ) { var newVisits  = data[2]; }
-				if ( chartCurves.visits 		   ) { var visits     = data[3]; }
-				if ( chartCurves.visitBounceRate   ) { var bounceRate = data[4]; }
-				if ( chartCurves.avgTimeOnSite 	   ) { var avgTime 	  = data[5]; }
-				if ( chartCurves.pageviews 		   ) { var pageviews  = data[6]; }
-				if ( chartCurves.pageviewsPerVisit ) { var perVisit   = data[7]; }
+				try {
+					data = $.parseJSON( data );
+					var chartCurves = $( '#gglnltcs-metrics-line-chart' ).data( 'chartCurves' );
+					var chartRows = [];
+					var chartDate = data[0];
+					if ( chartCurves.visitors 		   ) { var visitors   = data[1]; }
+					if ( chartCurves.newVisits		   ) { var newVisits  = data[2]; }
+					if ( chartCurves.visits 		   ) { var visits     = data[3]; }
+					if ( chartCurves.visitBounceRate   ) { var bounceRate = data[4]; }
+					if ( chartCurves.avgTimeOnSite 	   ) { var avgTime 	  = data[5]; }
+					if ( chartCurves.pageviews 		   ) { var pageviews  = data[6]; }
+					if ( chartCurves.pageviewsPerVisit ) { var perVisit   = data[7]; }
 
-				var ajaxChart = new google.visualization.DataTable();
-				ajaxChart.addColumn( 'date', 'Date' );
-				if ( chartCurves.visitors   	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartVisitors   ); }
-				if ( chartCurves.newVisits  	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartNewVisits  ); }
-				if ( chartCurves.visits     	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartVisits     ); }
-				if ( chartCurves.visitBounceRate   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartBounceRate ); }
-				if ( chartCurves.avgTimeOnSite     ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartAvgTime    ); }
-				if ( chartCurves.pageviews  	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPageviews  ); }
-				if ( chartCurves.pageviewsPerVisit ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPerVisit   ); }
+					var ajaxChart = new google.visualization.DataTable();
+					ajaxChart.addColumn( 'date', 'Date' );
+					if ( chartCurves.visitors   	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartVisitors   ); }
+					if ( chartCurves.newVisits  	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartNewVisits  ); }
+					if ( chartCurves.visits     	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartVisits     ); }
+					if ( chartCurves.visitBounceRate   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartBounceRate ); }
+					if ( chartCurves.avgTimeOnSite     ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartAvgTime    ); }
+					if ( chartCurves.pageviews  	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPageviews  ); }
+					if ( chartCurves.pageviewsPerVisit ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPerVisit   ); }
 
-				for ( var i = 0; i < chartDate.length; i++ ) {
-					chartRows = [];
-					chartRows.push( new Date( chartDate[i][0], chartDate[i][1] - 1, chartDate[i][2] ) );
-					if ( chartCurves.visitors   	   ) { chartRows.push( parseInt( visitors[i]   ) ) }
-					if ( chartCurves.newVisits  	   ) { chartRows.push( parseInt( newVisits[i]  ) ) }
-					if ( chartCurves.visits     	   ) { chartRows.push( parseInt( visits[i]     ) ) }
-					if ( chartCurves.visitBounceRate   ) { chartRows.push( parseInt( bounceRate[i] ) ) }
-					if ( chartCurves.avgTimeOnSite     ) { chartRows.push( parseInt( avgTime[i]    ) ) }
-					if ( chartCurves.pageviews  	   ) { chartRows.push( parseInt( pageviews[i]  ) ) }
-					if ( chartCurves.pageviewsPerVisit ) { chartRows.push( parseInt( perVisit[i]   ) ) } 
-					ajaxChart.addRows( [ chartRows ] );
-				}    
-				var newChart = new google.visualization.AnnotatedTimeLine( document.getElementById( 'gglnltcs-continuous_chart_div' ));
-				newChart.draw( ajaxChart, {
-					displayZoomButtons: true,
-					pointSize: 8,
-					scaleType: 'allmaximized',
-					thickness: 3,
-					wmode: 'transparent'
-			}); /* Bright up line chart. */
+					for ( var i = 0; i < chartDate.length; i++ ) {
+						chartRows = [];
+						chartRows.push( new Date( chartDate[i][0], chartDate[i][1] - 1, chartDate[i][2] ) );
+						if ( chartCurves.visitors   	   ) { chartRows.push( parseInt( visitors[i]   ) ) }
+						if ( chartCurves.newVisits  	   ) { chartRows.push( parseInt( newVisits[i]  ) ) }
+						if ( chartCurves.visits     	   ) { chartRows.push( parseInt( visits[i]     ) ) }
+						if ( chartCurves.visitBounceRate   ) { chartRows.push( parseInt( bounceRate[i] ) ) }
+						if ( chartCurves.avgTimeOnSite     ) { chartRows.push( parseInt( avgTime[i]    ) ) }
+						if ( chartCurves.pageviews  	   ) { chartRows.push( parseInt( pageviews[i]  ) ) }
+						if ( chartCurves.pageviewsPerVisit ) { chartRows.push( parseInt( perVisit[i]   ) ) } 
+						ajaxChart.addRows( [ chartRows ] );
+					}    
+					var newChart = new google.visualization.AnnotatedTimeLine( document.getElementById( 'gglnltcs-continuous_chart_div' ));
+					newChart.draw( ajaxChart, {
+						displayZoomButtons: true,
+						pointSize: 8,
+						scaleType: 'allmaximized',
+						thickness: 3,
+						wmode: 'transparent'
+					}); /* Bright up line chart. */
+				} catch ( errorInAjax ) {
+					/* show error message if we failed to display line chart */
+					$( '#gglnltcs-settings-error p' ).remove();
+					var chartErrorMessage = $( '<p>', { text: gglnltcsLocalize.ajaxApiError } ).hide().appendTo( '#gglnltcs-settings-error' );
+					loadingCircle.remove();
+					$( '#gglnltcs-settings-error' ).fadeIn( 1000 );
+					chartErrorMessage.fadeIn( 1000 );
+				}
 				$( '#gglnltcs-continuous_chart_div' ).fadeTo( 500, 1 );
 				/* Unlock form elements after chart is loaded. */
 				$( '#gglnltcs-metrics-line-chart input:checkbox' ).attr( 'disabled', false ); /* Unlock metrics checkboxes. */
@@ -409,7 +425,8 @@ function setViewID() {
 			action: 'gglnltcs_action',
 			settings: settings,
 			tab: 'table_chart',
-			page: 'bws-google-analytics.php'
+			page: 'bws-google-analytics.php',
+			'gglnltcs_nonce' : gglnltcsLocalize.gglnltcs_ajax_nonce
 		};
 		$.post( ajaxurl, data, function( data ) {
 			/* Remove existing results tables. */

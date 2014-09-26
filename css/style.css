@@ -398,8 +398,22 @@ span.gglnltcs-tracking-id {
 	display: block;
 }
 
-#gglnltcs-tracking-id-form {
-	height: 36px;
+#gglnltcs-tracking-id-table #gglnltcs-tracking-id-form label {
+	display: inline;
+}
+
+#gglnltcs-tracking-code-label {
+	display: inline-block;
+	padding-top: 5px;
+	padding-right: 5px;
+}
+
+#gglnltcs-add-tracking-code-checkbox input {
+	margin-top: 0px;
+}
+
+#gglnltcs-add-tracking-code-checkbox {
+	margin-top: 5px;
 }
 
 #gglnltcs-tracking-id-instructions {
@@ -413,7 +427,6 @@ span.gglnltcs-tracking-id {
 }
 
 input[name="gglnltcs_tracking_id"] {
-	margin-bottom: 30px;
 	position: relative;
 	vertical-align: top;
 	width: 178px;
