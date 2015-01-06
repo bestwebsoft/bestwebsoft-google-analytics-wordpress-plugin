@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&product_id=94
 Tags: add tracking code, analytics, analitics, display statistics report, googel, googgle, gogle, gogole, google, google analytics, google analytics loggins, google analytics plugin, google analytics stats, group stats, group statistics, metrics, page views, retrieve metrics, statistics, statistics report, stats, tracking, visit duration, visits statistics, visitors, visits, web properties, webproperties.
 Requires at least: 3.3
-Tested up to: 4.0
-Stable tag: 1.6
+Tested up to: 4.1
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,13 @@ http://www.youtube.com/watch?v=u6GCmG2SYIg
 * Display: Group stats by day, month and year.
 * Actions: See data for different time periods in your reports.
 * Actions: Add tracking code to enable Google Analytics logging on your blog.
+
+= Recommended Plugins =
+
+The author of the BestWebSoft Google Analytics also recommends the following plugins:
+
+* <a href="http://wordpress.org/plugins/updater/">Updater</a> - This plugin updates WordPress core and the plugins to the recent versions. You can also use the auto mode or manual mode for updating and set email notifications.
+There is also a premium version of the plugin <a href="http://bestwebsoft.com/products/updater/?k=b0536eca91f29f7603d42d53f5fd3990">Updater Pro</a> with more useful features available. It can make backup of all your files and database before updating. Also it can forbid some plugins or WordPress Core update.
 
 = Translation =
 
@@ -103,6 +110,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 
 == Changelog == 
 
+= V1.6.1 - 06.01.2014 =
+* Update: BWS plugins section was updated.
+
 = V1.6 - 26.09.2014 =
 * New : We added an option to save tracking code without adding it to blog.
 * Update : We updated all functionality for WordPress 4.0.
@@ -136,6 +146,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.6.1 =
+BWS plugins section was updated.
 
 = V1.6 =
 We added an option to save tracking code without adding it to blog. We updated all functionality for WordPress 4.0. We fixed the script that adds tracking code and moved it to the bottom of a page to speed the page loading process. Security Exploit was fixed.
