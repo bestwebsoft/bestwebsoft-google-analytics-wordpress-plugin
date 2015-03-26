@@ -453,6 +453,11 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	margin-bottom: 13px;
 }
 
+.gglnltcs-google-sign-in a {
+	color: #fff;
+    text-decoration: none;
+}
+
 #gglnltcs-authentication-code-input {
 	margin-right: 10px;
 	vertical-align: top;

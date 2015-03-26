@@ -1,7 +1,7 @@
 /* Load Visualization */
 google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 /************************************************************************/
-/* Get Vebproperties For Selected Account */
+/* Get Webproperties For Selected Account */
 function getWebproperties() {
 	var i = 0;
 	webPropIDs = [];
@@ -30,9 +30,9 @@ function setViewID() {
 /************************************************************************/
 /* jQuery Wrapper */
 ( function( $ ) {
-	$( document ).ready( function() {
-		/* Processing Clicks On Navigation Tabs */
-		$( '#gglnltcs-line-nav-tab, #gglnltcs-table-nav-tab, #gglnltcs-tracking-code-nav-tab' ).on( 'click', function( event ) {
+	$( document ).ready( function() {		
+		/* Processing Clicks On Navigation Tabs */		
+		$( '#gglnltcs-line-nav-tab, #gglnltcs-table-nav-tab, #gglnltcs-tracking-code-nav-tab, #gglnltcs-pro-nav-tab' ).on( 'click', function( event ) {
 			event = event || window.event;
 			event.preventDefault();
 			/* Change active tab. */
@@ -48,6 +48,8 @@ function setViewID() {
 				ajaxTabContent( 'table_chart' ); /* Print content for Table Chart Tab. */
 			} else if ( activeTab == 'gglnltcs-tracking-code-nav-tab' ) {
 				ajaxTabContent( 'tracking_code' ); /* Print content for Tracking Code $ Reset Tab. */
+			} else if ( activeTab == 'gglnltcs-pro-nav-tab' ) {
+				ajaxTabContent( 'go_pro' ); /* Print content for Tracking Code $ Reset Tab. */
 			}
 			$( '#gglnltcs-settings-message, #gglnltcs-settings-error, #gglnltcs-settings-notice' ).fadeOut( 500 );
 		});
@@ -63,7 +65,7 @@ function setViewID() {
 				$( '.updated.fade' ).css( 'display', 'none' );
 				$( '#gglnltcs-settings-notice' ).css( 'display', 'block' );
 			};
-		});
+		});		
 		/* Accounts on change */
 		$( '#gglnltcs-accounts' ).on( 'change', function() {
 			getWebproperties();
@@ -114,7 +116,7 @@ function setViewID() {
 				$( '#gglnltcs-metrics .gglnltcs-table-name' ).after( '<span class="gglnltcs-error-message">' +  gglnltcsLocalize.metricsValidation + '</span>' );
 			} else {
 				$( '#gglnltcs-metrics input:checkbox' ).removeClass( 'gglnltcs-validation-failed' );
-				$( '#gglnltcs-metrics .gglnltcs-table-name' ).next( '.error-message' ).remove();
+				$( '#gglnltcs-metrics .gglnltcs-table-name' ).next( '.gglnltcs-error-message' ).remove();
 			}
 		});
 		/* Main form preventing submit */
@@ -190,7 +192,7 @@ function setViewID() {
 			if ( ! input.val() ) {
 				event.preventDefault();
 				input.addClass( 'gglnltcs-validation-failed' );
-			}
+			}			
 		});
 		/* Here We Register Which Curves To Display On The Line Chart. */
 		if ( $( '#gglnltcs-metrics-line-chart' ).length ) {
@@ -300,14 +302,14 @@ function setViewID() {
 	function ajaxTabContent( tabName ) {
 		var loadingCircle = $( '<div>', { 'class': 'gglnltcs-loading-icon' } ).hide().appendTo( '.nav-tab-wrapper' ).fadeIn( 1000 );
 		var data = {
-			action: 'gglnltcs_print_tab_content',
+			action: 'gglnltcs_print_tab_content',			
 			tab: tabName,
 			page: 'bws-google-analytics.php',
 			'gglnltcs_nonce' : gglnltcsLocalize.gglnltcs_ajax_nonce
 		};
-		$.post( ajaxurl, data, function( data ) {
+		$.post( ajaxurl, data, function( data ) {			
 			$( '#gglnltcs-main-content' ).html( data ).fadeTo( 200, 1 );
-			loadingCircle.remove(); /* Remove loading circle gif. */
+			loadingCircle.remove();  /*Remove loading circle gif. */
 			contentProcessing(); /* Update all scripts in order to apply them to new page content */
 		});
 	}
@@ -402,7 +404,7 @@ function setViewID() {
 				loadingCircle.remove(); /* Remove loading circle gif */
 			}); // close $.post
 		} else { // close if.
-			var chartErrorMessage = $( '<div>', { 'class': 'error-message', text: gglnltcsLocalize.metricsValidation } ).hide().appendTo( '#gglnltcs-continuous_chart_div_container' );
+			var chartErrorMessage = $( '<div>', { 'class': 'gglnltcs-error-message', text: gglnltcsLocalize.metricsValidation } ).hide().appendTo( '#gglnltcs-continuous_chart_div_container' );
 			 loadingCircle.remove();
 			chartErrorMessage.fadeIn( 1000 );
 			/* Unlock form elements. */
