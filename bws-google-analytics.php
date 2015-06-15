@@ -4,7 +4,7 @@ Plugin Name: Google Analytics by BestWebSoft
 Plugin URI: http://bestwebsoft.com/products/
 Description: This plugin allows you to retrieve basic stats from Google Analytics account and adds the necessary tracking code to your blog.
 Author: BestWebSoft
-Version: 1.6.2
+Version: 1.6.4
 Author URI: http://bestwebsoft.com/
 License: GPLv2 or later
 */
@@ -50,7 +50,7 @@ if ( ! function_exists( 'gglnltcs_init' ) ) {
 			$gglnltcs_plugin_info = get_plugin_data( __FILE__ );
 		}
 		/* Check if plugin is compatible with current WP version.*/
-		bws_wp_version_check( $this_plugin, $gglnltcs_plugin_info, "3.3" );
+		bws_wp_version_check( $this_plugin, $gglnltcs_plugin_info, '3.3' );
 		/* Load options only on the frontend or on the plugin page. */
 		if ( ! is_admin() || ( isset( $_REQUEST['page'] ) && "bws-google-analytics.php" == $_REQUEST['page'] ) )
 			gglnltcs_get_options_from_db();
@@ -74,7 +74,7 @@ if ( ! function_exists( 'gglnltcs_get_options_from_db' ) ) {
 		$gglnltcs_option_defaults = array(
 			'plugin_option_version' 	=> $gglnltcs_plugin_info["Version"],
 			'tracking_id' 				=> '',
-			'add_tracking_code' 		=> 1,
+			'add_tracking_code' 		=> 1
 		);
 		/* install the option defaults */
 		if ( ! get_option( 'gglnltcs_options' ) )
@@ -117,7 +117,7 @@ if ( ! function_exists( 'gglnltcs_get_analytics' ) ) {
 /* Displays Google Analytics Settings Page In The Admin Area. */
 if ( ! function_exists( 'gglnltcs_settings_page' ) ) {
 	function gglnltcs_settings_page() {
-		global $gglnltcs_options;
+		global $gglnltcs_options, $gglnltcs_plugin_info;
 		$message = $error = '';
 		static $this_plugin;
 		if ( ! $this_plugin )
@@ -185,7 +185,7 @@ if ( ! function_exists( 'gglnltcs_settings_page' ) ) {
 
 if ( ! function_exists( 'gglnltcs_authenticate' ) ) {
 	function gglnltcs_authenticate() {
-		global $gglnltcs_options;
+		global $gglnltcs_options, $gglnltcs_plugin_info;
 		require_once 'google-api-php-client/api-code/Google_Client.php';
 		require_once 'google-api-php-client/api-code/contrib/Google_AnalyticsService.php';
 		$client = new Google_Client();
@@ -248,6 +248,7 @@ if ( ! function_exists( 'gglnltcs_authenticate' ) ) {
 			if ( isset( $_POST['code'] ) && $redirect === false ) { ?>
 				<p><span class="gglnltcs-unsuccess-message"><?php _e( 'Invalid code. Please, try again.', 'gglnltcs' ); ?></span></p><?php
 			}
+			bws_plugin_reviews_block( $gglnltcs_plugin_info['Name'], 'bws-google-analytics' );
 		}
 	}
 }
@@ -297,7 +298,7 @@ if ( ! function_exists( 'gglnltcs_scripts' ) ) {
 				'chartPageviews' 		=> 	__( 'Pageviews', 'gglnltcs' ),
 				'chartPerVisit' 		=> 	__( 'Pages / Visit', 'gglnltcs' ),
 				'ajaxApiError'	 		=> 	__( 'Failed to process the received data correctly', 'gglnltcs' ),
-				'gglnltcs_ajax_nonce'	=> wp_create_nonce( 'gglnltcs_ajax_nonce_value' ),
+				'gglnltcs_ajax_nonce'	=> wp_create_nonce( 'gglnltcs_ajax_nonce_value' )
 			));
 		}
 	}
@@ -316,7 +317,7 @@ if ( ! function_exists( 'gglnltcs_show_notices' ) ) {
 		} 
 		if ( 'plugins.php' == $hook_suffix ) {   
 			global $gglnltcs_plugin_info;
-			bws_plugin_banner( $gglnltcs_plugin_info, 'gglnltcs', 'bws-google-analytics', '938dae82c516792dea3980ff61a6af29', '125', plugins_url( 'images/banner.png', __FILE__ ) );
+			bws_plugin_banner( $gglnltcs_plugin_info, 'gglnltcs', 'bws-google-analytics', '938dae82c516792dea3980ff61a6af29', '125', '//ps.w.org/bws-google-analytics/assets/icon-128x128.png' );
 		}
 	}
 }
@@ -358,12 +359,10 @@ if ( ! function_exists( 'gglnltcs_build_table' ) ) {
 	function gglnltcs_build_table( $table_type_slug, $table_type, $data, $settings ) { 
 		$curr_category = $prev_category = '';
 		$rows_counter = 0; ?>
-		<table id="gglnltcs-<?php echo $table_type_slug; ?>" class="gglnltcs">
+		<table id="gglnltcs-<?php echo $table_type_slug; ?>" class="form-table gglnltcs">
 			<tr>
-				<th>
-					<h3 class="gglnltcs-table-name"><?php echo $table_type; ?></h3>
-				</th><?php
-				foreach ( $data as $item ) {
+				<th><?php echo $table_type; ?></th>
+				<?php foreach ( $data as $item ) {
 					$rows_counter++;
 					$curr_category = $item['category'];
 					if ( $curr_category != $prev_category ) {
@@ -399,19 +398,19 @@ if ( ! function_exists( 'gglnltcs_line_chart_tab' ) ) {
 		gglnltcs_load_metrics_and_dimensions();
 		/* Main Form */ ?>
 		<form id="gglnltcs-main-form" method="post" action="admin.php?page=bws-google-analytics.php">
-			<?php wp_nonce_field( plugin_basename( __FILE__ ), 'gglnltcs_nonce_name' ); ?>
-			<table class="gglnltcs"><?php
-				/* Print Accounts */ 
-				$func_return 	  = gglnltcs_print_accounts( $analytics );
-				$profile_accounts = $func_return[0];
-				$settings 		  = $func_return[1];
-				$accounts_id	  = $func_return[2];
-				/* Print Webproperties */
-				gglnltcs_print_webproperties( $analytics, $profile_accounts, $accounts_id, $settings ); ?>
-			</table><?php
+			<?php wp_nonce_field( plugin_basename( __FILE__ ), 'gglnltcs_nonce_name' );
+
+			/* Print Accounts */ 
+			$func_return 	  = gglnltcs_print_accounts( $analytics );
+			$profile_accounts = $func_return[0];
+			$settings 		  = $func_return[1];
+			$accounts_id	  = $func_return[2];
+			/* Print Webproperties */
+			gglnltcs_print_webproperties( $analytics, $profile_accounts, $accounts_id, $settings );
+
 			/* Print Table for Metrics */
 			gglnltcs_build_table( 'metrics-line-chart', __( 'Metrics', 'gglnltcs' ), $gglnltcs_metrics_data, $settings ); ?>
-			<table class="gglnltcs">
+			<table class="form-table gglnltcs">
 				<tr>
 					<th><!-- Empty Field --></th>
 					<td class="gglnltcs-get-statistics-cell"><!-- Get Data -->
@@ -437,45 +436,42 @@ if ( ! function_exists( 'gglnltcs_table_chart_tab' ) ) {
 		gglnltcs_load_metrics_and_dimensions();
 		/* Main Form */ ?>
 		<form id="gglnltcs-main-form" method="post" action="admin.php?page=bws-google-analytics.php&amp;action=table-tab">
-			<?php wp_nonce_field( plugin_basename( __FILE__ ), 'gglnltcs_nonce_name' ); ?>
-			<table class="gglnltcs"><?php
-				/* Print Accounts */ 
-				$func_return 	  = gglnltcs_print_accounts( $analytics );
-				$profile_accounts = $func_return[0];
-				$settings 		  = $func_return[1];
-				$accounts_id	  = $func_return[2];
-				/* Print Webproperties */
-				gglnltcs_print_webproperties( $analytics, $profile_accounts, $accounts_id, $settings ); ?>
-			</table><?php
+			<?php wp_nonce_field( plugin_basename( __FILE__ ), 'gglnltcs_nonce_name' );
+
+			/* Print Accounts */ 
+			$func_return 	  = gglnltcs_print_accounts( $analytics );
+			$profile_accounts = $func_return[0];
+			$settings 		  = $func_return[1];
+			$accounts_id	  = $func_return[2];
+			/* Print Webproperties */
+			gglnltcs_print_webproperties( $analytics, $profile_accounts, $accounts_id, $settings );
+
 			/* Print Table for Metrics */
 			gglnltcs_build_table( 'metrics', __( 'Metrics', 'gglnltcs' ), $gglnltcs_metrics_data, $settings );
 			/* Print Table for Dimensions */
 			gglnltcs_build_table( 'dimensions', __( 'Dimensions', 'gglnltcs' ), $gglnltcs_dimensions_data, $settings );
 			/* Print Table for Date Range */ ?>
-			<table id="gglnltcs-date" class="gglnltcs">
+			<table id="gglnltcs-date" class="form-table gglnltcs">
 				<tr><!-- Start Date -->
-					<th>
-						<h3>
-							<label for="gglnltcs-start-date"><?php _e( 'Start Date', 'gglnltcs' ); ?></label>
-						</h3>
-					</th>
+					<th><?php _e( 'Start Date', 'gglnltcs' ); ?></label></th>
 					<td class='gglnltcs-date'>
 						<input id="gglnltcs-start-date" name="gglnltcs_start_date" type="text" value="<?php if ( isset( $settings['gglnltcs_start_date'] ) ) echo $settings['gglnltcs_start_date']; ?>">
 						<span class="gglnltcs-note"><?php _e( 'Date values must match the pattern YYYY-MM-DD.', 'gglnltcs' ); ?></span>
 					</td>
 				</tr>
 				<tr><!-- End Date -->
-					<th>
-						<h3>
-							<label for="gglnltcs-end-date"><?php _e( 'End Date', 'gglnltcs' ); ?></label>
-						</h3>
-					</th>
+					<th><?php _e( 'End Date', 'gglnltcs' ); ?></th>
 					<td class='gglnltcs-date'>
 						<input id="gglnltcs-end-date" name="gglnltcs_end_date" type="text" value="<?php if ( isset( $settings['gglnltcs_end_date'] ) ) echo $settings['gglnltcs_end_date']; ?>">
 						<span class="gglnltcs-note"><?php _e( 'Date values must match the pattern YYYY-MM-DD.', 'gglnltcs' ); ?></span>
-						<!-- Get Data -->
-						<input id="gglnltcs-get-statistics-button" type="submit" class="button-secondary" value="<?php _e( 'Get Statistic', 'gglnltcs' ); ?>">
+						<!-- Get Data -->						
 					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td>
+						<input id="gglnltcs-get-statistics-button" type="submit" class="button-secondary" value="<?php _e( 'Get Statistic', 'gglnltcs' ); ?>">
+					</td>				
 				</tr>
 			</table><?php
 			/* Get statistics. */
@@ -490,44 +486,35 @@ if ( ! function_exists( 'gglnltcs_table_chart_tab' ) ) {
 
 /* Tracking Code & Results Tab */
 if ( ! function_exists( 'gglnltcs_tracking_code_tab' ) ) {
-	function gglnltcs_tracking_code_tab( $self_redirect ) { 
+	function gglnltcs_tracking_code_tab( $self_redirect ) {
+		global $gglnltcs_plugin_info;
 		/* Print insert tracking Code Table */ ?>
-		<div id="gglnltcs-tracking-id-table-content"> 
-			<table id="gglnltcs-tracking-id-table" class="gglnltcs">
-				<tr>
-					<th>
-						<h3>
-							<label for="gglnltcs-blog-tracking"><?php _e( 'Insert tracking Code To Your Blog', 'gglnltcs' ); ?></label>
-						</h3>
-					</th>
-				</tr>
-				<tr>
-					<td>
-						<?php $tracking_id = gglnltcs_print_tracking_id_field( $self_redirect ); ?>
-					</td>
-				</tr>
-			</table><?php
+		<div id="gglnltcs-tracking-id-table-content">
+			<?php $tracking_id = gglnltcs_print_tracking_id_field( $self_redirect );
 			if ( ! $tracking_id ) { ?>
-				<ol id="gglnltcs-tracking-id-instructions">
+				<div>
 					<p><?php _e( 'If you want to enable tracking and collect statistic from the', 'gglnltcs' ); ?> <strong>"<?php bloginfo( 'name' ); ?>"</strong>, <?php _e( 'you need to insert tracking code to your blog. To do this you should follow next steps', 'gglnltcs' ); ?>:</p>
-					<li><a href="http://www.google.com/accounts/ServiceLogin?service=analytics" target="_blank"><?php _e( 'Sign in', 'gglnltcs' ); ?></a> <?php _e( 'to your Google Analytics account. Click ', 'gglnltcs' ); ?> <strong>Admin</strong> <?php _e( 'in the menu bar at the top of any page.', 'gglnltcs' ); ?></li>
-					<li><?php _e( 'In the', 'gglnltcs' ); ?> <em><?php _e( 'Account column', 'gglnltcs' ); ?></em>, <?php _e( 'select the account from the dropdown that you want to add the property to.', 'gglnltcs' ); ?></li>
-					<li><?php _e( 'In the dropdown in the', 'gglnltcs' ); ?> <em><?php _e( 'Property column', 'gglnltcs' ); ?></em>, <?php _e( 'click', 'gglnltcs' ); ?> <strong>Create new property</strong>.</li>
-					<li><?php _e( 'Select', 'gglnltcs' ); ?> <strong>Website</strong>.</li>
-					<li><?php _e( 'Select a tracking method. Click either', 'gglnltcs' ); ?> <strong>Universal Analytics</strong> <?php _e( 'or', 'gglnltcs' ); ?> <strong>Classic Analytics</strong>. <?php _e( 'We strongly recommend Universal Analytics.', 'gglnltcs' ); ?></li>
-					<li><?php _e( 'Enter the', 'gglnltcs' ); ?> <strong><?php _e( 'name of your WordPress blog', 'gglnltcs' ); ?></strong></li>
-					<li><?php _e( 'Enter the', 'gglnltcs' ); ?> <strong>Website URL</strong> <?php _e( 'of your blog', 'gglnltcs' ); ?> <code><?php echo str_replace( 'http://', '', site_url( '', 'http' ) ); ?></code></li>
-					<li><?php _e( 'Select an', 'gglnltcs' ); ?> <strong>Industry Category</strong></li>
-					<li><?php _e( 'Select the', 'gglnltcs' ); ?> <strong>Reporting Time Zone</strong></li>
-					<li><?php _e( 'Click', 'gglnltcs' ); ?> <strong>Get Tracking ID</strong>.</li>
-					<li><?php _e( 'Copy', 'gglnltcs' ); ?> <strong>Tracking ID</strong> <?php _e( 'that looks like', 'gglnltcs' ); ?> <span class="gglnltcs-tracking-id">UA-xxxxx-y</span> <?php _e( 'and past it to the field above.', 'gglnltcs' ); ?></li>
-					<li><?php _e( 'Check', 'gglnltcs' ); ?> <strong><?php _e( 'Add tracking Code To Your Blog', 'gglnltcs' ); ?></strong> <?php _e( 'checkbox (if not checked) and click', 'gglnltcs' ); ?> <strong><?php _e( 'Save Changes', 'gglnltcs' ); ?></strong> <?php _e( 'button.', 'gglnltcs' ); ?> </li>
-				</ol><?php
-			}
+					<ol>
+						<li><a href="http://www.google.com/accounts/ServiceLogin?service=analytics" target="_blank"><?php _e( 'Sign in', 'gglnltcs' ); ?></a> <?php _e( 'to your Google Analytics account. Click ', 'gglnltcs' ); ?> <strong>Admin</strong> <?php _e( 'in the menu bar at the top of any page.', 'gglnltcs' ); ?></li>
+						<li><?php _e( 'In the', 'gglnltcs' ); ?> <em><?php _e( 'Account column', 'gglnltcs' ); ?></em>, <?php _e( 'select the account from the dropdown that you want to add the property to.', 'gglnltcs' ); ?></li>
+						<li><?php _e( 'In the dropdown in the', 'gglnltcs' ); ?> <em><?php _e( 'Property column', 'gglnltcs' ); ?></em>, <?php _e( 'click', 'gglnltcs' ); ?> <strong>Create new property</strong>.</li>
+						<li><?php _e( 'Select', 'gglnltcs' ); ?> <strong>Website</strong>.</li>
+						<li><?php _e( 'Select a tracking method. Click either', 'gglnltcs' ); ?> <strong>Universal Analytics</strong> <?php _e( 'or', 'gglnltcs' ); ?> <strong>Classic Analytics</strong>. <?php _e( 'We strongly recommend Universal Analytics.', 'gglnltcs' ); ?></li>
+						<li><?php _e( 'Enter the', 'gglnltcs' ); ?> <strong><?php _e( 'name of your WordPress blog', 'gglnltcs' ); ?></strong></li>
+						<li><?php _e( 'Enter the', 'gglnltcs' ); ?> <strong>Website URL</strong> <?php _e( 'of your blog', 'gglnltcs' ); ?> <code><?php echo str_replace( 'http://', '', site_url( '', 'http' ) ); ?></code></li>
+						<li><?php _e( 'Select an', 'gglnltcs' ); ?> <strong>Industry Category</strong></li>
+						<li><?php _e( 'Select the', 'gglnltcs' ); ?> <strong>Reporting Time Zone</strong></li>
+						<li><?php _e( 'Click', 'gglnltcs' ); ?> <strong>Get Tracking ID</strong>.</li>
+						<li><?php _e( 'Copy', 'gglnltcs' ); ?> <strong>Tracking ID</strong> <?php _e( 'that looks like', 'gglnltcs' ); ?> <span class="gglnltcs-tracking-id">UA-xxxxx-y</span> <?php _e( 'and past it to the field above.', 'gglnltcs' ); ?></li>
+						<li><?php _e( 'Check', 'gglnltcs' ); ?> <strong><?php _e( 'Add tracking Code To Your Blog', 'gglnltcs' ); ?></strong> <?php _e( 'checkbox (if not checked) and click', 'gglnltcs' ); ?> <strong><?php _e( 'Save Changes', 'gglnltcs' ); ?></strong> <?php _e( 'button.', 'gglnltcs' ); ?> </li>
+					</ol>
+				</div>
+			<?php }
 			/* Log out field. */
 			gglnltcs_print_log_out_field(); ?>
 		</div>
-	<?php }
+		<?php bws_plugin_reviews_block( $gglnltcs_plugin_info['Name'], 'bws-google-analytics' );
+	}
 }
 /* GO PRO Tab */
 if ( ! function_exists( 'gglnltcs_go_pro_tab' ) ) {
@@ -550,7 +537,7 @@ if ( ! function_exists( 'gglnltcs_go_pro_tab' ) ) {
 /* Prints Account List */
 if ( ! function_exists( 'gglnltcs_print_accounts' ) ) {
 	function gglnltcs_print_accounts( $analytics ) {
-		global $gglnltcs_options;
+		global $gglnltcs_options, $gglnltcs_plugin_info;
 		$profile_accounts = $accounts_id = array();
 
 		if ( isset( $_POST[ 'gglnltcs_accounts' ] ) && check_admin_referer( plugin_basename( __FILE__ ), 'gglnltcs_nonce_name' ) ) {
@@ -576,31 +563,29 @@ if ( ! function_exists( 'gglnltcs_print_accounts' ) ) {
 				$output   = '';
 				$accounts = $analytics->management_accounts->listManagementAccounts();
 				$items    = $accounts->getItems();
-				if ( count( $items ) != 0 ) {
-					foreach( $items as $account ) {
-						$output .= '<option';
-						if ( isset( $settings[ 'gglnltcs-accounts' ] ) && $settings[ 'gglnltcs_accounts' ] == $account->getName() ) {
-							$output .= ' selected = "selected">';
-						} else {
-							$output .= '>';
-						}
-						$output .= $account->getName() . '</option>';
-						$profile_accounts[ $account->getId() ][ 'name' ] = $account->getName();
-						$accounts_id[] = $account->getId();
-					} /* close foreach.*/?>
-					<tr>
-						<th>
-							<h3>
-								<label for="gglnltcs-accounts"><?php _e( 'Accounts', 'gglnltcs' ); ?></label>
-							</h3>
-						</th>
-						<td>
-							<select id="gglnltcs-accounts" name="gglnltcs_accounts">
-								<?php echo $output; ?>
-							</select>
-						</td>
-					</tr><?php 
-				} else {
+				if ( count( $items ) != 0 ) { ?>
+					<table class="form-table gglnltcs">
+						<?php foreach ( $items as $account ) {
+							$output .= '<option';
+							if ( isset( $settings[ 'gglnltcs-accounts' ] ) && $settings[ 'gglnltcs_accounts' ] == $account->getName() ) {
+								$output .= ' selected = "selected">';
+							} else {
+								$output .= '>';
+							}
+							$output .= $account->getName() . '</option>';
+							$profile_accounts[ $account->getId() ][ 'name' ] = $account->getName();
+							$accounts_id[] = $account->getId();
+						} /* close foreach.*/?>
+						<tr>
+							<th><?php _e( 'Accounts', 'gglnltcs' ); ?></th>
+							<td>
+								<select id="gglnltcs-accounts" name="gglnltcs_accounts">
+									<?php echo $output; ?>
+								</select>
+							</td>
+						</tr>
+					</table>
+				<?php } else {
 					gglnltcs_no_analytics_accounts();
 				}
 				$func_return = array( $profile_accounts, $settings, $accounts_id );
@@ -625,58 +610,56 @@ if ( ! function_exists( 'gglnltcs_print_webproperties' ) ) {
 				$output = '';
 				$webproperties = $analytics->management_webproperties->listManagementWebproperties( '~all' );
 				$items = $webproperties->getItems();
-				if ( count( $items ) != 0 ) {
-					foreach( $items as $webproperty ) {
-						$profile_accounts[ $webproperty->getAccountId() ]['webproperties'][ $webproperty->getId() ] = $webproperty->getName();
-						$profiles = $analytics->management_profiles->listManagementProfiles( $webproperty->getAccountId(), $webproperty->getId() );
-						$profiles_items = $profiles->getItems();
-						if ( count( $profiles_items ) != 0 ) {
-							foreach ( $profiles_items as &$profile ) {
-								$profile_webproperties[ $webproperty->getId() ] = $profile->getId();
+				if ( count( $items ) != 0 ) { ?>
+					<table class="form-table gglnltcs">
+						<?php foreach ( $items as $webproperty ) {
+							$profile_accounts[ $webproperty->getAccountId() ]['webproperties'][ $webproperty->getId() ] = $webproperty->getName();
+							$profiles = $analytics->management_profiles->listManagementProfiles( $webproperty->getAccountId(), $webproperty->getId() );
+							$profiles_items = $profiles->getItems();
+							if ( count( $profiles_items ) != 0 ) {
+								foreach ( $profiles_items as &$profile ) {
+									$profile_webproperties[ $webproperty->getId() ] = $profile->getId();
+								}
 							}
-						}
-					} /* close foreach.*/
-					/* get properties of the first account */
-					$first_account = current( $profile_accounts );
-					$first_account_webprops = '';
-					foreach ( $first_account['webproperties'] as $first_account_webprop ) {
-						if ( $first_account_webprops == '' ) {
-							$first_account_webprops = '<option selected = "selected">' . $first_account_webprop . '</option>' ;
-						} else {
-							$first_account_webprops .= '<option>' . $first_account_webprop . '</option>' ;
-						}
-					} ?>
-					<tr>
-						<th>
-							<h3>
-								<label for="gglnltcs-webproperties"><?php _e( 'Webproperties', 'gglnltcs' ); ?></label>
-							</h3>
-						</th>
-						<td><!-- Webproperties -->
-							<select id="gglnltcs-webproperties" name="gglnltcs_webproperties">
-								<?php echo $first_account_webprops; ?>
-							</select>
-							<!-- View (Profile) ID -->
-							<input id="gglnltcs-view-id" name="gglnltcs_view_id" type="hidden">
-						</td>
-					</tr><?php
-					$profile_accounts 	   = json_encode( $profile_accounts );
-					$profile_webproperties = json_encode( $profile_webproperties );
-					$accounts_id           = json_encode( $accounts_id ); ?>
-					<script type="text/javascript">
-						var profileAccounts      = <?php echo $profile_accounts; ?>;
-						var profileWebproperties = <?php echo $profile_webproperties; ?>;
-						var accountsId           = <?php echo $accounts_id; ?>;<?php 
-						if ( isset( $settings['gglnltcs-webproperties'] ) ) {
-							$selected_webproperty  = json_encode( $settings['gglnltcs_webproperties'] ); ?>
-							var selectedWebroperty = <?php echo $selected_webproperty; ?>;
-							<?php
+						} /* close foreach.*/
+						/* get properties of the first account */
+						$first_account = current( $profile_accounts );
+						$first_account_webprops = '';
+						foreach ( $first_account['webproperties'] as $first_account_webprop ) {
+							if ( $first_account_webprops == '' ) {
+								$first_account_webprops = '<option selected = "selected">' . $first_account_webprop . '</option>' ;
+							} else {
+								$first_account_webprops .= '<option>' . $first_account_webprop . '</option>' ;
+							}
 						} ?>
-						var webPropIDs = [];
-						getWebproperties();
-						setViewID();
-					</script><?php
-				} /* close if count items.*/
+						<tr>
+							<th><?php _e( 'Webproperties', 'gglnltcs' ); ?></th>
+							<td><!-- Webproperties -->
+								<select id="gglnltcs-webproperties" name="gglnltcs_webproperties">
+									<?php echo $first_account_webprops; ?>
+								</select>
+								<!-- View (Profile) ID -->
+								<input id="gglnltcs-view-id" name="gglnltcs_view_id" type="hidden" />
+							</td>
+						</tr><?php
+						$profile_accounts 	   = json_encode( $profile_accounts );
+						$profile_webproperties = json_encode( $profile_webproperties );
+						$accounts_id           = json_encode( $accounts_id ); ?>
+						<script type="text/javascript">
+							var profileAccounts      = <?php echo $profile_accounts; ?>;
+							var profileWebproperties = <?php echo $profile_webproperties; ?>;
+							var accountsId           = <?php echo $accounts_id; ?>;<?php 
+							if ( isset( $settings['gglnltcs-webproperties'] ) ) {
+								$selected_webproperty  = json_encode( $settings['gglnltcs_webproperties'] ); ?>
+								var selectedWebroperty = <?php echo $selected_webproperty; ?>;
+								<?php
+							} ?>
+							var webPropIDs = [];
+							getWebproperties();
+							setViewID();
+						</script>
+					</table>
+				<?php } /* close if count items.*/
 			} catch ( apiServiceException $e ) {
 				echo __( 'There was an Analytics API service error', 'gglnltcs' ) . ' ' . $e->getCode() . ':' . $e->getMessage();
 			} catch ( apiException $e ) {
@@ -688,8 +671,9 @@ if ( ! function_exists( 'gglnltcs_print_webproperties' ) ) {
 
 /* Prints Necessary Instructions For User When He Doesn't Have Google Accounts */
 if ( ! function_exists( 'gglnltcs_no_analytics_accounts' ) ) {
-	function gglnltcs_no_analytics_accounts() { ?>
-		<div class="gglnltcs-text-information">
+	function gglnltcs_no_analytics_accounts() {
+		global $gglnltcs_plugin_info; ?>
+		<div>
 			<p><span class='gglnltcs-unsuccess-message'><?php _e( "It seems like you are not registered for Google Analytics or you don't have any Google Analytics Account.", 'gglnltcs' ); ?></span></p>
 			<p><?php _e( 'To gain access to Analytics you must', 'gglnltcs' ); ?> <a href="https://www.google.com/analytics/web/provision?et=&authuser=#provision/CreateAccount/" target="_blank"><?php _e( 'register for Google Analytics', 'gglnltcs' ); ?></a> <?php _e( 'and create an Analytics account, a one-time, simple process.', 'gglnltcs' ); ?></p>
 			<ol>
@@ -703,12 +687,13 @@ if ( ! function_exists( 'gglnltcs_no_analytics_accounts' ) ) {
 				<li><?php _e( 'Click', 'gglnltcs' ); ?> <strong>Get Tracking ID</strong>.</li>
 				<li><?php _e( 'Copy', 'gglnlts' ); ?> <strong>Tracking ID</strong> <?php _e( 'that looks like', 'gglnltcs' ); ?> <span class="gglnltcs-tracking-id">UA-xxxxx-y</span> <?php _e( 'and past it to the field below.', 'gglnltcs' ); ?></li>
 				<li><?php _e( 'Check', 'gglnltcs' ); ?> <strong><?php _e( 'Add tracking Code To Your Blog', 'gglnltcs' ); ?></strong> <?php _e( 'checkbox (if not checked) and click', 'gglnltcs' ); ?> <strong><?php _e( 'Save Changes', 'gglnltcs' ); ?></strong> <?php _e( 'button.', 'gglnltcs' ); ?> </li>
-			</ol><?php
-			/* Tracking ID field */
-			gglnltcs_print_tracking_id_field(); ?>
-		</div><?php 
-		/* Log out field. */
+			</ol>
+		</div>
+		<?php /* Tracking ID field */
+		gglnltcs_print_tracking_id_field();
+		/* Log out field. */ 
 		gglnltcs_print_log_out_field();
+		bws_plugin_reviews_block( $gglnltcs_plugin_info['Name'], 'bws-google-analytics' );
 		exit();
 	}
 }
@@ -717,18 +702,29 @@ if ( ! function_exists( 'gglnltcs_no_analytics_accounts' ) ) {
 if ( ! function_exists( 'gglnltcs_print_tracking_id_field' ) ) {
 	function gglnltcs_print_tracking_id_field( $self_redirect = false ) {
 		global $gglnltcs_options; 
-		$tracking_id = isset( $gglnltcs_options['tracking_id'] ) ? $gglnltcs_options['tracking_id'] : "";?>
-		<form id="gglnltcs-tracking-id-form" method="post" action="admin.php?page=bws-google-analytics.php<?php if ( $self_redirect ) echo '&action=tracking-code-tab'; ?>">
-			<input type="hidden" name="gglnltcs_tracking_id_reset" value="1">
-			<span id="gglnltcs-tracking-code-label">Tracking ID</span><input type="text" name="gglnltcs_tracking_id" value="<?php echo $tracking_id; ?>" ><br />
-			<div id="gglnltcs-add-tracking-code-checkbox" ><input id='gglnltcs-add-tracking-code-input' type="checkbox" name="gglnltcs_add_tracking_code" value="1" <?php if ( isset( $gglnltcs_options['add_tracking_code'] ) && 1 == $gglnltcs_options['add_tracking_code'] ) echo 'checked="checked"'; ?> /><label for="gglnltcs-add-tracking-code-input"> <?php _e( 'Add tracking Code To Your Blog', 'gglnltcs' ) ?></label></div>
-			<input type="hidden" name="gglnltcs_form_submit" value="submit" />
-			<p class="submit">
-				<input type="submit" class="button-primary" value="<?php _e( 'Save Changes', 'gglnltcs' ) ?>" />
-			</p>
-			<?php wp_nonce_field( plugin_basename( __FILE__ ), 'gglnltcs_nonce_name' ); ?>
-		</form><?php
-		$tracking_id = ( $tracking_id && $tracking_id !== '""' ) ? true : false;
+		$tracking_id = isset( $gglnltcs_options['tracking_id'] ) ? $gglnltcs_options['tracking_id'] : "";?>		
+			<form id="gglnltcs-tracking-id-form" method="post" action="admin.php?page=bws-google-analytics.php<?php if ( $self_redirect ) echo '&action=tracking-code-tab'; ?>">
+				<table class="form-table gglnltcs">
+					<tr>
+						<th colspan='2'>
+							<h3><?php _e( 'Insert tracking Code To Your Blog', 'gglnltcs' ); ?></h3>
+						</th>
+					</tr>
+					<tr>
+						<th scope="row">Tracking ID</th>					
+						<td>
+							<input type="text" name="gglnltcs_tracking_id" value="<?php echo $tracking_id; ?>" ><br />
+							<label><input id='gglnltcs-add-tracking-code-input' type="checkbox" name="gglnltcs_add_tracking_code" value="1" <?php if ( isset( $gglnltcs_options['add_tracking_code'] ) && 1 == $gglnltcs_options['add_tracking_code'] ) echo 'checked="checked"'; ?> /><?php _e( 'Add tracking Code To Your Blog', 'gglnltcs' ) ?></label>
+						</td>
+					</tr>
+				</table>				
+				<input type="hidden" name="gglnltcs_form_submit" value="submit" />
+				<p class="submit">
+					<input type="submit" class="button-primary" value="<?php _e( 'Save Changes', 'gglnltcs' ) ?>" />
+				</p>
+				<?php wp_nonce_field( plugin_basename( __FILE__ ), 'gglnltcs_nonce_name' ); ?>
+			</form>
+		<?php $tracking_id = ( $tracking_id && $tracking_id !== '""' ) ? true : false;
 		return $tracking_id;
 	}
 }
@@ -839,7 +835,7 @@ if ( ! function_exists( 'gglnltcs_print_results' ) ) {
 						'09' => __( 'Sep', 'gglnltcs' ),
 						'10' => __( 'Oct', 'gglnltcs' ),
 						'11' => __( 'Nov', 'gglnltcs' ),
-						'12' => __( 'Dec', 'gglnltcs' ),
+						'12' => __( 'Dec', 'gglnltcs' )
 					);
 					foreach ( $results->getRows() as $row ) {
 						$second_table .= '<td>' . $monthes[ $row[ $i ] ] . '</td>';
@@ -920,7 +916,7 @@ if ( ! function_exists( 'gglnltcs_process_ajax' ) ) {
 				'09' => __( 'Sep', 'gglnltcs' ),
 				'10' => __( 'Oct', 'gglnltcs' ),
 				'11' => __( 'Nov', 'gglnltcs' ),
-				'12' => __( 'Dec', 'gglnltcs' ),
+				'12' => __( 'Dec', 'gglnltcs' )
 			);
 			$chart_data = $chart_date = $chart_visitors = $chart_new_visits = $chart_visits = $chart_bounce_rate = $chart_avg_time = $chart_pageviews = $chart_per_visit = array();
 			foreach ( $results->getRows() as $row ) {
@@ -963,7 +959,7 @@ if ( ! function_exists( 'gglnltcs_process_ajax' ) ) {
 /* Ajax Function To Print Tab Content When User Click Another Tab */
 if ( ! function_exists( 'gglnltcs_print_tab_content' ) ) {
 	function gglnltcs_print_tab_content() {
-		global $gglnltcs_options;
+		global $gglnltcs_options, $gglnltcs_plugin_info;
 		/* check ajax value */
 		check_ajax_referer( 'gglnltcs_ajax_nonce_value', 'gglnltcs_nonce' );
 		/* Get options from the database and set them to the global array */
@@ -1232,7 +1228,7 @@ if ( ! function_exists( 'gglnltcs_load_metrics_and_dimensions' ) ) {
 				'title'		=> __( 'Mobile manufacturer or branded name.', 'gglnltcs' ),
 				'for'		=> 'gglnltcs-ga-mobile-device-branding',
 				'label'		=> __( 'Mobile Device Branding', 'gglnltcs' ),
-				'category'	=> __( 'Platform or Device', 'gglnltcs' ),
+				'category'	=> __( 'Platform or Device', 'gglnltcs' )
 			),
 			/* Mobile Device Model */
 			'ga:mobileDeviceModel' => array(
@@ -1252,7 +1248,7 @@ if ( ! function_exists( 'gglnltcs_load_metrics_and_dimensions' ) ) {
 				'title'		=> __( 'Selector used on the mobile device (e.g.: touchscreen, joystick, clickwheel, stylus).', 'gglnltcs' ),
 				'for'		=> 'gglnltcs-ga-mobile-input-selector',
 				'label'		=> __( 'Mobile Input Selector', 'gglnltcs' ),
-				'category'	=> __( 'Platform or Device', 'gglnltcs' ),
+				'category'	=> __( 'Platform or Device', 'gglnltcs' )
 			),
 			/* Device Category */
 			'ga:deviceCategory' => array(

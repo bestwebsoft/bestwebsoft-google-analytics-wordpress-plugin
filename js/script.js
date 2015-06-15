@@ -60,10 +60,10 @@ function setViewID() {
 	/* Content Processing. This functions will be recalled every time user selects new tab. */
 	function contentProcessing() {
 		/* add notice about changing in the settings page */
-		$( 'input[name="gglnltcs_tracking_id"], #gglnltcs-add-tracking-code-checkbox input' ).on( "change click select", function() {
+		$( 'input[name="gglnltcs_tracking_id"], #gglnltcs-add-tracking-code-checkbox input, .form-table input' ).on( "change click select", function() {
 			if ( $( this ).attr( 'type' ) != 'submit' ) {
-				$( '.updated.fade' ).css( 'display', 'none' );
-				$( '#gglnltcs-settings-notice' ).css( 'display', 'block' );
+				$( '.updated.fade' ).hide();
+				$( '#gglnltcs-settings-notice' ).show();
 			};
 		});		
 		/* Accounts on change */
@@ -113,10 +113,10 @@ function setViewID() {
 		$( '#gglnltcs-metrics input:checkbox' ).on( 'change', function() {
 			if ( $( '#gglnltcs-metrics input:checkbox:checked' ).length == 0 ) {
 				$( '#gglnltcs-metrics input:checkbox' ).addClass( 'gglnltcs-validation-failed' );
-				$( '#gglnltcs-metrics .gglnltcs-table-name' ).after( '<span class="gglnltcs-error-message">' +  gglnltcsLocalize.metricsValidation + '</span>' );
+				$( '#gglnltcs-metrics' ).after( '<span class="gglnltcs-error-message">' +  gglnltcsLocalize.metricsValidation + '</span>' );
 			} else {
 				$( '#gglnltcs-metrics input:checkbox' ).removeClass( 'gglnltcs-validation-failed' );
-				$( '#gglnltcs-metrics .gglnltcs-table-name' ).next( '.gglnltcs-error-message' ).remove();
+				$( '#gglnltcs-metrics' ).next( '.gglnltcs-error-message' ).remove();
 			}
 		});
 		/* Main form preventing submit */
@@ -154,8 +154,8 @@ function setViewID() {
 				if ( $( '#gglnltcs-metrics input:checkbox:checked' ).length == 0 ) {
 					$( '#gglnltcs-metrics input:checkbox' ).addClass( 'gglnltcs-validation-failed' );
 					runAjax = false;
-					if ( $( '#gglnltcs-metrics .gglnltcs-error-message' ).length == 0) {
-						$( '#gglnltcs-metrics .gglnltcs-table-name' ).after( '<span class="gglnltcs-error-message">' +  gglnltcsLocalize.metricsValidation + '</span>' );
+					if ( $( '#gglnltcs-metrics' ).next( '.gglnltcs-error-message' ).length == 0) {
+						$( '#gglnltcs-metrics' ).after( '<span class="gglnltcs-error-message">' +  gglnltcsLocalize.metricsValidation + '</span>' );
 					}       
 				} /* If Everything Is OK, 
 				 /* Prevent Default Submit 
@@ -421,7 +421,7 @@ function setViewID() {
 		if ( $( '#gglnltcs-results-wrapper' ).length ) {
 			$( '#gglnltcs-results-wrapper' ).fadeTo( 200, .1 );
 		}
-		var loadingCircle = $( '<div>', { 'class' : 'gglnltcs-loading-icon' } ).hide().appendTo( '#gglnltcs-date' ).fadeIn( 1000 );
+		var loadingCircle = $( '<div>', { 'class' : 'gglnltcs-loading-icon' } ).hide().insertAfter( '#gglnltcs-get-statistics-button' ).fadeIn( 1000 );
 		var settings = $( '#gglnltcs-main-form' ).serialize();
 		var data = {
 			action: 'gglnltcs_action',

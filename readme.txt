@@ -1,10 +1,10 @@
 === Google Analytics by BestWebSoft ===
 Contributors: bestwebsoft
-Donate link: https://www.2checkout.com/checkout/purchase?sid=1430388&quantity=1&product_id=94
+Donate link: http://bestwebsoft.com/donate/
 Tags: add tracking code, analytics, analitics, display statistics report, googel, googgle, gogle, gogole, google, google analytics, google analytics loggins, google analytics plugin, google analytics stats, group stats, group statistics, metrics, page views, retrieve metrics, statistics, statistics report, stats, tracking, visit duration, visits statistics, visitors, visits, web properties, webproperties.
 Requires at least: 3.3
-Tested up to: 4.1.1
-Stable tag: 1.6.2
+Tested up to: 4.2.2
+Stable tag: 1.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,7 @@ This plugin establishes a connection with your Google Analytics account and allo
 http://www.youtube.com/watch?v=u6GCmG2SYIg
 
 <a href="http://wordpress.org/plugins/bws-google-analytics/faq/" target="_blank">FAQ</a>
+
 <a href="http://support.bestwebsoft.com" target="_blank">Support</a>
 
 <a href="http://bestwebsoft.com/products/bws-google-analytics/?k=5891b1a2761b39cd5706eba26c3af1d4" target="_blank">Upgrade to Pro Version</a>
@@ -54,7 +55,9 @@ We can fix some things for free for the users who provide translation of our plu
 
 1. Upload the `bws-google-analytics` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin using the 'Plugins' menu in your WordPress admin panel.
-3. Plugin settings are located in the plugin settings page.
+3. Plugin settings are located in your WordPress admin panel in "BWS Plugins" > "Google Analytics" > "Tracking Code & Reset".
+
+View a PDF version of <a href="https://docs.google.com/document/d/1-J7Qk3MGIE6kFgsRjKbjynNbGuiD7yAicqzOWmkaafQ/edit" target="_blank">Step-by-step Instruction on Google Analytics Installation</a>
 
 == Frequently Asked Questions ==
 
@@ -73,6 +76,7 @@ After you have created a new webroperty you will get a tracking code. If you wan
 = I want to collect statistic from my blog, what should I do? =
 
 If you want to enable tracking and collect statistics from your blog, you need to past tracking code to your blog. To do this you should follow next steps:
+
 1. Sign in to your Google Analytics account. Click Admin in the menu bar at the top of any page.
 2. In the Account column, select the account from the dropdown that you want to add the property to.
 3. In the dropdown in the Property column, click Create new property.
@@ -97,6 +101,7 @@ Line chart displays stats for the last year, 6 months, 3 months, 1 month, 5 days
 = I have some problems with the plugin's work. What Information should I provide to receive proper support? =
 
 Please make sure that the problem hasn't been discussed yet on our forum (<a href="http://support.bestwebsoft.com" target="_blank">http://support.bestwebsoft.com</a>). If no, please provide the following data along with your problem's description:
+
 1. The link to the page where the problem occurs
 2. The name of the plugin and its version. If you are using a pro version - your order number.
 3. The version of your WordPress installation
@@ -110,6 +115,14 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 4. Tracking Code and Reset Tab in the plugin settings page.
 
 == Changelog == 
+
+= V1.6.4 - 15.06.2015 =
+* Update: Input maxlength is added.
+* Bugfix: We fixed the settings page display.
+* Update: BWS plugins section was updated.
+
+= V1.6.3 - 07.05.2015 =
+* Update : We updated all functionality for wordpress 4.2.2.
 
 = V1.6.2 - 26.03.2015 =
 * New: An ability to add tracking code to the website without authorizing in the plugin was added.
@@ -150,6 +163,12 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.6.4 =
+Input maxlength is added. We fixed the settings page display. BWS plugins section was updated.
+
+= V1.6.3 =
+We updated all functionality for wordpress 4.2.2.
 
 = V1.6.2 =
 An ability to add tracking code to the website without authorizing in the plugin was added.
