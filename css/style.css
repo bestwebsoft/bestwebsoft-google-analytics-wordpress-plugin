@@ -1,5 +1,8 @@
 /*** BWS Google Anlytics ***/
 /* Global Styles */
+strong {
+	font-weight: bold;
+}
 table.gglnltcs hr:first-of-type {
 	margin-top: 0;
 }
@@ -15,6 +18,13 @@ table.gglnltcs hr:first-of-type {
 #gglnltcs-start-date.gglnltcs-invalid-date-range,
 #gglnltcs-end-date.gglnltcs-invalid-date-range {
 	border: 1px solid rgb(205, 92, 92);
+	padding-left: 4px;
+	padding-top: 2px;
+}
+#gglnltcs-start-date.gglnltcs-validation-failed,
+#gglnltcs-end-date.gglnltcs-validation-failed {
+	padding-left: 4px;
+	padding-top: 2px;
 }
 #gglnltcs-start-date.gglnltcs-validation-failed,
 #gglnltcs-end-date.gglnltcs-validation-failed,
@@ -38,6 +48,11 @@ table.gglnltcs hr:first-of-type {
 #gglnltcs-metrics-line-chart td {
 	max-width: 200px;
 	vertical-align: top;
+}
+#gglnltcs-metrics td hr + strong,
+#gglnltcs-dimensions td hr + strong,
+#gglnltcs-metrics-line-chart td hr + strong {
+	font-weight: bold;
 }
 /* Error Messages and Notes */
 #gglnltcs-start-date.gglnltcs-validation-failed,
@@ -85,6 +100,9 @@ table.gglnltcs hr:first-of-type {
 table.gglnltcs tr.gglnltcs-validation-failed + tr.gglnltcs-validation-failed .gglnltcs-date .gglnltcs-error-message {
 	display: none;
 }
+table.gglnltcs td.gglnltcs-date {	
+	position: relative;
+}
 div.ui-datepicker {
 	font-size: 10px;
 }
@@ -127,9 +145,6 @@ div.ui-datepicker {
 }
 
 /* For arabic language */
-.rtl .gglnltcs-results.gglnltcs th {
-	text-align: right;
-}
 .rtl .gglnltcs-results table.gglnltcs-table-header {
 	left: 0px !important;
 	width: auto;
@@ -283,8 +298,26 @@ div.gglnltcs-text-information {
 	padding-bottom: 0;
 	vertical-align: middle;
 }
+span.gglnltcs-tracking-id {
+	color: rgb(0, 112, 0);
+}
 .gglnltcs-unsuccess-message {
 	color: rgb(205, 92, 92);
+}
+#gglnltcs-tracking-id-table label {
+	display: block;
+}
+#gglnltcs-tracking-id-table #gglnltcs-tracking-id-form label {
+	display: inline;
+}
+#gglnltcs-tracking-id-instructions ol {
+	margin-top: 0;
+	max-width: 500px;
+	width: 100%;
+}
+#gglnltcs-tracking-id-instructions ol p {
+	left: -2em;
+	position: relative;
 }
 input[name="gglnltcs_tracking_id"].gglnltcs-validation-failed {
 	border: 2px solid rgb(205, 92, 92);
@@ -292,8 +325,15 @@ input[name="gglnltcs_tracking_id"].gglnltcs-validation-failed {
 	position: relative;
 	top: -1px;
 }
+.gglnltcs-text-information .gglnltcs-authentication-instructions {
+	clear: both;
+}
 noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	margin-bottom: 13px;
+}
+.gglnltcs-google-sign-in a {
+	color: #fff;
+    text-decoration: none;
 }
 #gglnltcs-authentication-code-input {
 	margin-right: 10px;
@@ -334,6 +374,7 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 #ui-datepicker-div {
 	z-index: 2 !important;
 }
+
 ::-webkit-scrollbar {
 	width: 12px;  /* for vertical scrollbars */
 	height: 12px; /* for horizontal scrollbars */
@@ -353,25 +394,52 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	background-image: url(../images/loading.gif);
 	background-repeat: no-repeat;
 	background-size: 100%;
+	position: absolute;	
+}
+.nav-tab-wrapper .gglnltcs-loading-icon {
 	display: inline-block !important;
 	height: 21px;
+	opacity: 0.7;
 	position: relative;
 	left: 5px;
-	right: 5px;
 	top: 5px;
 	width: 21px;
 	/* for IE6 and IE7 */
     zoom: 1;
     *display: inline !important;
 }
-.gglnltcs-loading-icon + .gglnltcs-loading-icon {
+.nav-tab-wrapper .gglnltcs-loading-icon + .gglnltcs-loading-icon {
 	display: none !important;
+}
+#gglnltcs-date .gglnltcs-loading-icon {
+	bottom: 18px;
+	height: 21px;
+	left: 330px;
+	width: 21px;
+}
+.rtl #gglnltcs-date .gglnltcs-loading-icon {
+	bottom: 18px;
+	height: 21px;
+	right: 330px;
+	width: 21px;
 }
 #gglnltcs-tracking-code-nav-tab .gglnltcs-loading-icon {
 	height: 21px;
 	opacity: 0.7;
 	right: -38px;
 	top: 13%;
+	width: 21px;
+}
+.gglnltcs-get-statistics-cell .gglnltcs-loading-icon {
+	height: 21px;
+	left: 110px;
+	top: 17px;
+	width: 21px;
+}
+.rtl .gglnltcs-get-statistics-cell .gglnltcs-loading-icon {
+	height: 21px;
+	right: 120px;
+	top: 18px;
 	width: 21px;
 }
 #gglnltcs-tracking-code-nav-tab {
@@ -381,6 +449,7 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	display: block;
 	position: relative;
 }
+
 @media only screen and (min-width: 600px) and (max-width: 780px) {
 	.gglnltcs-results th,
 	#gglnltcs-metrics th,
@@ -413,7 +482,13 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	}
 	.gglnltcs-date .gglnltcs-error-message,
 	.gglnltcs-date .gglnltcs-note {
+		width: 100px;
+		left: 183px;
 		z-index: 5;
+	}
+	.form-table #gglnltcs-tracking-id-instructions ol {
+		max-width: 480px;
+		width: 100%;
 	}
 	.rtl #gglnltcs-group-by-Y-M-D {
 		right: 170px;
@@ -426,6 +501,12 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	#gglnltcs-metrics-line-chart th {
 		display: none;
 	}
+	table.gglnltcs th {
+		width: 150px;
+	}
+	#gglnltcs-tracking-id-table-content table.gglnltcs th {
+		width: auto;
+	}
 	.gglnltcs-results table.gglnltcs-table-header {
 		left: 0;
 		top: 40px;
@@ -433,14 +514,16 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	.gglnltcs-results div.gglnltcs-table-body {
 		left: 0;
 		max-width: 250px;
+		width: 100%;
 		top: 40px;
 	}
 	#gglnltcs-group-by-Y-M-D {
 		left: 0;
-		width: auto;
+		width: 100%;
 	}
 	#gglnltcs-group-by-Y-M-D div {
 		left: 163px;
+		position: absolute;
 	}
 	#gglnltcs-group-by-Y-M-D span {
 		padding-top: 8px;
@@ -457,5 +540,31 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	.gglnltcs-date .gglnltcs-error-message,
 	.gglnltcs-date .gglnltcs-note {
 		z-index: 5;
+	}
+	#gglnltcs-tracking-id-table th {
+		vertical-align: top;
+	}
+	input[name="gglnltcs_tracking_id"] {
+		display: block;
+	}
+	#gglnltcs-tracking-id-table th {
+		width: 150px;
+	}
+	#gglnltcs-tracking-id-form input[type="submit"] {
+		margin-top: 10px;
+		width: 178px;
+	}
+	#gglnltcs-tracking-id-form .gglnltcs-validation-failed + input[type="submit"] {
+		margin-top: 8px;
+	}
+	.form-table #gglnltcs-tracking-id-instructions ol {
+		max-width: 360px;
+		width: 84%;
+	}
+	.rtl #gglnltcs-tracking-id-instructions p {
+		left: 0em;
+	}
+	.rtl #gglnltcs-group-by-Y-M-D {
+		right: 0px;
 	}
 }

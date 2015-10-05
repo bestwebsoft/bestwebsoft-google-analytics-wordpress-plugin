@@ -1,10 +1,10 @@
 === Google Analytics by BestWebSoft ===
 Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
-Tags: add tracking code, analytics, analitics, display statistics report, googel, googgle, gogle, gogole, google, google analytics, google analytics loggins, google analytics plugin, google analytics stats, group stats, group statistics, metrics, page views, retrieve metrics, statistics, statistics report, stats, tracking, visit duration, visits statistics, visitors, visits, web properties, webproperties.
-Requires at least: 3.3
-Tested up to: 4.2.2
-Stable tag: 1.6.4
+Tags: add google plugin, add google analytics plugin, add code, add tracking code, analitics, analytics, best google plugin, best google analytics plugin, code, display report, display google statistics report, display statistics report, free, free google plugin, free google statistics plugin, free google analytics plugin, free wp plugins, free wp google plugins, gogle, gogole, googel, googgle, google, google analytics, google analytics loggins, google analytics plugin, google analytics stats, google statistics, group statistics, group stats, metrics, page, page views, page views statistics, page views report, retrieve metrics, statistics, statistics report, stats, tracking, visit duration, visitors, visits, visits statistics, web properties, webproperties, wp plugins, wp plugin, wp google plugin, wp google statistics plugin, wp google analytics plugin, wordpress plugins, wordpress plugin, wordpress google plugin, wordpress google statistics plugin, wordpress google analytics plugin
+Requires at least: 3.8
+Tested up to: 4.3.1
+Stable tag: 1.6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,18 +16,18 @@ This plugin establishes a connection with your Google Analytics account and allo
 
 http://www.youtube.com/watch?v=u6GCmG2SYIg
 
-<a href="http://wordpress.org/plugins/bws-google-analytics/faq/" target="_blank">FAQ</a>
+<a href="http://wordpress.org/plugins/bws-google-analytics/faq/" target="_blank">Google Analytics by BestWebSoft FAQ</a>
 
-<a href="http://support.bestwebsoft.com" target="_blank">Support</a>
+<a href="http://support.bestwebsoft.com" target="_blank">Google Analytics by BestWebSoft Support</a>
 
-<a href="http://bestwebsoft.com/products/bws-google-analytics/?k=5891b1a2761b39cd5706eba26c3af1d4" target="_blank">Upgrade to Pro Version</a>
+<a href="http://bestwebsoft.com/products/bws-google-analytics/?k=5891b1a2761b39cd5706eba26c3af1d4" target="_blank">Upgrade to Google Analytics Pro by BestWebSoft</a>
 
 = Features = 
 
-* Actions: Connect to your Google Analytics account and get Google Analytics stats.
-* Display: Group stats by day, month and year.
-* Actions: See data for different time periods in your reports.
-* Actions: Add tracking code to enable Google Analytics logging on your blog.
+* Connect to your Google Analytics account and get Google Analytics stats.
+* Group stats by day, month and year.
+* See data for different time periods in your reports.
+* Add tracking code to enable Google Analytics logging on your blog.
 
 = Recommended Plugins =
 
@@ -114,9 +114,13 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 3. Table Chart Tab in the plugin settings page.
 4. Tracking Code and Reset Tab in the plugin settings page.
 
-== Changelog == 
+== Changelog ==
 
-= V1.6.4 - 15.06.2015 =
+= V1.6.5 - 05.10.2015 =
+* Update : We updated all functionality for wordpress 4.3.1.
+* Update : Textdomain was changed. 
+
+= V1.6.4 - 11.06.2015 =
 * Update: Input maxlength is added.
 * Bugfix: We fixed the settings page display.
 * Update: BWS plugins section was updated.
@@ -163,6 +167,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.6.5 =
+We updated all functionality for wordpress 4.3.1. Textdomain was changed. 
 
 = V1.6.4 =
 Input maxlength is added. We fixed the settings page display. BWS plugins section was updated.

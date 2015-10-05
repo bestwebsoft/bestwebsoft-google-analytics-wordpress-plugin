@@ -51,7 +51,7 @@ function setViewID() {
 			} else if ( activeTab == 'gglnltcs-pro-nav-tab' ) {
 				ajaxTabContent( 'go_pro' ); /* Print content for Tracking Code $ Reset Tab. */
 			}
-			$( '#gglnltcs-settings-message, #gglnltcs-settings-error, #gglnltcs-settings-notice' ).fadeOut( 500 );
+			$( '#gglnltcs-settings-message, #gglnltcs-settings-error, #bws_save_settings_notice' ).fadeOut( 500 );
 		});
 		contentProcessing(); /* Content Processing */
 	});
@@ -59,13 +59,6 @@ function setViewID() {
 /************************************************************************/
 	/* Content Processing. This functions will be recalled every time user selects new tab. */
 	function contentProcessing() {
-		/* add notice about changing in the settings page */
-		$( 'input[name="gglnltcs_tracking_id"], #gglnltcs-add-tracking-code-checkbox input, .form-table input' ).on( "change click select", function() {
-			if ( $( this ).attr( 'type' ) != 'submit' ) {
-				$( '.updated.fade' ).hide();
-				$( '#gglnltcs-settings-notice' ).show();
-			};
-		});		
 		/* Accounts on change */
 		$( '#gglnltcs-accounts' ).on( 'change', function() {
 			getWebproperties();
@@ -421,7 +414,7 @@ function setViewID() {
 		if ( $( '#gglnltcs-results-wrapper' ).length ) {
 			$( '#gglnltcs-results-wrapper' ).fadeTo( 200, .1 );
 		}
-		var loadingCircle = $( '<div>', { 'class' : 'gglnltcs-loading-icon' } ).hide().insertAfter( '#gglnltcs-get-statistics-button' ).fadeIn( 1000 );
+		var loadingCircle = $( '<div>', { 'class' : 'gglnltcs-loading-icon' } ).hide().appendTo( '#gglnltcs-date' ).fadeIn( 1000 );
 		var settings = $( '#gglnltcs-main-form' ).serialize();
 		var data = {
 			action: 'gglnltcs_action',
