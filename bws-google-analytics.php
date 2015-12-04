@@ -6,7 +6,7 @@ Description: This plugin allows you to retrieve basic stats from Google Analytic
 Author: BestWebSoft
 Text Domain: bws-google-analytics
 Domain Path: /languages
-Version: 1.6.5
+Version: 1.6.6
 Author URI: http://bestwebsoft.com/
 License: GPLv2 or later
 */
@@ -29,8 +29,9 @@ License: GPLv2 or later
 
 if ( ! function_exists( 'gglnltcs_add_admin_menu' ) ) {
 	function gglnltcs_add_admin_menu() {
-		bws_add_general_menu( plugin_basename( __FILE__ ) ); 
-		add_submenu_page( 'bws_plugins', 'Google Analytics', 'Google Analytics', 'manage_options', 'bws-google-analytics.php', 'gglnltcs_settings_page' );
+		bws_general_menu();
+		$settings = add_submenu_page( 'bws_plugins', 'Google Analytics', 'Google Analytics', 'manage_options', 'bws-google-analytics.php', 'gglnltcs_settings_page' );
+		add_action( 'load-' . $settings, 'gglnltcs_add_tabs' );
 	}
 }
 
@@ -152,43 +153,43 @@ if ( ! function_exists( 'gglnltcs_settings_page' ) ) {
 		}
 		$analytics 	= gglnltcs_get_analytics();
 		/* Print Tab Navigation */ ?>
-		<div class="icon32 icon32-bws" id="icon-options-general"></div>
-		<h2 id="gglnltcs-main-header"><?php _e( 'Google Analytics Settings', 'bws-google-analytics' ); ?></h2>
-		<h2 class="nav-tab-wrapper">
-			<a id="gglnltcs-line-nav-tab" class="nav-tab<?php if ( ! isset( $_GET['action'] ) ) echo ' nav-tab-active'; ?>" href="admin.php?page=bws-google-analytics.php"><?php _e( 'Line Chart', 'bws-google-analytics' ); ?></a>
-			<a id="gglnltcs-table-nav-tab" class="nav-tab<?php if ( isset( $_GET['action'] ) && 'table-tab' == $_GET['action'] ) echo ' nav-tab-active'; ?>" href="admin.php?page=bws-google-analytics.php&amp;action=table-tab"><?php _e( 'Table Chart', 'bws-google-analytics' ); ?></a>
-			<a id="gglnltcs-tracking-code-nav-tab" class="nav-tab<?php if ( isset( $_GET['action'] ) && 'tracking-code-tab' == $_GET['action'] ) echo ' nav-tab-active'; ?>" href="admin.php?page=bws-google-analytics.php&amp;action=tracking-code-tab"><?php _e( 'Tracking Code & Reset', 'bws-google-analytics' ); ?></a>
-			<a id="gglnltcs-faq" class="nav-tab" href="http://bestwebsoft.com/products/bws-google-analytics/faq/" target="_blank"><?php _e( 'FAQ', 'bws-google-analytics' ); ?></a>
-			<a id="gglnltcs-pro-nav-tab" class="nav-tab bws_go_pro_tab<?php if ( isset( $_GET['action'] ) && 'go_pro' == $_GET['action'] ) echo ' nav-tab-active'; ?>" href="admin.php?page=bws-google-analytics.php&amp;action=go_pro"><?php _e( 'Go PRO', 'bws-google-analytics' ); ?></a>
-		</h2>
-		<div id="gglnltcs-settings-message" class="updated fade" <?php if ( empty( $message ) ) echo "style=\"display:none\""; ?>><p><strong><?php echo $message; ?></strong></p></div>
-		<div id="gglnltcs-settings-error" class="error" <?php if ( empty( $error ) ) echo "style=\"display:none\""; ?>><p><strong><?php echo $error; ?></strong></p></div>
-		<?php bws_show_settings_notice(); ?>
-		<div id="gglnltcs-main-content"><?php 
-			/* Line Chart Tab */
-			if ( ! isset( $_GET['action'] ) ) {
-				if ( ! isset( $gglnltcs_options['token'] ) )
-					gglnltcs_authenticate();
-				else
-					gglnltcs_line_chart_tab( $analytics );
-			}
-			/* Table Chart Tab */
-			if ( isset( $_GET['action'] ) && 'table-tab' == $_GET['action'] ) {
-				if ( ! isset( $gglnltcs_options['token'] ) )
-					gglnltcs_authenticate();
-				else 
-					gglnltcs_table_chart_tab( $analytics );
-			}
-			/* Tracking Code & Reset Tab */
-			if ( isset( $_GET['action'] ) && 'tracking-code-tab' == $_GET['action'] ) {
-				gglnltcs_tracking_code_tab( true );
-			}
-			/* GO PRO Tab */
-			if ( isset( $_GET['action'] ) && 'go_pro' == $_GET['action'] ) {
-				gglnltcs_go_pro_tab();
-			} ?>
-		</div><?php
-	} /* close gglnltcs_settings_page function.*/
+		<div class="wrap">
+			<h1 id="gglnltcs-main-header"><?php _e( 'Google Analytics Settings', 'bws-google-analytics' ); ?></h1>
+			<h2 class="nav-tab-wrapper">
+				<a id="gglnltcs-line-nav-tab" class="nav-tab<?php if ( ! isset( $_GET['action'] ) ) echo ' nav-tab-active'; ?>" href="admin.php?page=bws-google-analytics.php"><?php _e( 'Line Chart', 'bws-google-analytics' ); ?></a>
+				<a id="gglnltcs-table-nav-tab" class="nav-tab<?php if ( isset( $_GET['action'] ) && 'table-tab' == $_GET['action'] ) echo ' nav-tab-active'; ?>" href="admin.php?page=bws-google-analytics.php&amp;action=table-tab"><?php _e( 'Table Chart', 'bws-google-analytics' ); ?></a>
+				<a id="gglnltcs-tracking-code-nav-tab" class="nav-tab<?php if ( isset( $_GET['action'] ) && 'tracking-code-tab' == $_GET['action'] ) echo ' nav-tab-active'; ?>" href="admin.php?page=bws-google-analytics.php&amp;action=tracking-code-tab"><?php _e( 'Tracking Code & Reset', 'bws-google-analytics' ); ?></a>
+				<a id="gglnltcs-pro-nav-tab" class="nav-tab bws_go_pro_tab<?php if ( isset( $_GET['action'] ) && 'go_pro' == $_GET['action'] ) echo ' nav-tab-active'; ?>" href="admin.php?page=bws-google-analytics.php&amp;action=go_pro"><?php _e( 'Go PRO', 'bws-google-analytics' ); ?></a>
+			</h2>
+			<div id="gglnltcs-settings-message" class="updated fade" <?php if ( empty( $message ) ) echo "style=\"display:none\""; ?>><p><strong><?php echo $message; ?></strong></p></div>
+			<div id="gglnltcs-settings-error" class="error" <?php if ( empty( $error ) ) echo "style=\"display:none\""; ?>><p><strong><?php echo $error; ?></strong></p></div>
+			<?php bws_show_settings_notice(); ?>
+			<div id="gglnltcs-main-content"><?php 
+				/* Line Chart Tab */
+				if ( ! isset( $_GET['action'] ) ) {
+					if ( ! isset( $gglnltcs_options['token'] ) )
+						gglnltcs_authenticate();
+					else
+						gglnltcs_line_chart_tab( $analytics );
+				}
+				/* Table Chart Tab */
+				if ( isset( $_GET['action'] ) && 'table-tab' == $_GET['action'] ) {
+					if ( ! isset( $gglnltcs_options['token'] ) )
+						gglnltcs_authenticate();
+					else 
+						gglnltcs_table_chart_tab( $analytics );
+				}
+				/* Tracking Code & Reset Tab */
+				if ( isset( $_GET['action'] ) && 'tracking-code-tab' == $_GET['action'] ) {
+					gglnltcs_tracking_code_tab( true );
+				}
+				/* GO PRO Tab */
+				if ( isset( $_GET['action'] ) && 'go_pro' == $_GET['action'] ) {
+					gglnltcs_go_pro_tab();
+				} ?>
+			</div>
+		</div>
+	<?php } /* close gglnltcs_settings_page function.*/
 }
 
 if ( ! function_exists( 'gglnltcs_authenticate' ) ) {
@@ -333,6 +334,18 @@ if ( ! function_exists( 'gglnltcs_show_notices' ) ) {
 			
 			bws_plugin_banner_to_settings( $gglnltcs_plugin_info, 'gglnltcs_options', 'bws-google-analytics', 'admin.php?page=bws-google-analytics.php' );
 		}
+	}
+}
+
+/* add help tab  */
+if ( ! function_exists( 'gglnltcs_add_tabs' ) ) {
+	function gglnltcs_add_tabs() {
+		$screen = get_current_screen();
+		$args = array(
+			'id' 			=> 'gglnltcs',
+			'section' 		=> '200538749'
+		);
+		bws_help_tab( $screen, $args );
 	}
 }
 

@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
 Tags: add google plugin, add google analytics plugin, add code, add tracking code, analitics, analytics, best google plugin, best google analytics plugin, code, display report, display google statistics report, display statistics report, free, free google plugin, free google statistics plugin, free google analytics plugin, free wp plugins, free wp google plugins, gogle, gogole, googel, googgle, google, google analytics, google analytics loggins, google analytics plugin, google analytics stats, google statistics, group statistics, group stats, metrics, page, page views, page views statistics, page views report, retrieve metrics, statistics, statistics report, stats, tracking, visit duration, visitors, visits, visits statistics, web properties, webproperties, wp plugins, wp plugin, wp google plugin, wp google statistics plugin, wp google analytics plugin, wordpress plugins, wordpress plugin, wordpress google plugin, wordpress google statistics plugin, wordpress google analytics plugin
 Requires at least: 3.8
-Tested up to: 4.3.1
-Stable tag: 1.6.5
+Tested up to: 4.4-RC1
+Stable tag: 1.6.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,6 +116,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 
 == Changelog ==
 
+= V1.6.6 - 04.12.2015 =
+* Bugfix : The bug with plugin menu duplicating was fixed.
+
 = V1.6.5 - 05.10.2015 =
 * Update : We updated all functionality for wordpress 4.3.1.
 * Update : Textdomain was changed. 
@@ -167,6 +170,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.6.6 =
+The bug with plugin menu duplicating was fixed.
 
 = V1.6.5 =
 We updated all functionality for wordpress 4.3.1. Textdomain was changed. 
