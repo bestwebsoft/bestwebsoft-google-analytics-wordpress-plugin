@@ -292,7 +292,7 @@ if ( ! function_exists( 'gglnltcs_scripts' ) ) {
 			/* This function is called from the inside of the function "gglnltcs_add_admin_menu" */
 			wp_enqueue_style( 'gglnltcs_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
 			wp_enqueue_style( 'gglnltcs_jquery_ui_stylesheet', plugins_url( 'css/jquery-ui.css', __FILE__ ) );
-			wp_enqueue_script( 'gglnltcs_google_js_api', 'http://www.google.com/jsapi' ); /* Load Google object. It will be used for visualization.*/
+			wp_enqueue_script( 'gglnltcs_google_js_api', 'https://www.google.com/jsapi' ); /* Load Google object. It will be used for visualization.*/
 			wp_enqueue_script( 'gglnltcs_script', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery-ui-datepicker' ) ); /* Load main plugin script. It is important to load google object first.*/
 			/* Script Localization */
 			wp_localize_script( 'gglnltcs_script', 'gglnltcsLocalize', array(
