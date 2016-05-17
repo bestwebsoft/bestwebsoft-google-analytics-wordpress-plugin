@@ -12,9 +12,6 @@ table.gglnltcs hr:first-of-type {
 	margin-bottom: 30px;
 	position: relative;
 }
-#gglnltcs-end-date {
-	display: block;
-}
 #gglnltcs-start-date.gglnltcs-invalid-date-range,
 #gglnltcs-end-date.gglnltcs-invalid-date-range {
 	border: 1px solid rgb(205, 92, 92);
@@ -29,45 +26,39 @@ table.gglnltcs hr:first-of-type {
 #gglnltcs-start-date.gglnltcs-validation-failed,
 #gglnltcs-end-date.gglnltcs-validation-failed,
 #gglnltcs-metrics input[type=checkbox].gglnltcs-validation-failed,
-#gglnltcs-metrics-line-chart input[type=checkbox].gglnltcs-validation-failed,
 #gglnltcs-authentication-code-input.gglnltcs-validation-failed,
 .error-message {
 	border: 1px solid rgb(205, 92, 92);
 }
-/* Metrics and Dimensions */
-#gglnltcs-dimensions {
-	display: none;
-}
-#gglnltcs-metrics,
-#gglnltcs-dimensions,
-#gglnltcs-metrics-line-chart {
+/* Metrics */
+#gglnltcs-metrics {
 	width: auto;
 }
-#gglnltcs-metrics td,
-#gglnltcs-dimensions td,
-#gglnltcs-metrics-line-chart td {
+#gglnltcs-metrics td {
 	max-width: 200px;
 	vertical-align: top;
 }
-#gglnltcs-metrics td hr + strong,
-#gglnltcs-dimensions td hr + strong,
-#gglnltcs-metrics-line-chart td hr + strong {
+#gglnltcs-metrics td hr + strong{
 	font-weight: bold;
+}
+#gglnltcs-main-content .bws_help_box {
+	vertical-align: middle;
 }
 /* Error Messages and Notes */
 #gglnltcs-start-date.gglnltcs-validation-failed,
 #gglnltcs-end-date.gglnltcs-validation-failed,
-.gglnltcs-error-message {
+.gglnltcs-error-message,
+#gglnltcs-main-content .gglnltcs-error-tooltip {
 	color: rgb(205, 92, 92);
 }
 .gglnltcs-date .gglnltcs-error-message,
 .gglnltcs-date .gglnltcs-note {
-	display: inline-block;	
+	display: inline-block;
 }
 .gglnltcs-date .gglnltcs-note {
 	background: rgb(255, 255, 255);
 	border: 1px solid rgb(114, 117, 122);
-	display: none;	
+	display: none;
 	padding: 4px;
 }
 .gglnltcs-date .gglnltcs-note.gglnltcs-err {
@@ -100,28 +91,26 @@ table.gglnltcs hr:first-of-type {
 table.gglnltcs tr.gglnltcs-validation-failed + tr.gglnltcs-validation-failed .gglnltcs-date .gglnltcs-error-message {
 	display: none;
 }
-table.gglnltcs td.gglnltcs-date {	
+table.gglnltcs td.gglnltcs-date {
 	position: relative;
 }
 div.ui-datepicker {
 	font-size: 10px;
 }
-#gglnltcs-continuous_chart_div {
-	height: 200px;
-	left: -100px;
-	width: 100%;
-}
-#gglnltcs-continuous_chart_div_container {
-	height: 200px;
+#gglnltcs-results-wrapper{
 	position: relative;
+	margin-bottom: 10px;
 }
-#gglnltcs-continuous_chart_div_container .gglnltcs-error-message {
+#gglnltcs-results-wrapper .gglnltcs-error-message {
 	background: rgb(255, 255, 255);
 	border: 2px solid rgb(205, 92, 92);
-	left: 36%;
 	padding: 15px;
 	position: absolute;
 	top: 39%;
+}
+#gglnltcs-chart {
+	height: 200px;
+	width: 100%;
 }
 #gglnltcs-chart-metrics {
 	position: relative;
@@ -134,16 +123,6 @@ div.ui-datepicker {
 	display: none;
 }
 
-/* Results Table */
-.gglnltcs-results { 
-	display: none;
-	position: absolute;
-}
-.gglnltcs-results:first-child {
-	display: block;
-	position: relative;
-}
-
 /* For arabic language */
 .rtl .gglnltcs-results table.gglnltcs-table-header {
 	left: 0px !important;
@@ -154,6 +133,10 @@ div.ui-datepicker {
 }
 .rtl #gglnltcs-group-by-Y-M-D{
 	right: 310px;
+}
+.rtl .gglnltcs-date,
+.rtl .gglnltcs-view-mode label {
+	float: right;
 }
 /* end for arabic language */
 
@@ -168,30 +151,31 @@ div.ui-datepicker {
 	padding-left: 0.5%;
     padding-right: 0.5%;
     width: 98%;
-    margin-bottom: 20px;     
+    margin-bottom: 20px;
 }
 #gglnltcs-group-by-Y-M-D div {
 	display: inline-block !important;
+}
+.gglnltcs-results {
+	position: absolute;
+	display: none;
+}
+.gglnltcs-results:nth-child(2) {
+	display: table;
+
 }
 .gglnltcs-results table {
 	border-collapse: collapse;
 	border-spacing: 0;
 	height: 100%;
-	margin: 0px;
-	padding: 0px;
-	position: relative;
-	top: 3px;
+	margin: 0 0 10px 0;
+	padding: 0;
 }
 .gglnltcs-results .gglnltcs-table-body table {
 	background: rgb( 255, 255, 255 );
 }
 .gglnltcs-results table th {
 	padding: 0 0 8px 0;
-}
-.gglnltcs-results table.gglnltcs-table-header {
-	left: -165px;
-	top: 30px;
-	width: 156px;
 }
 .gglnltcs-results table.gglnltcs-table-header td {
 	border: none;
@@ -214,12 +198,7 @@ div.ui-datepicker {
 	position: relative;
 }
 .gglnltcs-results div.gglnltcs-table-body {
-	left: -156px;
-	max-width: 700px;
-	width: 100%;
 	overflow-x: auto;
-	position: relative;
-	top: 30px;
 }
 .gglnltcs-results .gglnltcs-row-year td,
 .gglnltcs-results .gglnltcs-row-month td,
@@ -252,7 +231,6 @@ div.ui-datepicker {
 }
 .gglnltcs-results .gglnltcs-bad-results {
 	position: relative;
-	top: 50px;
 }
 p.gglnltcs-select-wrapper {
 	position: relative;
@@ -272,7 +250,7 @@ table.gglnltcs h3 {
     margin: 0;
 }
 svg > rect {
-	 fill: none !important; 
+	 fill: none !important;
 }
 #gglnltcs-main-header {
 	margin-bottom: 1em;
@@ -345,22 +323,13 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	position: relative;
 }
 #gglnltcs-results-wrapper {
-	margin-bottom: 60px;
 	position: relative;
-}
-#gglnltcs-results-wrapper table {
-	margin-bottom: 30px;
-}
-#gglnltcs-group-by-Y-M-D {
-	left: 212px;
-	position: absolute;
-	z-index: 2;
-	top: 0;
 }
 #gglnltcs-group-by-Y-M-D span {
 	font-weight: bold;
 	padding: 4px;
 	margin-right: 10px;
+	line-height: 2.2;
 }
 #gglnltcs-group-by-Y-M-D input.gglnltcs-selected {
 	background: rgb(114, 117, 122);
@@ -394,7 +363,7 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	background-image: url(../images/loading.gif);
 	background-repeat: no-repeat;
 	background-size: 100%;
-	position: absolute;	
+	position: absolute;
 }
 .nav-tab-wrapper .gglnltcs-loading-icon {
 	display: inline-block !important;
@@ -450,10 +419,9 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	position: relative;
 }
 
-@media only screen and (min-width: 600px) and (max-width: 780px) {
+@media only screen and (max-width: 780px) {
 	.gglnltcs-results th,
-	#gglnltcs-metrics th,
-	#gglnltcs-metrics-line-chart th {
+	#gglnltcs-metrics th {
 		display: none;
 	}
 	.gglnltcs-results table.gglnltcs-table-header {
@@ -493,12 +461,24 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	.rtl #gglnltcs-group-by-Y-M-D {
 		right: 170px;
 	}
+	.gglnltcs-view-mode {
+		margin-bottom: 7px;
+	}
+	.bws-plugins_page_bws-google-analytics #ui-datepicker-div {
+		-webkit-transform: translate(55px, 70px) scale(1.6, 1.6);
+		-moz-transform: translate(55px, 70px) scale(1.6, 1.6);
+		-o-transform: translate(55px, 70px) scale(1.6, 1.6);
+		-ms-transform: translate(55px, 70px) scale(1.6, 1.6);
+		transform: translate(55px, 70px) scale(1.6, 1.6);
+	}
+	#gglnltcs-tracking-tooltip {
+		margin: 10px 0 !important;
+	}
 }
 
 @media only screen and (max-width: 599px) {
 	.gglnltcs-results th,
-	#gglnltcs-metrics th,
-	#gglnltcs-metrics-line-chart th {
+	#gglnltcs-metrics th {
 		display: none;
 	}
 	table.gglnltcs th {

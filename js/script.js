@@ -1,179 +1,26 @@
 /* Load Visualization */
 google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
-/************************************************************************/
-/* Get Webproperties For Selected Account */
-function getWebproperties() {
-	var i = 0;
-	webPropIDs = [];
-	document.getElementById( 'gglnltcs-webproperties' ).innerHTML = '';
-	var selectedAccount = accountsId[ document.getElementById( 'gglnltcs-accounts' ).selectedIndex ];
-	var selectedAccountWebproperties = profileAccounts[ selectedAccount ]['webproperties'];     
-	for ( webproperty in selectedAccountWebproperties ) {
-		var newOption = document.createElement( 'option' );
-		newOption.innerHTML = selectedAccountWebproperties[ webproperty ];
-		webPropIDs.push( webproperty );
-		document.getElementById( 'gglnltcs-webproperties' ).appendChild( newOption );
-		if ( window.selectedWebroperty !== undefined && window.selectedWebroperty == selectedAccountWebproperties[ webproperty ] ) {
-			document.getElementById( 'gglnltcs-webproperties' ).options[ i ].selected = true;
-			/* Makes first option selected in the weproperties select list. 
-			 * This is necessary when you select another account. */
-			selectedWebroperty = false;
-		}       
-		i++;
-	}
-}
-/************************************************************************/
-/* Sets View ID To The Hidden Field */
-function setViewID() {
-	document.getElementById( 'gglnltcs-view-id' ).value = 'ga:' + profileWebproperties[ webPropIDs[ document.getElementById( 'gglnltcs-webproperties' ).selectedIndex ] ];
-}
-/************************************************************************/
-/* jQuery Wrapper */
+
 ( function( $ ) {
-	$( document ).ready( function() {		
-		/* Processing Clicks On Navigation Tabs */		
-		$( '#gglnltcs-line-nav-tab, #gglnltcs-table-nav-tab, #gglnltcs-tracking-code-nav-tab, #gglnltcs-pro-nav-tab' ).on( 'click', function( event ) {
-			event = event || window.event;
-			event.preventDefault();
-			/* Change active tab. */
-			$( '.nav-tab-wrapper .nav-tab-active' ).removeClass( 'nav-tab-active' );
-			$( this ).addClass( 'nav-tab-active' );
-			/* Clear page content and print new content. */
-			$( '#gglnltcs-main-content' ).fadeTo( 500, .4 ); /* Blur previous content. */
-			$( '#gglnltcs-main-content' ).find( ':input' ).attr( 'disabled', true ); /* Block form elemnts to prevent double content. */
-			var activeTab = $( this ).attr( 'id' ); /* Determine which tab did user click. */
-			if( activeTab == 'gglnltcs-line-nav-tab' ) {
-				ajaxTabContent( 'line_chart' ); /* Print content for Line Chart Tab */
-			} else if ( activeTab == 'gglnltcs-table-nav-tab' ) {
-				ajaxTabContent( 'table_chart' ); /* Print content for Table Chart Tab. */
-			} else if ( activeTab == 'gglnltcs-tracking-code-nav-tab' ) {
-				ajaxTabContent( 'tracking_code' ); /* Print content for Tracking Code $ Reset Tab. */
-			} else if ( activeTab == 'gglnltcs-pro-nav-tab' ) {
-				ajaxTabContent( 'go_pro' ); /* Print content for Tracking Code $ Reset Tab. */
-			}
-			$( '#gglnltcs-settings-message, #gglnltcs-settings-error, #bws_save_settings_notice' ).fadeOut( 500 );
-		});
-		contentProcessing(); /* Content Processing */
+	$( document ).ready( function() {
+		contentProcessing();
 	});
 
-/************************************************************************/
-	/* Content Processing. This functions will be recalled every time user selects new tab. */
+	/**
+	 * Content Processing. This functions will be recalled every time user selects new tab.
+	 */
 	function contentProcessing() {
-		/* Accounts on change */
-		$( '#gglnltcs-accounts' ).on( 'change', function() {
-			getWebproperties();
-			setViewID();
-		});
-		/* Webproperties on change */
-		$( '#gglnltcs-webproperties' ).on( 'change', function() {
-			setViewID();
-		});
-		/* Add Datepicker */
-		var dateInput = $( '#gglnltcs-start-date, #gglnltcs-end-date' );
-		dateInput.datepicker( {
-			dateFormat : 'yy-mm-dd',
-			changeMonth: true,
-			changeYear: true,
-			showButtonPanel: true
-		});
-		/* Date Validation */
-		var validationError = 0;
-		dateInput.on( 'change', function() {
-			dateValue = $( this ).val();
-			if ( ! dateValue.match( /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/ ) ) {
-				$( this ).addClass( 'gglnltcs-validation-failed' );
-				$( this ).parent().addClass( 'gglnltcs-validation-failed' );
-				$( this ).parent().parent().addClass( 'gglnltcs-validation-failed' );
-				if ( $( this ).next( '.gglnltcs-error-message' ).length == 0  && validationError != 1 ) {
-					$( this ).after( ' <span class="gglnltcs-error-message">' + gglnltcsLocalize.matchPattern + '</span>' );
-				}
-			} else {
-				$( this ).removeClass( 'gglnltcs-validation-failed' );
-				$( this ).parent().removeClass( 'gglnltcs-validation-failed' );
-				$( this ).parent().parent().removeClass( 'gglnltcs-validation-failed' );
-				$( this ).next( '.gglnltcs-error-message' ).remove();
-			}
-		});
-		/* Date Note */
-		dateInput.on( 'focus', function() {
-			$( '.gglnltcs-date span.gglnltcs-note:not(.gglnltcs-err)' ).text( gglnltcsLocalize.matchPattern );
-		});
-		dateInput.on( 'blur', function() {
-			dateInput.removeClass( 'gglnltcs-invalid-date-range' );
-			$( '.gglnltcs-date span.gglnltcs-note' ).removeClass( 'gglnltcs-err' );
-		});
-		/* Metrics Validation */
-		$( '#gglnltcs-metrics input:checkbox' ).on( 'change', function() {
-			if ( $( '#gglnltcs-metrics input:checkbox:checked' ).length == 0 ) {
-				$( '#gglnltcs-metrics input:checkbox' ).addClass( 'gglnltcs-validation-failed' );
-				$( '#gglnltcs-metrics' ).after( '<span class="gglnltcs-error-message">' +  gglnltcsLocalize.metricsValidation + '</span>' );
-			} else {
-				$( '#gglnltcs-metrics input:checkbox' ).removeClass( 'gglnltcs-validation-failed' );
-				$( '#gglnltcs-metrics' ).next( '.gglnltcs-error-message' ).remove();
-			}
-		});
-		/* Main form preventing submit */
-		$( '#gglnltcs-main-form' ).on( 'submit', function( event ) {
-			event = event || window.event;
 
-			/* Submit on the Table Tab */
-			if ( $( '#gglnltcs-get-statistics-button' ).length ) {
-				var startDateInput = $( '#gglnltcs-start-date' );
-				var endDateInput   = $( '#gglnltcs-end-date'   );
-				var startDateValue = startDateInput.val();     
-				var endDateValue   = endDateInput.val();  
-				var runAjax 	   = true;
-				  /* Start date is missing */
-				if ( ! startDateValue ) {
-					startDateInput.addClass( 'gglnltcs-validation-failed' );
-					runAjax = false;
-				} /* End date is missing */
-				if ( ! endDateValue ) {
-					endDateInput.addClass( 'gglnltcs-validation-failed' );
-					runAjax = false;
-				} /* Invalid date range. When start date aheades of end date. */
-				if ( startDateValue && endDateValue ) {
-					startDateValue = new Date( startDateValue ).getTime();
-					endDateValue   = new Date( endDateValue   ).getTime();
-					if ( startDateValue > endDateValue ) {
-						$( '.gglnltcs-date span.gglnltcs-note' ).text( gglnltcsLocalize.invalidDateRange ).addClass( 'err' );
-						dateInput.addClass( 'gglnltcs-invalid-date-range' );
-						runAjax = false;
-					}
-				} /* When date didn't match the pattern */
-				if ( dateInput.hasClass( 'gglnltcs-validation-failed' ) ) {
-					runAjax = false;
-				} /* When no metrics were selected */
-				if ( $( '#gglnltcs-metrics input:checkbox:checked' ).length == 0 ) {
-					$( '#gglnltcs-metrics input:checkbox' ).addClass( 'gglnltcs-validation-failed' );
-					runAjax = false;
-					if ( $( '#gglnltcs-metrics' ).next( '.gglnltcs-error-message' ).length == 0) {
-						$( '#gglnltcs-metrics' ).after( '<span class="gglnltcs-error-message">' +  gglnltcsLocalize.metricsValidation + '</span>' );
-					}       
-				} /* If Everything Is OK, 
-				 /* Prevent Default Submit 
-				/* and Run Ajax Function for the Table Chart*/
-				event.preventDefault();
-				if ( runAjax ) { 
-					ajaxBuildTableChart();
-				}
-			/* Submit on the Line Chart Tab */
-			} else if ( $( '#gglnltcs-get-statistics-button-line-chart' ).length ) {
-				event.preventDefault();
-				ajaxBuildLineChart();
-			}
-		});
+		/*
+		 * functions for "Tracking Code & Reset" tab
+		 */
 		/* uncheck "Add tracking Code To Your Blog" checkbox if tracking code is empty */
-		if ( $( 'input[name="gglnltcs_tracking_id"]' ).val() == 0 ) {
-			$( '#gglnltcs-add-tracking-code-input' ).prop( "checked", false );
+		if ( ! $( 'input[name="gglnltcs_tracking_id"]' ).val() ) {
+			$( '#gglnltcs-add-tracking-code-input' ).attr( "checked", false );
 		};
 		/* check/uncheck "Add tracking Code To Your Blog" checkbox depending whether tracking code field is empty */
 		$( 'input[name="gglnltcs_tracking_id"]' ).change( function(){
-			if ( $( 'input[name="gglnltcs_tracking_id"]' ).val() == 0 ) {
-				$( '#gglnltcs-add-tracking-code-input' ).prop( "checked", false );
-			} else {
-				$( '#gglnltcs-add-tracking-code-input' ).prop( "checked", true );
-			}
+			$( '#gglnltcs-add-tracking-code-input' ).attr( "checked", !! $( this ).val() );
 		});
 		$( '#gglnltcs-tracking-id-form input[name="gglnltcs_tracking_id"], input[name="gglnltcs_tracking_id"], #gglnltcs-authentication-code-input' ).on( 'keypress', function() {
 			$( this ).removeClass( 'gglnltcs-validation-failed' );
@@ -185,11 +32,152 @@ function setViewID() {
 			if ( ! input.val() ) {
 				event.preventDefault();
 				input.addClass( 'gglnltcs-validation-failed' );
-			}			
+			}
 		});
-		/* Here We Register Which Curves To Display On The Line Chart. */
-		if ( $( '#gglnltcs-metrics-line-chart' ).length ) {
-			var chartCurves = {
+
+		/*
+		 * Add Datepicker
+		 */
+		var dateInput = $( '#gglnltcs-start-date, #gglnltcs-end-date' );
+		dateInput.on( 'change', function() {
+			var dateValue = $( this ).val(),
+				startDateInput = $( '#gglnltcs-start-date' ),
+				endDateInput   = $( '#gglnltcs-end-date' ),
+				startDateValue = startDateInput.val(),
+				endDateValue   = endDateInput.val(),
+				rightFormat    = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+			/* if the entered value has wrong format */
+			if ( dateValue && ! dateValue.match( rightFormat ) ) {
+				/* highlight the text field */
+				$( this ).addClass( 'gglnltcs-validation-failed' );
+				/* highlight the tooltip */
+				$( '#gglnltcs-date-tooltip, .gglnltcs-date-format' ).addClass( 'gglnltcs-error-tooltip' );
+			/* check both dates */
+			} else if ( startDateValue && endDateValue ) {
+				var start  = new Date( startDateValue ).getTime(),
+					end    = new Date( endDateValue   ).getTime(),
+					dayGap = Math.abs( end - start ) / 86400000;
+
+				/* the time gap between two dates must not be more than 999 days */
+				if ( dayGap > 999 ) {
+					/* change the "to" field if the "from" field has been changed just right now */
+					if ( $( this ).attr( 'id' ) == 'gglnltcs-start-date' ) {
+						var endTime = new Date( start + 86313600000 ); /* 86313600000 - is number of milliseconds in 999 days */
+						endDateInput.val( endTime.getFullYear() + '-' + ( '0' + ( endTime.getMonth() + 1 ) ).slice( -2 ) + '-' + ( '0' + endTime.getDate() ).slice( -2 ) );
+					/* change the "from" field if the "to" field has been changed just right now */
+					} else if ( $( this ).attr( 'id' ) == 'gglnltcs-end-date' ) {
+						var startTime = new Date( end - 86313600000 );
+						startDateInput.val( startTime.getFullYear() + '-' + ( '0' + ( startTime.getMonth() + 1 ) ).slice( -2 ) + '-' + ( '0' + startTime.getDate() ).slice( -2 ) );
+					}
+					/* highlight the tooltip */
+					$( '#gglnltcs-date-tooltip, .gglnltcs-max-gap' ).addClass( 'gglnltcs-error-tooltip' );
+				} else if ( start > end ) {
+					/* change the values by places */
+					startDateInput.val( endDateValue );
+					endDateInput.val( startDateValue );
+				} else {
+					if ( dateValue.match( rightFormat ) ) {
+						$( '.gglnltcs-error-tooltip' ).removeClass( 'gglnltcs-error-tooltip' );
+						$( this ).removeClass( 'gglnltcs-validation-failed' );
+					}
+				}
+			} else {
+				$( this ).removeClass( 'gglnltcs-validation-failed' );
+				$( '.gglnltcs-error-tooltip' ).removeClass( 'gglnltcs-error-tooltip' );
+			}
+		}).datepicker( {
+			dateFormat :     'yy-mm-dd',
+			changeMonth:     true,
+			changeYear:      true,
+			showButtonPanel: true,
+			minDate:         new Date( '2005-01-01' )
+		});
+
+		/*
+		 * Main form preventing submit
+		 */
+		$( '#gglnltcs-get-statistics-button' ).on( 'click', function( event ) {
+
+			event = event || window.event;
+			event.preventDefault();
+
+			var startDateInput = $( '#gglnltcs-start-date' ),
+				endDateInput   = $( '#gglnltcs-end-date' ),
+				startDateValue = startDateInput.val(),
+				endDateValue   = endDateInput.val();
+
+			if ( ! startDateValue || ! endDateValue ) {
+				var now = new Date;
+				startDateInput.val( ( now.getFullYear() - 1 ) + '-' + ( '0' + ( now.getMonth() + 1 ) ).slice( -2 ) + '-' + ( '0' + now.getDate() ).slice( -2 ) ); /* year ago */
+				endDateInput.val( now.getFullYear() + '-' + ( '0' + ( now.getMonth() + 1 ) ).slice( -2 ) + '-' + ( '0' + now.getDate() ).slice( -2 ) );
+			}
+
+			if ( ! dateInput.hasClass( 'gglnltcs-validation-failed' ) ) {
+				$( '.gglnltcs-error-tooltip' ).removeClass( 'gglnltcs-error-tooltip' );
+				displayStatistics();
+			}
+		});
+
+		setChartCurves();
+		/*
+		 * Display statistics
+		 */
+		displayStatistics( false );
+
+		$( '.gglnltcs-select' ).on( 'change', function() {
+			if ( $( this ).attr( 'id' ) == 'gglnltcs-accounts' )
+				getWebproperties();
+
+			displayStatistics();
+		});
+	}
+
+
+	/**
+	 * Display statistical data
+	 * @since   1.6.7
+	 * @param   boolean  make_ajax
+	 * @rerturn void
+	 */
+	function displayStatistics( make_ajax ) {
+		make_ajax = 'undefined' ===  typeof make_ajax ? true : make_ajax;
+		var viewMode   = $( 'input[name="gglnltcs_view_mode"]:checked' ).val(),
+			metrics    = $( '.gglnltcs-metrics' );
+		if ( make_ajax )
+			$( '#gglnltcs-results-wrapper' ).children().fadeTo( 200, .3 );
+		if ( ! $( '.gglnltcs-metrics input:checkbox:checked' ).length ) {
+			$( '.gglnltcs-metrics input:checkbox' ).addClass( 'gglnltcs-validation-failed' );
+			displayError( gglnltcsLocalize.metricsValidation );
+			return false;
+		}
+
+		switch ( viewMode ) {
+			case 'table':
+				if ( make_ajax )
+					ajaxBuildTableChart( pagenow );
+				else
+					resultsTableFunctions();
+				break;
+			case 'chart':
+			default:
+				ajaxBuildLineChart( pagenow );
+				break;
+
+		}
+	}
+
+	/**
+	 * Here We Register Which Curves To Display On The Line Chart.
+	 * @since   1.6.7
+	 * @param   void
+	 * @rerturn void
+	 */
+	function setChartCurves() {
+		var metrics    = $( '#gglnltcs-metrics' ),
+			checkboxes = metrics.find( 'input:checkbox' ),
+			checked    = metrics.find( 'input:checkbox:checked' ),
+			id         = metrics.attr( 'id' ),
+			chartCurves = {
 				'visitors'			: false,
 				'newVisits'			: false,
 				'visits'			: false,
@@ -197,40 +185,27 @@ function setViewID() {
 				'avgTimeOnSite'	 	: false,
 				'pageviews'		 	: false,
 				'pageviewsPerVisit' : false
-			};
-			$( '#gglnltcs-metrics-line-chart' ).data( 'chartCurves', chartCurves );
+			}, chartSelectedMetric;
+		if ( metrics.length ) {
+			metrics.data( 'chartCurves', chartCurves );
 			/* On document ready */
-			$( '#gglnltcs-metrics-line-chart input:checkbox:checked' ).each( function() {
-				var chartSelectedMetric = $( this ).val();
-					chartSelectedMetric = chartSelectedMetric.substring(3);
-				var chartCurves = $( '#gglnltcs-metrics-line-chart' ).data( 'chartCurves' );
-					chartCurves[ chartSelectedMetric ] = true;
+			checked.each( function() {
+				chartSelectedMetric = $( this ).val(),
+				chartSelectedMetric = chartSelectedMetric.substring(3),
+				chartCurves         = metrics.data( 'chartCurves' ),
+				chartCurves[ chartSelectedMetric ] = true;
 			});
 			/* On change */
-			$( '#gglnltcs-metrics-line-chart input:checkbox' ).on( 'change', function() {
-				var chartSelectedMetric = $( this ).val();
-					chartSelectedMetric = chartSelectedMetric.substring(3);
-				var chartCurves = $( '#gglnltcs-metrics-line-chart' ).data( 'chartCurves' );
-				if ( ! chartCurves[ chartSelectedMetric ] ) {
-					chartCurves[ chartSelectedMetric ] = true;
-				} else {
-					chartCurves[ chartSelectedMetric ] = false;
-				};
-				if ( $( this ).hasClass( 'gglnltcs-validation-failed' ) ) {
-					$( '#gglnltcs-metrics-line-chart input:checkbox' ).removeClass( 'gglnltcs-validation-failed' );
-				}
+			checkboxes.on( 'change', function() {
+				chartSelectedMetric = $( this ).val(),
+				chartSelectedMetric = chartSelectedMetric.substring(3),
+				chartCurves         = metrics.data( 'chartCurves' );
+				chartCurves[ chartSelectedMetric ] = chartCurves[ chartSelectedMetric ] ? false : true;
+				checkboxes.removeClass( 'gglnltcs-validation-failed' );
 			});
 		}
-		resultsTableFunctions(); /* Call all neccessary functions to process results table. */
-		/* Run Ajax when user selects webproperty. */
-		/* Run Ajax when documet ready if we are on the appropriate page.. */
-		if( $( '#gglnltcs-continuous_chart_div' ).length ) { 
-			$( '#gglnltcs-webproperties, #gglnltcs-accounts' ).on( 'change', ajaxBuildLineChart );
-			ajaxBuildLineChart();
-		}
+	}
 
-	} /* close content processing. */
-/************************************************************************/
 	/* All neccessary processing for the results table. */
 	function resultsTableFunctions() {
 		/* Results table hover highlight cells */
@@ -240,8 +215,7 @@ function setViewID() {
 				$( this ).find( 'td' ).eq( cellIndex ).addClass( 'gglnltcs-hovered-cell' );
 			});
 			$( this ).addClass( 'gglnltcs-this-hovered-cell' );
-		});
-		$( '.gglnltcs-results div.gglnltcs-table-body td' ).on( 'mouseleave', function() {
+		}).on( 'mouseleave', function() {
 			var cellIndex = $( this ).index();
 			$( '.gglnltcs-results div.gglnltcs-table-body tr' ).each( function() {
 				$( this ).find( 'td' ).eq( cellIndex ).removeClass( 'gglnltcs-hovered-cell' );
@@ -250,188 +224,170 @@ function setViewID() {
 		});
 		/* Height and Width of result tables. */
 		if ( $( "#gglnltcs-results-wrapper" ).length ) {
-			/* Fix results table wrapper height. Prevents table from jumping, when you press group-By buttons. */
-			$( '#gglnltcs-results-wrapper' ).height( $( '#gglnltcs-results-wrapper' ).height() );
-			/* Set results table width. */
-			setResultsTableWidth()
+			$( '#gglnltcs-results-wrapper' ).height( $( '.gglnltcs-results:first' ).height() + $( '#gglnltcs-group-by-Y-M-D' ).height() + 20 );
+			setResultsTableWidth();
 			$( window ).on( 'resize', setResultsTableWidth );
 		}
 		/* Change year month day in the results table */
 		$( '#gglnltcs-group-by-Y-M-D input' ).on( 'click', function() {
 			$( '#gglnltcs-group-by-Y-M-D input' ).removeClass( 'gglnltcs-selected' );
 			$( this ).addClass( 'gglnltcs-selected' );
-			if ( $( '.gglnltcs-results .gglnltcs-bad-results' ).length == 0 ) {
+			if ( ! $( '.gglnltcs-results .gglnltcs-bad-results' ).length ) {
 				var index = $( this ).index();
 				var tablesTotal = $( '#gglnltcs-results-wrapper .gglnltcs-results' );
-				tablesTotal.hide().css( 'position', 'absolute' );
-				$( '#gglnltcs-results-wrapper .gglnltcs-results:eq(' + ( tablesTotal.length - index - 1 ) + ')' ).show().css( 'position', 'relative' );
+				tablesTotal.hide();
+				$( '#gglnltcs-results-wrapper .gglnltcs-results:eq(' + ( tablesTotal.length - index ) + ')' ).show();
 			}
 		});
-	} /* close resultsTableFunctions. */
-/************************************************************************/
+	}
+
 	/* Set Results Table Width. */
 	function setResultsTableWidth() {
-		var adminMenu = $( '#adminmenuwrap');
-		if ( adminMenu.length && ( adminMenu.height() != 0 ) ) {
-			var adminMenuWidth = $( '#adminmenuback' ).width();
-			var viewportWidth  = $( window ).width();
-			var resultsThWidth = $( '.gglnltcs-results th:first' ).width();
-			if ( viewportWidth > 960  ) {
-				var z = 50;
-			} else {
-				var z = 20;
-			}
-			$( '#gglnltcs-results-wrapper .gglnltcs-table-body' ).width( viewportWidth - resultsThWidth - adminMenuWidth - z ).css( 'max-width', '100%' );
-			$( '#wpcontent' ).width( viewportWidth - adminMenuWidth - z + 20 ).css( "overflow", "hidden" );
-		} else {
-			var bodyWidth = $( 'body' ).width();
-			var resultsThWidth = $( '.gglnltcs-results th:first' ).width();
-			$( '#gglnltcs-results-wrapper .gglnltcs-table-body' ).width( bodyWidth - resultsThWidth - 25 ).css( 'max-width', '100%' );
-			$( '#wpcontent' ).width( bodyWidth ).css( "overflow", "hidden" );
-		}
+		var table  = $( '.gglnltcs-table-body' );
+		if ( ! table.length )
+			table  = $( '.gglnltcs-results' );
+		var isRtl  = $( 'body' ).hasClass( 'rtl' ),
+			offset = isRtl ? $( '.gglnltcs-table-header' ).offset() : table.offset(),
+			width  = ( isRtl ? offset.left : $( window ).width() - offset.left ) - 30;
+		table.css( 'max-width', width + 'px' );
 	}
-/************************************************************************/
-	/* Ajax Function To Print Tab Content When User Click Another Tab */
-	function ajaxTabContent( tabName ) {
-		var loadingCircle = $( '<div>', { 'class': 'gglnltcs-loading-icon' } ).hide().appendTo( '.nav-tab-wrapper' ).fadeIn( 1000 );
-		var data = {
-			action: 'gglnltcs_print_tab_content',			
-			tab: tabName,
-			page: 'bws-google-analytics.php',
-			'gglnltcs_nonce' : gglnltcsLocalize.gglnltcs_ajax_nonce
-		};
-		$.post( ajaxurl, data, function( data ) {			
-			$( '#gglnltcs-main-content' ).html( data ).fadeTo( 200, 1 );
-			loadingCircle.remove();  /*Remove loading circle gif. */
-			contentProcessing(); /* Update all scripts in order to apply them to new page content */
-		});
+
+	/**
+	 * Display an error message
+	 * @since  1.6.7
+	 * @param  string   errror   the text of message
+	 * @return void
+	 */
+	function displayError( error ) {
+		var parentWidth = $( '#gglnltcs-results-wrapper' ).width();
+		$( '.gglnltcs-error-message' ).remove();
+		$( '<div>', { 'class': 'gglnltcs-error-message', html: error } )
+			.hide()
+			.appendTo( '#gglnltcs-results-wrapper' )
+			.css({ 'left': ( ( parentWidth - $( '.gglnltcs-error-message' ).width() ) / 2 ) + 'px' })
+			.fadeIn( 500 );
 	}
-/***********************************************************************/
+
 	/* Ajax Function To Build The Line Chart When User Clicks "Get Statisics" Button */
-	function ajaxBuildLineChart() {
-		var settings = $( '#gglnltcs-main-form' ).serialize();
-		/* Block form elements while chart is being loaded to prevent double submit. */
-		$( '#gglnltcs-metrics-line-chart input:checkbox' ).attr( 'disabled', true ); /* Block metrics checkboxes. */
-		$( '#gglnltcs-accounts' ).attr( 'disabled', true ); /* Block accounts select. */
-		$( '#gglnltcs-webproperties' ).attr( 'disabled', true ); /* Block webproperties select. */
-		$( '#gglnltcs-get-statistics-button-line-chart' ).attr( 'disabled', true ); /* Block "Get Statistics" submit button. */
-		/* Add loading circle gif */
-		var loadingCircle = $( '<div>', { 'class': 'gglnltcs-loading-icon' } ).hide().insertAfter( '#gglnltcs-get-statistics-button-line-chart' ).fadeIn( 1000 );
-		/* Blur existing chart */
-		$( '#gglnltcs-continuous_chart_div' ).fadeTo( 200, .1 ); 
-		/* Build new chart */
-		if ( $( '#gglnltcs-metrics-line-chart input:checkbox:checked' ).length ) {
-			/* First we need to hide error message that asks us to choos at least one metric */
-			if ( $( '#gglnltcs-continuous_chart_div_container .gglnltcs-error-message' ).length ) {
-				$( '#gglnltcs-continuous_chart_div_container .gglnltcs-error-message' ).fadeOut( 500, function() { 
-					$( this ).remove(); 
-				});
-			}
-			var viewProfileId = $( '#gglnltcs-view-id' ).val();
-			var data = {
-				action: 'gglnltcs_action',
-				viewProfileId: viewProfileId,
-				settings: settings,
-				tab: 'line_chart',
-				page: 'bws-google-analytics.php',
-				'gglnltcs_nonce' : gglnltcsLocalize.gglnltcs_ajax_nonce
+	function ajaxBuildLineChart( url ) {
+		var settings      = $( '#gglnltcs-main-form' ).serialize(),
+			toDisable     = $( '.gglnltcs_to_disable' ).attr( 'disabled', true ),
+			loadingCircle = $( '<div>', { 'class': 'gglnltcs-loading-icon' } ).hide().insertAfter( '#gglnltcs-get-statistics-button' ).fadeIn( 500 ),
+			chartCanvas   = $( '#gglnltcs-results-wrapper' ).children(),
+			data          = {
+				action:         'gglnltcs_action',
+				settings:       settings,
+				url:            url,
+				tab:            'line_chart',
+				page:           'bws-google-analytics.php',
+				gglnltcs_nonce: gglnltcsLocalize.gglnltcs_ajax_nonce
 			};
-			$.post( ajaxurl, data, function( data ) {
-				try {
-					data = $.parseJSON( data );
-					var chartCurves = $( '#gglnltcs-metrics-line-chart' ).data( 'chartCurves' );
-					var chartRows = [];
-					var chartDate = data[0];
-					if ( chartCurves.visitors 		   ) { var visitors   = data[1]; }
-					if ( chartCurves.newVisits		   ) { var newVisits  = data[2]; }
-					if ( chartCurves.visits 		   ) { var visits     = data[3]; }
-					if ( chartCurves.visitBounceRate   ) { var bounceRate = data[4]; }
-					if ( chartCurves.avgTimeOnSite 	   ) { var avgTime 	  = data[5]; }
-					if ( chartCurves.pageviews 		   ) { var pageviews  = data[6]; }
-					if ( chartCurves.pageviewsPerVisit ) { var perVisit   = data[7]; }
-
-					var ajaxChart = new google.visualization.DataTable();
-					ajaxChart.addColumn( 'date', 'Date' );
-					if ( chartCurves.visitors   	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartVisitors   ); }
-					if ( chartCurves.newVisits  	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartNewVisits  ); }
-					if ( chartCurves.visits     	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartVisits     ); }
-					if ( chartCurves.visitBounceRate   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartBounceRate ); }
-					if ( chartCurves.avgTimeOnSite     ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartAvgTime    ); }
-					if ( chartCurves.pageviews  	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPageviews  ); }
-					if ( chartCurves.pageviewsPerVisit ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPerVisit   ); }
-
-					for ( var i = 0; i < chartDate.length; i++ ) {
-						chartRows = [];
-						chartRows.push( new Date( chartDate[i][0], chartDate[i][1] - 1, chartDate[i][2] ) );
-						if ( chartCurves.visitors   	   ) { chartRows.push( parseInt( visitors[i]   ) ) }
-						if ( chartCurves.newVisits  	   ) { chartRows.push( parseInt( newVisits[i]  ) ) }
-						if ( chartCurves.visits     	   ) { chartRows.push( parseInt( visits[i]     ) ) }
-						if ( chartCurves.visitBounceRate   ) { chartRows.push( parseInt( bounceRate[i] ) ) }
-						if ( chartCurves.avgTimeOnSite     ) { chartRows.push( parseInt( avgTime[i]    ) ) }
-						if ( chartCurves.pageviews  	   ) { chartRows.push( parseInt( pageviews[i]  ) ) }
-						if ( chartCurves.pageviewsPerVisit ) { chartRows.push( parseInt( perVisit[i]   ) ) } 
-						ajaxChart.addRows( [ chartRows ] );
-					}    
-					var newChart = new google.visualization.AnnotatedTimeLine( document.getElementById( 'gglnltcs-continuous_chart_div' ));
-					newChart.draw( ajaxChart, {
-						displayZoomButtons: true,
-						pointSize: 8,
-						scaleType: 'allmaximized',
-						thickness: 3,
-						wmode: 'transparent'
-					}); /* Bright up line chart. */
-				} catch ( errorInAjax ) {
-					/* show error message if we failed to display line chart */
-					$( '#gglnltcs-settings-error p' ).remove();
-					var chartErrorMessage = $( '<p>', { text: gglnltcsLocalize.ajaxApiError } ).hide().appendTo( '#gglnltcs-settings-error' );
-					loadingCircle.remove();
-					$( '#gglnltcs-settings-error' ).fadeIn( 1000 );
-					chartErrorMessage.fadeIn( 1000 );
-				}
-				$( '#gglnltcs-continuous_chart_div' ).fadeTo( 500, 1 );
-				/* Unlock form elements after chart is loaded. */
-				$( '#gglnltcs-metrics-line-chart input:checkbox' ).attr( 'disabled', false ); /* Unlock metrics checkboxes. */
-				$( '#gglnltcs-accounts' ).removeAttr( 'disabled' ); /* Unlock accounts select. */
-				$( '#gglnltcs-webproperties' ).removeAttr( 'disabled' ); /* Unlock webproperties select. */
-				$( '#gglnltcs-get-statistics-button-line-chart' ).removeAttr( 'disabled' ); /* Unlock "Get Statistics" submit button. */
-				loadingCircle.remove(); /* Remove loading circle gif */
-			}); // close $.post
-		} else { // close if.
-			var chartErrorMessage = $( '<div>', { 'class': 'gglnltcs-error-message', text: gglnltcsLocalize.metricsValidation } ).hide().appendTo( '#gglnltcs-continuous_chart_div_container' );
-			 loadingCircle.remove();
-			chartErrorMessage.fadeIn( 1000 );
-			/* Unlock form elements. */
-			$( '#gglnltcs-metrics-line-chart input:checkbox' ).attr( 'disabled', false ).addClass( 'validation-failed' ); /* Unlock metrics checkboxes and remove red border. */
-			$( '#gglnltcs-accounts' ).removeAttr( 'disabled' ); /* Unlock accounts select. */
-			$( '#gglnltcs-webproperties' ).removeAttr( 'disabled' ); /* Unlock webproperties select. */
-			$( '#gglnltcs-get-statistics-button-line-chart' ).removeAttr( 'disabled' ); /* Unlock "Get Statistics" submit button. */
-		}
-	} /* close ajaxBuildLineChart */
-/***********************************************************************/	
-	/* Ajax Function To Build The Table With Results When User Clicks "Get Statisics" Button */
-	function ajaxBuildTableChart() {
-		$( '#gglnltcs-get-statistics-button' ).attr( 'disabled', true );
-		if ( $( '#gglnltcs-results-wrapper' ).length ) {
-			$( '#gglnltcs-results-wrapper' ).fadeTo( 200, .1 );
-		}
-		var loadingCircle = $( '<div>', { 'class' : 'gglnltcs-loading-icon' } ).hide().appendTo( '#gglnltcs-date' ).fadeIn( 1000 );
-		var settings = $( '#gglnltcs-main-form' ).serialize();
-		var data = {
-			action: 'gglnltcs_action',
-			settings: settings,
-			tab: 'table_chart',
-			page: 'bws-google-analytics.php',
-			'gglnltcs_nonce' : gglnltcsLocalize.gglnltcs_ajax_nonce
-		};
 		$.post( ajaxurl, data, function( data ) {
-			/* Remove existing results tables. */
-			if ( $( '#gglnltcs-results-wrapper' ).length ) {
-				$( '#gglnltcs-results-wrapper' ).remove();
+			try {
+				/* fetch only JSON string from the result  */
+				var regExp = /<!-- start bws-ga-results -->([^]+)<!-- end bws-ga-results -->/,
+					matches = regExp.exec( data );
+				if ( matches ) {
+					data = matches[1];
+				} else {
+					displayError( gglnltcsLocalize.ajaxApiError + '<br/>' + data );
+					return false;
+				}
+
+				data = $.parseJSON( data );
+
+				var chartCurves = $( '#gglnltcs-metrics' ).data( 'chartCurves' ),
+					chartRows   = [];
+					chartDate   = data[0];
+				if ( chartCurves.visitors 		   ) { var visitors   = data[1]; }
+				if ( chartCurves.newVisits		   ) { var newVisits  = data[2]; }
+				if ( chartCurves.visits 		   ) { var visits     = data[3]; }
+				if ( chartCurves.visitBounceRate   ) { var bounceRate = data[4]; }
+				if ( chartCurves.avgTimeOnSite 	   ) { var avgTime 	  = data[5]; }
+				if ( chartCurves.pageviews 		   ) { var pageviews  = data[6]; }
+				if ( chartCurves.pageviewsPerVisit ) { var perVisit   = data[7]; }
+
+				var ajaxChart = new google.visualization.DataTable();
+				ajaxChart.addColumn( 'date', 'Date' );
+				if ( chartCurves.visitors   	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartVisitors   ); }
+				if ( chartCurves.newVisits  	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartNewVisits  ); }
+				if ( chartCurves.visits     	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartVisits     ); }
+				if ( chartCurves.visitBounceRate   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartBounceRate ); }
+				if ( chartCurves.avgTimeOnSite     ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartAvgTime    ); }
+				if ( chartCurves.pageviews  	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPageviews  ); }
+				if ( chartCurves.pageviewsPerVisit ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPerVisit   ); }
+
+				for ( var i = 0; i < chartDate.length; i++ ) {
+					chartRows = [];
+					chartRows.push( new Date( chartDate[i][0], chartDate[i][1] - 1, chartDate[i][2] ) );
+					if ( chartCurves.visitors   	   ) { chartRows.push( parseInt( visitors[i]   ) ) }
+					if ( chartCurves.newVisits  	   ) { chartRows.push( parseInt( newVisits[i]  ) ) }
+					if ( chartCurves.visits     	   ) { chartRows.push( parseInt( visits[i]     ) ) }
+					if ( chartCurves.visitBounceRate   ) { chartRows.push( parseInt( bounceRate[i] ) ) }
+					if ( chartCurves.avgTimeOnSite     ) { chartRows.push( parseInt( avgTime[i]    ) ) }
+					if ( chartCurves.pageviews  	   ) { chartRows.push( parseInt( pageviews[i]  ) ) }
+					if ( chartCurves.pageviewsPerVisit ) { chartRows.push( parseInt( perVisit[i]   ) ) }
+					ajaxChart.addRows( [ chartRows ] );
+				}
+				chartCanvas.parent().html( '<div id="gglnltcs-chart"></div>' ).height( 200 );
+				var newChart = new google.visualization.AnnotatedTimeLine( document.getElementById( 'gglnltcs-chart' ));
+				newChart.draw( ajaxChart, {
+					displayZoomButtons: true,
+					pointSize: 8,
+					scaleType: 'allmaximized',
+					thickness: 3,
+					wmode: 'transparent'
+				});
+			} catch ( errorInAjax ) {
+				displayError( gglnltcsLocalize.ajaxApiError + '<br/>' + errorInAjax );
 			}
-			loadingCircle.remove(); /* Remove loading circle gif. */
-			$( '#gglnltcs-get-statistics-button' ).removeAttr( 'disabled' );
-			$( '#gglnltcs-main-form' ).after( data ); /* Print results tables. */
-			resultsTableFunctions(); /* Call all neccessary functions to process results table. */
+			$( '#gglnltcs-results-wrapper .gglnltcs-error-message' ).remove();
+			chartCanvas.fadeTo( 500, 1 );
+			loadingCircle.remove();
+			toDisable.attr( 'disabled', false );
 		});
-	} /* close ajaxBuildTableChart */
+	}
+
+	/* Ajax Function To Build The Table With Results When User Clicks "Get Statisics" Button */
+	function ajaxBuildTableChart( url ) {
+		var settings      = $( '#gglnltcs-main-form' ).serialize(),
+			toDisable     = $( '.gglnltcs_to_disable' ).attr( 'disabled', true ),
+			loadingCircle = $( '<div>', { 'class': 'gglnltcs-loading-icon' } ).hide().insertAfter( '#gglnltcs-get-statistics-button' ).fadeIn( 500 ),
+			tableWrapper  = $( '#gglnltcs-results-wrapper' ).children(),
+			data = {
+				action:         'gglnltcs_action',
+				settings:       settings,
+				url:            url,
+				tab:            'table_chart',
+				page:           'bws-google-analytics.php',
+				gglnltcs_nonce: gglnltcsLocalize.gglnltcs_ajax_nonce
+			};
+
+		$.post( ajaxurl, data, function( data ) {
+			tableWrapper.parent().html( data );
+			resultsTableFunctions();
+			tableWrapper.fadeTo( 500, 1 );
+			loadingCircle.remove();
+			toDisable.attr( 'disabled', false );
+		});
+	}
 })( jQuery );
+
+/**
+ * Get Webproperties For Selected Account
+ */
+function getWebproperties() {
+	var account    = document.getElementById( 'gglnltcs-accounts' ).value,
+		select     = document.getElementById( 'gglnltcs-webproperties' ),
+		properties = profileAccounts[ account ]['webproperties'],
+		property, profile, option;
+	select.innerHTML = '';
+	for ( property in properties ) {
+		for ( profile in properties[ property ]['profiles'] ) {
+			option = document.createElement( 'option' );
+			option.innerHTML = properties[ property ]['name'] + ' ( ' + properties[ property ]['profiles'][profile] + ' )';
+			option.value     = 'ga:' + profile;
+			select.appendChild( option );
+		}
+	}
+}
