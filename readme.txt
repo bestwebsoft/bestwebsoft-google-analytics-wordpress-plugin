@@ -1,14 +1,14 @@
 === Google Analytics by BestWebSoft ===
 Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
-Tags: add google plugin, add google analytics plugin, add code, add tracking code, analitics, analytics, best google plugin, best google analytics plugin, code, display report, display google statistics report, display statistics report, free, free google plugin, free google statistics plugin, free google analytics plugin, free wp plugins, free wp google plugins, gogle, gogole, googel, googgle, google, google analytics, google analytics loggins, google analytics plugin, google analytics stats, google statistics, group statistics, group stats, metrics, page, page views, page views statistics, page views report, retrieve metrics, statistics, statistics report, stats, tracking, visit duration, visitors, visits, visits statistics, web properties, webproperties, wp plugins, wp plugin, wp google plugin, wp google statistics plugin, wp google analytics plugin, wordpress plugins, wordpress plugin, wordpress google plugin, wordpress google statistics plugin, wordpress google analytics plugin
+Tags: add tracking code, analytics, display statistic report, google analytics, google analytics plugin, google analytics stats, group statistics, metrics, page views, visit duration, tracking, web properties
 Requires at least: 3.8
-Tested up to: 4.5.2
-Stable tag: 1.6.7
+Tested up to: 4.5.3
+Stable tag: 1.6.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin allows you to retrieve basic stats from Google Analytics account and add the necessary tracking code to your blog.
+Add Google Analytics code to WordPress website and track basic stats.
 
 == Description ==
 
@@ -43,7 +43,7 @@ There is also a premium version of the plugin <a href="http://bestwebsoft.com/pr
 * Russian (ru_RU)
 * Ukrainian (uk)
 
-If you would like to create your own language pack or update the existing one, you can send <a href="http://codex.wordpress.org/Translating_WordPress" target="_blank">the text of PO and MO files</a> for <a href="http://support.bestwebsoft.com" target="_blank">BestWebSoft</a> and we'll add it to the plugin. You can download the latest version of the program for work with PO and MO files  <a href="http://www.poedit.net/download.php" target="_blank">Poedit</a>.
+If you would like to create your own language pack or update the existing one, you can send <a href="http://codex.wordpress.org/Translating_WordPress" target="_blank">the text of PO and MO files</a> for <a href="http://support.bestwebsoft.com/hc/en-us/requests/new" target="_blank">BestWebSoft</a> and we'll add it to the plugin. You can download the latest version of the program for work with PO and MO files  <a href="http://www.poedit.net/download.php" target="_blank">Poedit</a>.
 
 = Technical support =
 
@@ -57,7 +57,7 @@ We can fix some things for free for the users who provide translation of our plu
 
 1. Upload the `bws-google-analytics` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin using the 'Plugins' menu in your WordPress admin panel.
-3. Plugin settings are located in your WordPress admin panel in "BWS Plugins" > "Google Analytics" > "Settings".
+3. Plugin settings are located in your WordPress admin panel in "BWS Panel" > "Google Analytics" > "Settings".
 
 View a PDF version of <a href="https://docs.google.com/document/d/1-J7Qk3MGIE6kFgsRjKbjynNbGuiD7yAicqzOWmkaafQ/edit" target="_blank">Step-by-step Instruction on Google Analytics Installation</a>
 
@@ -118,6 +118,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 
 == Changelog ==
 
+= V1.6.8 - 21.07.2016 =
+* Update : BWS panel section was updated.
+
 = V1.6.7 - 16.05.2016 =
 * Update : The structure of the plugin settings page has been changed.
 * Update : The code refactoring has been made to speed up the work of the plugin.
@@ -176,6 +179,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.6.8 =
+* Usability improved.
 
 = V1.6.7 =
 The structure of the plugin settings page has been changed. The code refactoring has been made to speed up the work of the plugin.

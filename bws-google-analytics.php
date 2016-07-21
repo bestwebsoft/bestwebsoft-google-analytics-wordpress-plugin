@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: Google Analytics by BestWebSoft
-Plugin URI: http://bestwebsoft.com/products/
-Description: This plugin allows you to retrieve basic stats from Google Analytics account and adds the necessary tracking code to your blog.
+Plugin URI: http://bestwebsoft.com/products/bws-google-analytics/
+Description: Add Google Analytics code to WordPress website and track basic stats.
 Author: BestWebSoft
 Text Domain: bws-google-analytics
 Domain Path: /languages
-Version: 1.6.7
+Version: 1.6.8
 Author URI: http://bestwebsoft.com/
 License: GPLv2 or later
 */
@@ -30,7 +30,7 @@ License: GPLv2 or later
 if ( ! function_exists( 'gglnltcs_add_admin_menu' ) ) {
 	function gglnltcs_add_admin_menu() {
 		bws_general_menu();
-		$settings = add_submenu_page( 'bws_plugins', 'Google Analytics', 'Google Analytics', 'manage_options', 'bws-google-analytics.php', 'gglnltcs_settings_page' );
+		$settings = add_submenu_page( 'bws_panel', 'Google Analytics', 'Google Analytics', 'manage_options', 'bws-google-analytics.php', 'gglnltcs_settings_page' );
 		add_action( 'load-' . $settings, 'gglnltcs_add_tabs' );
 	}
 }
@@ -67,7 +67,7 @@ if ( ! function_exists( 'gglnltcs_admin_init' ) ) {
 	function gglnltcs_admin_init() {
 		global $bws_plugin_info, $gglnltcs_plugin_info;
 		/* Add variable for bws_menu */
-		if ( ! isset( $bws_plugin_info ) || empty( $bws_plugin_info ) )
+		if ( empty( $bws_plugin_info ) )
 			$bws_plugin_info = array( 'id' => '125', 'version' => $gglnltcs_plugin_info['Version'] );
 	}
 }
@@ -95,7 +95,6 @@ if ( ! function_exists( 'gglnltcs_get_options_from_db' ) ) {
 
 		/* Array merge incase this version has added new options */
 		if ( ! isset( $gglnltcs_options['plugin_option_version'] ) || $gglnltcs_options['plugin_option_version'] != $gglnltcs_plugin_info['Version'] ) {
-			$gglnltcs_option_defaults['display_settings_notice'] = 0;
 			$gglnltcs_options = array_merge( $gglnltcs_option_defaults, $gglnltcs_options );
 			$gglnltcs_options['plugin_option_version'] = $gglnltcs_plugin_info['Version'];
 			$htccss_options['hide_premium_options']    = array();
@@ -339,7 +338,7 @@ if ( ! function_exists( 'gglnltcs_scripts' ) ) {
 if ( ! function_exists( 'gglnltcs_show_notices' ) ) {
 	function gglnltcs_show_notices() {
 		global $hook_suffix, $gglnltcs_plugin_info;
-		if ( 'plugins.php' == $hook_suffix || ( isset( $_REQUEST['page'] ) && 'bws_plugins' == $_REQUEST['page'] ) || ( isset( $_REQUEST['page'] ) && 'bws-google-analytics.php' == $_REQUEST['page'] ) ) { ?>
+		if ( 'plugins.php' == $hook_suffix || ( isset( $_REQUEST['page'] ) && 'bws-google-analytics.php' == $_REQUEST['page'] ) ) { ?>
 			<noscript>
 				<div class="error below-h2">
 					<p><?php _e( 'If you want Google Analytics by BestWebSoft plugin to work correctly, please enable JavaScript in your browser!', 'bws-google-analytics' ); ?></p>
@@ -900,7 +899,7 @@ if ( ! function_exists( 'gglnltcs_show_pro_ad' ) ) {
 				<div class="bws_info">
 					<?php _e( 'Unlock premium options by upgrading to Pro version', 'bws-google-analytics' ); ?>
 				</div>
-				<a class="bws_button" href="http://bestwebsoft.com/products/bws-google-analytics/?k=261c74cad753fb279cdf5a5db63fbd43&pn=125&v=<?php echo $gglnltcs_plugin_info["Version"]; ?>&wp_v=<?php echo $wp_version; ?>" target="_blank" title="Google Analytics Pro by BestWebSoft plugin"><?php _e( 'Learn More', 'bws-google-analytics' ); ?></a>
+				<a class="bws_button" href="http://bestwebsoft.com/products/bws-google-analytics/?k=0ceb29947727cb6b38a01b29102661a3&pn=125&v=<?php echo $gglnltcs_plugin_info["Version"]; ?>&wp_v=<?php echo $wp_version; ?>" target="_blank" title="Google Analytics Pro by BestWebSoft plugin"><?php _e( 'Learn More', 'bws-google-analytics' ); ?></a>
 				<div class="clear"></div>
 			</div>
 		</div>
