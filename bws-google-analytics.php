@@ -6,7 +6,7 @@ Description: Add Google Analytics code to WordPress website and track basic stat
 Author: BestWebSoft
 Text Domain: bws-google-analytics
 Domain Path: /languages
-Version: 1.6.8
+Version: 1.6.9
 Author URI: http://bestwebsoft.com/
 License: GPLv2 or later
 */

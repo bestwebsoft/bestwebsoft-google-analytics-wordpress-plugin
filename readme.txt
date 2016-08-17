@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
 Tags: add tracking code, analytics, display statistic report, google analytics, google analytics plugin, google analytics stats, group statistics, metrics, page views, visit duration, tracking, web properties
 Requires at least: 3.8
-Tested up to: 4.5.3
-Stable tag: 1.6.8
+Tested up to: 4.6
+Stable tag: 1.6.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -118,6 +118,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 
 == Changelog ==
 
+= V1.6.9 - 17.08.2016 =
+* Update : All functionality for WordPress 4.6 was updated.
+
 = V1.6.8 - 21.07.2016 =
 * Update : BWS panel section was updated.
 
@@ -129,7 +132,7 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * Bugfix : The bug with plugin menu duplicating was fixed.
 
 = V1.6.5 - 05.10.2015 =
-* Update : We updated all functionality for wordpress 4.3.1.
+* Update : We updated all functionality for WordPress 4.3.1.
 * Update : Textdomain was changed.
 
 = V1.6.4 - 11.06.2015 =
@@ -138,7 +141,7 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * Update: BWS plugins section was updated.
 
 = V1.6.3 - 07.05.2015 =
-* Update : We updated all functionality for wordpress 4.2.2.
+* Update : We updated all functionality for WordPress 4.2.2.
 
 = V1.6.2 - 26.03.2015 =
 * New: An ability to add tracking code to the website without authorizing in the plugin was added.
@@ -154,7 +157,7 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 
 = V1.5 - 13.05.2014 =
 * New : We added Ukrainian language.
-* Update : We updated all functionality for wordpress 3.9.1.
+* Update : We updated all functionality for WordPress 3.9.1.
 
 = V1.4 - 12.03.2014 =
 * Update: Screenshots were updated.
@@ -180,6 +183,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 
 == Upgrade Notice ==
 
+= V1.6.9 =
+* The compatibility with new WordPress version updated.
+
 = V1.6.8 =
 * Usability improved.
 
@@ -190,13 +196,13 @@ The structure of the plugin settings page has been changed. The code refactoring
 The bug with plugin menu duplicating was fixed.
 
 = V1.6.5 =
-We updated all functionality for wordpress 4.3.1. Textdomain was changed.
+We updated all functionality for WordPress 4.3.1. Textdomain was changed.
 
 = V1.6.4 =
 Input maxlength is added. We fixed the settings page display. BWS plugins section was updated.
 
 = V1.6.3 =
-We updated all functionality for wordpress 4.2.2.
+We updated all functionality for WordPress 4.2.2.
 
 = V1.6.2 =
 An ability to add tracking code to the website without authorizing in the plugin was added.
@@ -208,7 +214,7 @@ BWS plugins section was updated.
 We added an option to save tracking code without adding it to blog. We updated all functionality for WordPress 4.0. We fixed the script that adds tracking code and moved it to the bottom of a page to speed the page loading process. Security Exploit was fixed.
 
 = V1.5 =
-We added Ukrainian language. We updated all functionality for wordpress 3.9.1.
+We added Ukrainian language. We updated all functionality for WordPress 3.9.1.
 
 = V1.4 =
 Plugin optimization was done. BWS plugins section was updated. Readme file was updated. Screenshots were updated.
