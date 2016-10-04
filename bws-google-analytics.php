@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Google Analytics by BestWebSoft
-Plugin URI: http://bestwebsoft.com/products/bws-google-analytics/
+Plugin URI: http://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/
 Description: Add Google Analytics code to WordPress website and track basic stats.
 Author: BestWebSoft
 Text Domain: bws-google-analytics
@@ -899,7 +899,7 @@ if ( ! function_exists( 'gglnltcs_show_pro_ad' ) ) {
 				<div class="bws_info">
 					<?php _e( 'Unlock premium options by upgrading to Pro version', 'bws-google-analytics' ); ?>
 				</div>
-				<a class="bws_button" href="http://bestwebsoft.com/products/bws-google-analytics/?k=0ceb29947727cb6b38a01b29102661a3&pn=125&v=<?php echo $gglnltcs_plugin_info["Version"]; ?>&wp_v=<?php echo $wp_version; ?>" target="_blank" title="Google Analytics Pro by BestWebSoft plugin"><?php _e( 'Learn More', 'bws-google-analytics' ); ?></a>
+				<a class="bws_button" href="http://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/?k=0ceb29947727cb6b38a01b29102661a3&pn=125&v=<?php echo $gglnltcs_plugin_info["Version"]; ?>&wp_v=<?php echo $wp_version; ?>" target="_blank" title="Google Analytics Pro by BestWebSoft plugin"><?php _e( 'Learn More', 'bws-google-analytics' ); ?></a>
 				<div class="clear"></div>
 			</div>
 		</div>
