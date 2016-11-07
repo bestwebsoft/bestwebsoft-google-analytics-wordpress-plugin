@@ -1,10 +1,9 @@
-/* Load Visualization */
-google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
-
 ( function( $ ) {
 	$( document ).ready( function() {
-		contentProcessing();
-	});
+		/* Load google package for chart visualization */
+		google.charts.load( 'current', { packages: ['corechart'] } );
+		google.charts.setOnLoadCallback(contentProcessing);
+	} );
 
 	/**
 	 * Content Processing. This functions will be recalled every time user selects new tab.
@@ -19,12 +18,12 @@ google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 			$( '#gglnltcs-add-tracking-code-input' ).attr( "checked", false );
 		};
 		/* check/uncheck "Add tracking Code To Your Blog" checkbox depending whether tracking code field is empty */
-		$( 'input[name="gglnltcs_tracking_id"]' ).change( function(){
+		$( 'input[name="gglnltcs_tracking_id"]' ).change( function() {
 			$( '#gglnltcs-add-tracking-code-input' ).attr( "checked", !! $( this ).val() );
-		});
+		} );
 		$( '#gglnltcs-tracking-id-form input[name="gglnltcs_tracking_id"], input[name="gglnltcs_tracking_id"], #gglnltcs-authentication-code-input' ).on( 'keypress', function() {
 			$( this ).removeClass( 'gglnltcs-validation-failed' );
-		});
+		} );
 		/* Google Authentication form preventing submit */
 		$( '#gglnltcs-authentication-form' ).on( 'submit', function( event ) {
 			event = event || window.event;
@@ -33,7 +32,7 @@ google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 				event.preventDefault();
 				input.addClass( 'gglnltcs-validation-failed' );
 			}
-		});
+		} );
 
 		/*
 		 * Add Datepicker
@@ -85,13 +84,13 @@ google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 				$( this ).removeClass( 'gglnltcs-validation-failed' );
 				$( '.gglnltcs-error-tooltip' ).removeClass( 'gglnltcs-error-tooltip' );
 			}
-		}).datepicker( {
+		} ).datepicker( {
 			dateFormat :     'yy-mm-dd',
 			changeMonth:     true,
 			changeYear:      true,
 			showButtonPanel: true,
 			minDate:         new Date( '2005-01-01' )
-		});
+		} );
 
 		/*
 		 * Main form preventing submit
@@ -116,7 +115,7 @@ google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 				$( '.gglnltcs-error-tooltip' ).removeClass( 'gglnltcs-error-tooltip' );
 				displayStatistics();
 			}
-		});
+		} );
 
 		setChartCurves();
 		/*
@@ -129,7 +128,7 @@ google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 				getWebproperties();
 
 			displayStatistics();
-		});
+		} );
 	}
 
 
@@ -192,41 +191,55 @@ google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 			checked.each( function() {
 				chartSelectedMetric = $( this ).val(),
 				chartSelectedMetric = chartSelectedMetric.substring(3),
-				chartCurves         = metrics.data( 'chartCurves' ),
 				chartCurves[ chartSelectedMetric ] = true;
-			});
+			} );
+			metrics.data( 'chartCurves', chartCurves );
 			/* On change */
 			checkboxes.on( 'change', function() {
 				chartSelectedMetric = $( this ).val(),
 				chartSelectedMetric = chartSelectedMetric.substring(3),
-				chartCurves         = metrics.data( 'chartCurves' );
 				chartCurves[ chartSelectedMetric ] = chartCurves[ chartSelectedMetric ] ? false : true;
 				checkboxes.removeClass( 'gglnltcs-validation-failed' );
-			});
+				metrics.data( 'chartCurves', chartCurves );
+			} );
 		}
+	}
+
+	/* Set Results Table Height. */
+	function setResultsTableHeight() {
+		if ( $( 'input[name="gglnltcs_view_mode"]:checked' ).val() != 'table' )
+			return false;
+		$( 'table.gglnltcs-results:visible tr' ).each( function() {
+			$( this ).height( $( this ).find( 'th' ).outerHeight() );
+		} );
 	}
 
 	/* All neccessary processing for the results table. */
 	function resultsTableFunctions() {
 		/* Results table hover highlight cells */
-		$( '.gglnltcs-results div.gglnltcs-table-body td' ).on( 'mouseover', function() {
+		$( '.gglnltcs-results td' ).on( 'mouseover', function() {
 			var cellIndex = $( this ).index();
-			$( '.gglnltcs-results div.gglnltcs-table-body tr' ).each( function() {
-				$( this ).find( 'td' ).eq( cellIndex ).addClass( 'gglnltcs-hovered-cell' );
-			});
+			$( '.gglnltcs-results tr' ).each( function() {
+				$( this ).find( 'td' ).eq( cellIndex - 2 ).addClass( 'gglnltcs-hovered-cell' );
+			} );
 			$( this ).addClass( 'gglnltcs-this-hovered-cell' );
-		}).on( 'mouseleave', function() {
+		} ).on( 'mouseleave', function() {
 			var cellIndex = $( this ).index();
-			$( '.gglnltcs-results div.gglnltcs-table-body tr' ).each( function() {
-				$( this ).find( 'td' ).eq( cellIndex ).removeClass( 'gglnltcs-hovered-cell' );
-			});
+			$( '.gglnltcs-results tr' ).each( function() {
+				$( this ).find( 'td' ).eq( cellIndex - 2 ).removeClass( 'gglnltcs-hovered-cell' );
+			} );
 			$( this ).removeClass( 'gglnltcs-this-hovered-cell' );
-		});
+		} );
 		/* Height and Width of result tables. */
 		if ( $( "#gglnltcs-results-wrapper" ).length ) {
-			$( '#gglnltcs-results-wrapper' ).height( $( '.gglnltcs-results:first' ).height() + $( '#gglnltcs-group-by-Y-M-D' ).height() + 20 );
-			setResultsTableWidth();
-			$( window ).on( 'resize', setResultsTableWidth );
+			setResultsTableHeight();
+			var width = $( window ).width();
+			$( window ).on( 'resize', function() {
+				if ( $( this ).width() != width ) {
+					width = $( this ).width();
+					setResultsTableHeight();
+				}
+			} );
 		}
 		/* Change year month day in the results table */
 		$( '#gglnltcs-group-by-Y-M-D input' ).on( 'click', function() {
@@ -234,22 +247,12 @@ google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 			$( this ).addClass( 'gglnltcs-selected' );
 			if ( ! $( '.gglnltcs-results .gglnltcs-bad-results' ).length ) {
 				var index = $( this ).index();
-				var tablesTotal = $( '#gglnltcs-results-wrapper .gglnltcs-results' );
+				var tablesTotal = $( '.gglnltcs-results-table-wrap' );
 				tablesTotal.hide();
-				$( '#gglnltcs-results-wrapper .gglnltcs-results:eq(' + ( tablesTotal.length - index ) + ')' ).show();
+				$( '.gglnltcs-results-table-wrap' ).eq( tablesTotal.length - index ).show();
+				setResultsTableHeight();
 			}
-		});
-	}
-
-	/* Set Results Table Width. */
-	function setResultsTableWidth() {
-		var table  = $( '.gglnltcs-table-body' );
-		if ( ! table.length )
-			table  = $( '.gglnltcs-results' );
-		var isRtl  = $( 'body' ).hasClass( 'rtl' ),
-			offset = isRtl ? $( '.gglnltcs-table-header' ).offset() : table.offset(),
-			width  = ( isRtl ? offset.left : $( window ).width() - offset.left ) - 30;
-		table.css( 'max-width', width + 'px' );
+		} );
 	}
 
 	/**
@@ -264,7 +267,7 @@ google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 		$( '<div>', { 'class': 'gglnltcs-error-message', html: error } )
 			.hide()
 			.appendTo( '#gglnltcs-results-wrapper' )
-			.css({ 'left': ( ( parentWidth - $( '.gglnltcs-error-message' ).width() ) / 2 ) + 'px' })
+			.css( { 'left': ( ( parentWidth - $( '.gglnltcs-error-message' ).width() ) / 2 ) + 'px' } )
 			.fadeIn( 500 );
 	}
 
@@ -320,24 +323,62 @@ google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 				for ( var i = 0; i < chartDate.length; i++ ) {
 					chartRows = [];
 					chartRows.push( new Date( chartDate[i][0], chartDate[i][1] - 1, chartDate[i][2] ) );
-					if ( chartCurves.visitors   	   ) { chartRows.push( parseInt( visitors[i]   ) ) }
-					if ( chartCurves.newVisits  	   ) { chartRows.push( parseInt( newVisits[i]  ) ) }
-					if ( chartCurves.visits     	   ) { chartRows.push( parseInt( visits[i]     ) ) }
-					if ( chartCurves.visitBounceRate   ) { chartRows.push( parseInt( bounceRate[i] ) ) }
-					if ( chartCurves.avgTimeOnSite     ) { chartRows.push( parseInt( avgTime[i]    ) ) }
-					if ( chartCurves.pageviews  	   ) { chartRows.push( parseInt( pageviews[i]  ) ) }
-					if ( chartCurves.pageviewsPerVisit ) { chartRows.push( parseInt( perVisit[i]   ) ) }
+					if ( chartCurves.visitors   	   ) { chartRows.push( parseInt( visitors[i], 10   ) ) }
+					if ( chartCurves.newVisits  	   ) { chartRows.push( parseInt( newVisits[i], 10  ) ) }
+					if ( chartCurves.visits     	   ) { chartRows.push( parseInt( visits[i], 10     ) ) }
+					if ( chartCurves.visitBounceRate   ) { chartRows.push( parseInt( bounceRate[i], 10 ) ) }
+					if ( chartCurves.avgTimeOnSite     ) { chartRows.push( parseInt( avgTime[i], 10    ) ) }
+					if ( chartCurves.pageviews  	   ) { chartRows.push( parseInt( pageviews[i], 10  ) ) }
+					if ( chartCurves.pageviewsPerVisit ) { chartRows.push( parseInt( perVisit[i], 10   ) ) }
 					ajaxChart.addRows( [ chartRows ] );
 				}
-				chartCanvas.parent().html( '<div id="gglnltcs-chart"></div>' ).height( 200 );
-				var newChart = new google.visualization.AnnotatedTimeLine( document.getElementById( 'gglnltcs-chart' ));
-				newChart.draw( ajaxChart, {
-					displayZoomButtons: true,
-					pointSize: 8,
-					scaleType: 'allmaximized',
-					thickness: 3,
-					wmode: 'transparent'
-				});
+				chartCanvas.parent().html( '<div id="gglnltcs-chart"></div>' );
+				function drawChart( tableData ) {
+					var options = {
+						aggregationTarget: 'series',
+						chartArea: {
+							backgroundColor: {
+								fill: 'white',
+								opacity: 100,
+								stroke: '#666',
+								strokeWidth: 0
+							},
+						},
+						explorer: {
+							axis: 'horizontal',
+							maxZoomOut: 1,
+							maxZoomIn: 10,
+							keepInBounds: true
+						},
+						focusTarget: 'category',
+						hAxis: {
+							viewWindowMode: 'explicit'
+						},
+						height: 300,
+						interpolateNulls: false,
+						legend: {
+							maxLines: 8,
+							position: 'top'
+						},
+						lineWidth: 2,
+						pointSize: 2,
+						selectionMode : 'multiple',
+						vAxis: {
+							viewWindowMode: 'pretty'
+						}
+					}
+					var chart = new google.visualization.LineChart( document.getElementById('gglnltcs-chart') );
+					chart.draw( tableData, options );
+				}
+				drawChart( ajaxChart );
+				var width = $( window ).width();
+				$( window ).on( 'resize', function() {
+					if ( $( this ).width() != width ) {
+						width = $( this ).width();
+						drawChart( ajaxChart );
+					}
+				} );
+				$( '#gglnltcs-results-wrapper' ).css('height', 'auto');
 			} catch ( errorInAjax ) {
 				displayError( gglnltcsLocalize.ajaxApiError + '<br/>' + errorInAjax );
 			}
@@ -345,7 +386,7 @@ google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 			chartCanvas.fadeTo( 500, 1 );
 			loadingCircle.remove();
 			toDisable.attr( 'disabled', false );
-		});
+		} );
 	}
 
 	/* Ajax Function To Build The Table With Results When User Clicks "Get Statisics" Button */
@@ -353,25 +394,24 @@ google.load( 'visualization', '1', { 'packages': ['annotatedtimeline'] });
 		var settings      = $( '#gglnltcs-main-form' ).serialize(),
 			toDisable     = $( '.gglnltcs_to_disable' ).attr( 'disabled', true ),
 			loadingCircle = $( '<div>', { 'class': 'gglnltcs-loading-icon' } ).hide().insertAfter( '#gglnltcs-get-statistics-button' ).fadeIn( 500 ),
-			tableWrapper  = $( '#gglnltcs-results-wrapper' ).children(),
+			tableWrapper  = $( '#gglnltcs-results-wrapper' ),
 			data = {
 				action:         'gglnltcs_action',
 				settings:       settings,
 				url:            url,
 				tab:            'table_chart',
-				page:           'bws-google-analytics.php',
 				gglnltcs_nonce: gglnltcsLocalize.gglnltcs_ajax_nonce
 			};
 
 		$.post( ajaxurl, data, function( data ) {
-			tableWrapper.parent().html( data );
+			tableWrapper.html( data );
 			resultsTableFunctions();
 			tableWrapper.fadeTo( 500, 1 );
 			loadingCircle.remove();
 			toDisable.attr( 'disabled', false );
-		});
+		} );
 	}
-})( jQuery );
+} )( jQuery );
 
 /**
  * Get Webproperties For Selected Account

@@ -4,7 +4,7 @@ Donate link: http://bestwebsoft.com/donate/
 Tags: add tracking code, analytics, display statistic report, google analytics, google analytics plugin, google analytics stats, group statistics, metrics, page views, visit duration, tracking, web properties
 Requires at least: 3.8
 Tested up to: 4.6.1
-Stable tag: 1.6.9
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,7 +35,7 @@ http://www.youtube.com/watch?v=u6GCmG2SYIg
 	* Page Tracking
 		* Pageviews
 		* Page/Visit
-* Compatible with latest WordPress version 
+* Compatible with latest WordPress version
 * Incredibly simple settings for fast setup without modifying code
 * Detailed step-by-step documentation and videos
 
@@ -102,11 +102,11 @@ No, you can't. Google Analytics provides developer access to the configuration d
 
 = How can I add tracking code? =
 
-After you have created a new webroperty you will get a tracking code. If you want to add tracking code to your blog you will need to copy Tracking ID that looks like UA-xxxxx-y, paste it to the "Tracking Code" field, check "Add tracking Code To Blog" checkbox (if it is not checked) and click "Save Changes" button.
+After you have created a new webproperty you will get a tracking code. If you want to add tracking code to your blog you will need to copy Tracking ID that looks like UA-xxxxx-y, paste it to the "Tracking Code" field, check "Add tracking Code To Blog" checkbox (if it is not checked) and click "Save Changes" button.
 
 = I want to collect statistic from my blog, what should I do? =
 
-If you want to enable tracking and collect statistics from your blog, you need to past tracking code to your blog. To do this you should follow next steps:
+If you want to enable tracking and collect statistics from your blog, you need to paste tracking code to your blog. To do this you should follow next steps:
 
 1. Sign in to your Google Analytics account. Click Admin in the menu bar at the top of any page.
 2. In the Account column, select the account from the dropdown that you want to add the property to.
@@ -118,7 +118,7 @@ If you want to enable tracking and collect statistics from your blog, you need t
 8. Select the Industry Category.
 9. Select the Reporting Time Zone.
 10. Click Get Tracking ID.
-11. Copy Tracking ID that looks like UA-xxxxx-y and past it to the "Tracking Code" field in the "Settings" tab of this plugin.
+11. Copy Tracking ID that looks like UA-xxxxx-y and paste it to the "Tracking Code" field in the "Settings" tab of this plugin.
 12. Check "Add tracking Code To Blog" checkbox (if it is not checked) and click "Save Changes" button.
 
 = I have added tracking code to my blog using this plugin. Now if I deactivate this plugin, will Google Analytics continue logging my blog? =
@@ -146,6 +146,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<http:
 4. Google Analytics Settings page.
 
 == Changelog ==
+
+= V1.7.0 - 04.11.2016 =
+* Update : 'Line Chart' view mode has been updated.
 
 = V1.6.9 - 17.08.2016 =
 * Update : All functionality for WordPress 4.6 was updated.
@@ -211,6 +214,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<http:
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.7.0 =
+* Functionality improved. Appearance improved.
 
 = V1.6.9 =
 * The compatibility with new WordPress version updated.

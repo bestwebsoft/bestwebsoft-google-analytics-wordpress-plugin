@@ -185,7 +185,7 @@ msgstr "Дата має бути у вигляді РРРР-ММ-ДД"
 
 #: bws-google-analytics.php:505
 msgid "The gap between dates must not be more than 999 days"
-msgstr "Рзниця між датами не повинна перевищувати 999 днів"
+msgstr "Різниця між датами не повинна перевищувати 999 днів"
 
 #: bws-google-analytics.php:511
 msgid "View mode"

@@ -1,4 +1,4 @@
-<a href="http://bestwebsoft.com/products/bws-google-analytics/" target=_blank>Google Analytics WordPress Plugin</a>
+<a href="http://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/" target=_blank>Google Analytics WordPress Plugin</a>
 ========================
 
 Add Google Analytics code to WordPress website and track basic stats.
@@ -46,7 +46,7 @@ Add Google Analytics code to WordPress website and track basic stats.
 <li>Page/Visit</li>
 </ul></li>
 </ul></li>
-<li>Compatible with latest WordPress version </li>
+<li>Compatible with latest WordPress version</li>
 <li>Incredibly simple settings for fast setup without modifying code</li>
 <li>Detailed step-by-step documentation and videos</li>
 </ul>

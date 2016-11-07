@@ -6,7 +6,7 @@ Description: Add Google Analytics code to WordPress website and track basic stat
 Author: BestWebSoft
 Text Domain: bws-google-analytics
 Domain Path: /languages
-Version: 1.6.9
+Version: 1.7.0
 Author URI: http://bestwebsoft.com/
 License: GPLv2 or later
 */
@@ -27,8 +27,10 @@ License: GPLv2 or later
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( ! function_exists( 'gglnltcs_add_admin_menu' ) ) {
-	function gglnltcs_add_admin_menu() {
+require_once( dirname( __FILE__ ) . '/includes/deprecated.php' );
+
+if ( ! function_exists( 'gglnltcs_admin_menu' ) ) {
+	function gglnltcs_admin_menu() {
 		bws_general_menu();
 		$settings = add_submenu_page( 'bws_panel', 'Google Analytics', 'Google Analytics', 'manage_options', 'bws-google-analytics.php', 'gglnltcs_settings_page' );
 		add_action( 'load-' . $settings, 'gglnltcs_add_tabs' );
@@ -94,11 +96,31 @@ if ( ! function_exists( 'gglnltcs_get_options_from_db' ) ) {
 		$gglnltcs_options = get_option( 'gglnltcs_options' );
 
 		/* Array merge incase this version has added new options */
-		if ( ! isset( $gglnltcs_options['plugin_option_version'] ) || $gglnltcs_options['plugin_option_version'] != $gglnltcs_plugin_info['Version'] ) {
+		if (
+			! isset( $gglnltcs_options['plugin_option_version'] ) ||
+			( isset( $gglnltcs_options['plugin_option_version'] ) && $gglnltcs_options['plugin_option_version'] != $gglnltcs_plugin_info['Version'] )
+		) {
 			$gglnltcs_options = array_merge( $gglnltcs_option_defaults, $gglnltcs_options );
 			$gglnltcs_options['plugin_option_version'] = $gglnltcs_plugin_info['Version'];
 			$htccss_options['hide_premium_options']    = array();
 			update_option( 'gglnltcs_options', $gglnltcs_options );
+
+			gglnltcs_plugin_activate();
+		}
+	}
+}
+
+/**
+ * Activation plugin function
+ */
+if ( ! function_exists( 'gglnltcs_plugin_activate' ) ) {
+	function gglnltcs_plugin_activate() {
+		if ( is_multisite() ) {
+			switch_to_blog( 1 );
+			register_uninstall_hook( __FILE__, 'gglnltcs_delete_options' );
+			restore_current_blog();
+		} else {
+			register_uninstall_hook( __FILE__, 'gglnltcs_delete_options' );
 		}
 	}
 }
@@ -310,11 +332,12 @@ if ( ! function_exists( 'gglnltcs_scripts' ) ) {
 	function gglnltcs_scripts() {
 		/* Load plugin styles and scripts only on the plugin settings page */
 		if ( isset( $_REQUEST['page'] ) && "bws-google-analytics.php" == $_REQUEST['page'] ) {
-			/* This function is called from the inside of the function "gglnltcs_add_admin_menu" */
-			wp_enqueue_style( 'gglnltcs_stylesheet', plugins_url( 'css/style.css', __FILE__ ) );
-			wp_enqueue_style( 'gglnltcs_jquery_ui_stylesheet', plugins_url( 'css/jquery-ui.css', __FILE__ ) );
-			wp_enqueue_script( 'gglnltcs_google_js_api', 'https://www.google.com/jsapi' ); /* Load Google object. It will be used for visualization.*/
-			wp_enqueue_script( 'gglnltcs_script', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery-ui-datepicker' ) ); /* Load main plugin script. It is important to load google object first.*/
+			global $gglnltcs_plugin_info;
+			/* This function is called from the inside of the function "gglnltcs_admin_menu" */
+			wp_enqueue_script( 'gglnltcs_google_js_api', 'https://www.gstatic.com/charts/loader.js' ); /* Load Google object. It will be used for chart visualization.*/
+			wp_enqueue_style( 'gglnltcs_stylesheet', plugins_url( 'css/style.css', __FILE__ ), array(), $gglnltcs_plugin_info['Version'] );
+			wp_enqueue_style( 'gglnltcs_jquery_ui_stylesheet', plugins_url( 'css/jquery-ui.css', __FILE__ ), array(), $gglnltcs_plugin_info['Version'] );
+			wp_enqueue_script( 'gglnltcs_script', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery-ui-datepicker', 'gglnltcs_google_js_api' ), $gglnltcs_plugin_info['Version'] ); /* Load main plugin script. It is important to load google object first.*/
 			/* Script Localization */
 			wp_localize_script( 'gglnltcs_script', 'gglnltcsLocalize', array(
 				'matchPattern' 			=> 	__( 'Date values must match the pattern YYYY-MM-DD.', 'bws-google-analytics' ),
@@ -329,7 +352,7 @@ if ( ! function_exists( 'gglnltcs_scripts' ) ) {
 				'chartPerVisit' 		=> 	__( 'Pages / Visit', 'bws-google-analytics' ),
 				'ajaxApiError'	 		=> 	__( 'Failed to process the received data correctly', 'bws-google-analytics' ),
 				'gglnltcs_ajax_nonce'	=> wp_create_nonce( 'gglnltcs_ajax_nonce_value' )
-			));
+			) );
 		}
 	}
 }
@@ -766,17 +789,17 @@ if ( ! function_exists( 'gglnltcs_get_statistic' ) ) {
 				<?php $dimensions = array( 'dimensions' => 'ga:year,ga:month,ga:day' );
 				$results = $analytics->data_ga->get( $settings['gglnltcs_webproperties'], $start_date, $end_date, $metrics, $dimensions );
 				$results = gglnltcs_print_results( $results, $metrics_data );
-				echo $results[0], $results[1];
+				echo $results;
 
 				$dimensions = array( 'dimensions' => 'ga:year,ga:month' );
 				$results = $analytics->data_ga->get( $settings['gglnltcs_webproperties'], $start_date, $end_date, $metrics, $dimensions );
 				$results = gglnltcs_print_results( $results, $metrics_data );
-				echo $results[0], $results[1];
+				echo $results;
 
 				$dimensions = array( 'dimensions' => 'ga:year' );
 				$results = $analytics->data_ga->get( $settings['gglnltcs_webproperties'], $start_date, $end_date, $metrics, $dimensions );
 				$results = gglnltcs_print_results( $results, $metrics_data );
-				echo $results[0], $results[1];
+				echo $results;
 			} catch ( Google_ServiceException $e ) { ?>
 				<table class="gglnltcs gglnltcs-results">
 					<tr>
@@ -800,20 +823,18 @@ if ( ! function_exists( 'gglnltcs_print_results' ) ) {
 		/* Print results */
 		if ( count( $results->getRows() ) ) {
 			$i = 0;
-			$table  = '<table class="gglnltcs-results gglnltcs">';
-			$table .= '<tr><td><table class="gglnltcs-table-header gglnltcs" >';
-			$second_table = '<td><div class="gglnltcs-table-body gglnltcs"><table>';
+
+			$table = 	'<div class="gglnltcs-results-table-wrap">
+							<table class="gglnltcs gglnltcs-results">';
+
 			$dimension_labels = array(
 				'ga:year'  => __( 'Year', 'bws-google-analytics' ),
 				'ga:month' => __( 'Month', 'bws-google-analytics' ),
 				'ga:day'   => __( 'Day', 'bws-google-analytics' )
 			);
 			foreach ( $results->getColumnHeaders() as $header ) {
-				$table .= '<tr>';
-				$table .= '<td>';
-				$table .= isset( $gglnltcs_metrics_data[ $header->name ] ) ? $gglnltcs_metrics_data[ $header->name ]['label'] : $dimension_labels[ $header->name ];
-				$table .= '</td></tr>';
-				$second_table .= '<tr class="gglnltcs-row-' . ltrim( $header->name, 'ga:' ) . '">';
+				$label = isset( $gglnltcs_metrics_data[ $header->name ] ) ? $gglnltcs_metrics_data[ $header->name ]['label'] : $dimension_labels[ $header->name ];
+				$table .= '<tr class="gglnltcs-row-' . ltrim( $header->name, 'ga:' ) . '"><th>' . $label . '<th>';
 				if ( $header->name == 'ga:month' ) {
 					$months = array(
 						'01' => __( 'Jan', 'bws-google-analytics' ),
@@ -830,41 +851,34 @@ if ( ! function_exists( 'gglnltcs_print_results' ) ) {
 						'12' => __( 'Dec', 'bws-google-analytics' )
 					);
 					foreach ( $results->getRows() as $row ) {
-						$second_table .= '<td>' . $months[ $row[ $i ] ] . '</td>';
+						$table .= '<td>' . $months[ $row[ $i ] ] . '</td>';
 					}
 				} else {
 					foreach ( $results->getRows() as $row ) {
 						$cell = floatval( $row[ $i ] );
 						if ( $header->name == 'ga:avgTimeOnSite' ) {
-							$cell = gmdate( 'H : i : s', $cell );
+							$cell = gmdate( 'H:i:s', $cell );
 						} else {
 							$cell = round( $cell, 2 );
 							$cell = $cell + 0;
 						}
-						$second_table .= '<td>' . $cell;
-						if ( $header->name == 'ga:visitBounceRate' ) {
-							if ( $cell != 0 ) {
-								$second_table .= '%';
-							}
-						}
-						$second_table .= '</td>';
+						$table .= '<td>' . $cell . ( ( 'ga:visitBounceRate' == $header->name && 0 != $cell ) ? '%' : '' ) . '</td>';
 					}
 				}
-				$second_table .= '</td></tr>';
+				$table .= "</tr>\n";
 				$i++;
 			} /* close foreach. */
-			$table .= '</table></td>';
-			$second_table .= '</table></div></td></tr></table>';
+			$table .= 		'</table>
+						</div>';
 		} else {
-			$table .= '<table class="gglnltcs-results gglnltcs">
-						<tr>
-							<th><h3>' . _e( 'Results', 'bws-google-analytics' ) . '</h3></th>
-							<td><div class="gglnltcs-bad-results">' . __( 'No results found', 'bws-google-analytics' ) . '.<div></td>
-						</tr>
-					  </table>';
-			$second_table = '';
+			$table .= 	'<table class="gglnltcs gglnltcs-results">
+							<tr>
+								<th><h3>' . _e( 'Results', 'bws-google-analytics' ) . '</h3></th>
+								<td><div class="gglnltcs-bad-results">' . __( 'No results found', 'bws-google-analytics' ) . '.<div></td>
+							</tr>
+						</table>';
 		}
-		return array( $table, $second_table );
+		return $table;
 	}
 }
 
@@ -1048,32 +1062,49 @@ if ( ! function_exists( 'gglnltcs_load_metrics' ) ) {
 if ( ! function_exists( 'gglnltcs_delete_options' ) ) {
 	function gglnltcs_delete_options() {
 		global $wpdb;
-		if ( is_multisite() ) {
-			$old_blog = $wpdb->blogid;
-			/* Get all blog ids */
-			$blogids = $wpdb->get_col( "SELECT `blog_id` FROM $wpdb->blogs" );
-			foreach ( $blogids as $blog_id ) {
-				switch_to_blog( $blog_id );
+		if ( ! function_exists( 'get_plugins' ) )
+			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		$all_plugins = get_plugins();
+
+		if ( ! array_key_exists( 'bws-google-analytics-pro/bws-google-analytics-pro.php', $all_plugins ) ) {
+			if ( is_multisite() ) {
+				$old_blog = $wpdb->blogid;
+				/* Get all blog ids */
+				$blogids = $wpdb->get_col( "SELECT `blog_id` FROM $wpdb->blogs" );
+				foreach ( $blogids as $blog_id ) {
+					switch_to_blog( $blog_id );
+					delete_option( 'gglnltcs_options' );
+				}
+				switch_to_blog( $old_blog );
+			} else {
 				delete_option( 'gglnltcs_options' );
 			}
-			switch_to_blog( $old_blog );
-		} else {
-			delete_option( 'gglnltcs_options' );
 		}
+
+		/**
+		 * @deprecated since 1.7.0
+		 * @todo remove after 01.06.2017
+		 */
+		if ( function_exists( 'gglnltcs_clear_uninstall_option' ) ) {
+			gglnltcs_clear_uninstall_option();
+		}
+		/* deprecated (end) */
+
 		require_once( dirname( __FILE__ ) . '/bws_menu/bws_include.php' );
 		bws_include_init( plugin_basename( __FILE__ ) );
 		bws_delete_plugin( plugin_basename( __FILE__ ) );
 	}
 }
 
+register_activation_hook( __FILE__, 'gglnltcs_plugin_activate' );
+
 add_action( 'init', 'gglnltcs_init' ); /* Load database options.*/
 add_action( 'plugins_loaded', 'gglnltcs_plugins_loaded' );
 add_action( 'admin_init', 'gglnltcs_admin_init' ); /* bws_plugin_info, gglnltcs_plugin_info, check WP version, plugin localization */
-add_action( 'admin_menu', 'gglnltcs_add_admin_menu' ); /* Add menu page, add submenu page.*/
+add_action( 'admin_menu', 'gglnltcs_admin_menu' ); /* Add menu page, add submenu page.*/
 add_action( 'admin_enqueue_scripts', 'gglnltcs_scripts' );
 add_action( 'admin_notices', 'gglnltcs_show_notices' );
 add_filter( 'plugin_action_links', 'gglnltcs_plugin_action_links', 10, 2 ); /* Add "Settings" link to the plugin action page.*/
 add_filter( 'plugin_row_meta', 'gglnltcs_register_plugin_links', 10, 2 ); /* Additional links on the plugin page - "Settings", "FAQ", "Support".*/
 add_action( 'wp_footer', 'gglnltcs_past_tracking_code' ); /* Insert tracking code when front page loads.*/
 add_action( 'wp_ajax_gglnltcs_action','gglnltcs_process_ajax' ); /* Ajax processing function.*/
-register_uninstall_hook( __FILE__, 'gglnltcs_delete_options' );
