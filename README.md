@@ -3,8 +3,6 @@
 
 Add Google Analytics code to WordPress website and track basic stats.
 
-<img src="http://bestwebsoft.com/wp-content/uploads/2014/09/google-analytics-banner-website.jpg" />
-
 <p>Google Analytics plugin is the best way to view Google Analytics on your WordPress website dashboard. Configure the reporting mode, select the metrics you need, set the time range for your statistic displaying and keep tracking your WordPress website statistics.</p>
 
 
