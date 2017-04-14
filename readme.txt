@@ -1,10 +1,10 @@
 === Google Analytics by BestWebSoft ===
 Contributors: bestwebsoft
-Donate link: http://bestwebsoft.com/donate/
+Donate link: https://bestwebsoft.com/donate/
 Tags: add tracking code, analytics, display statistic report, google analytics, google analytics plugin, google analytics stats, group statistics, metrics, page views, visit duration, tracking, web properties
 Requires at least: 3.8
-Tested up to: 4.6.1
-Stable tag: 1.7.0
+Tested up to: 4.7.3
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Add Google Analytics code to WordPress website and track basic stats.
 
 Google Analytics plugin is the best way to view Google Analytics on your WordPress website dashboard. Configure the reporting mode, select the metrics you need, set the time range for your statistic displaying and keep tracking your WordPress website statistics.
 
-http://www.youtube.com/watch?v=u6GCmG2SYIg
+https://www.youtube.com/watch?v=u6GCmG2SYIg
 
 = Free Features =
 
@@ -50,37 +50,31 @@ http://www.youtube.com/watch?v=u6GCmG2SYIg
 > 	* Conversion rate
 > 	* Abandoned funnels
 > * Configure all subsites on the network
-> * Get answer to your support question within one business day ([Support Policy](http://bestwebsoft.com/support-policy/))
+> * Get answer to your support question within one business day ([Support Policy](https://bestwebsoft.com/support-policy/))
 >
-> [Upgrade to Pro Now](http://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/?k=5891b1a2761b39cd5706eba26c3af1d4)
+> [Upgrade to Pro Now](https://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/?k=5891b1a2761b39cd5706eba26c3af1d4)
 
-If you have a feature suggestion or idea you'd like to see in the plugin, we'd love to hear about it! [Suggest a Feature](http://support.bestwebsoft.com/hc/en-us/requests/new)
+If you have a feature suggestion or idea you'd like to see in the plugin, we'd love to hear about it! [Suggest a Feature](https://support.bestwebsoft.com/hc/en-us/requests/new)
 
 = Documentation & Videos =
 
-* [[Doc] Installation](https://docs.google.com/document/d/1-J7Qk3MGIE6kFgsRjKbjynNbGuiD7yAicqzOWmkaafQ/)
-* [[Doc] Purchase, Installation & Configuration](https://docs.google.com/document/d/1Q0TBrlX5I338U99BN0Qo0CZ3VCa5bNsZmTBQTVdmWuw/)
+* [[Doc] Installation](https://docs.google.com/document/d/1-hvn6WRvWnOqj5v5pLUk7Awyu87lq5B_dO-Tv-MC9JQ/)
+* [[Doc] Purchase](https://docs.google.com/document/d/1EUdBVvnm7IHZ6y0DNyldZypUQKpB8UVPToSc_LdOYQI/)
 
 = Help & Support =
 
-Visit our Help Center if you have any questions, our friendly Support Team is happy to help — <http://support.bestwebsoft.com/>
+Visit our Help Center if you have any questions, our friendly Support Team is happy to help — <https://support.bestwebsoft.com/>
 
 = Translation =
 
 * Russian (ru_RU)
 * Ukrainian (uk)
 
-Some of these translations are not complete. We are constantly adding new features which should be translated. If you would like to create your own language pack or update the existing one, you can send [the text of PO and MO files](http://codex.wordpress.org/Translating_WordPress) to [BestWebSoft](http://support.bestwebsoft.com/hc/en-us/requests/new) and we'll add it to the plugin. You can download the latest version of the program for work with PO and MO [files Poedit](http://www.poedit.net/download.php).
+Some of these translations are not complete. We are constantly adding new features which should be translated. If you would like to create your own language pack or update the existing one, you can send [the text of PO and MO files](https://codex.wordpress.org/Translating_WordPress) to [BestWebSoft](https://support.bestwebsoft.com/hc/en-us/requests/new) and we'll add it to the plugin. You can download the latest version of the program for work with PO and MO [files Poedit](https://www.poedit.net/download.php).
 
 = Recommended Plugins =
 
-* [Updater](http://bestwebsoft.com/products/wordpress/plugins/updater/?k=b0536eca91f29f7603d42d53f5fd3990) - Automatically check and update WordPress core with all installed plugins to the latest versions. Manual mode, email notifications and backups of all your files and database before updating.
-
-= Donate =
-
-Donations play an important role in supporting open-source projects. We greatly appreciate any donation you can make to help us continue further development of free products.
-
-[Donate Now](http://bestwebsoft.com/donate/)
+* [Updater](https://bestwebsoft.com/products/wordpress/plugins/updater/?k=b0536eca91f29f7603d42d53f5fd3990) - Automatically check and update WordPress core with all installed plugins to the latest versions. Manual mode, email notifications and backups of all your files and database before updating.
 
 == Installation ==
 
@@ -88,55 +82,62 @@ Donations play an important role in supporting open-source projects. We greatly 
 2. Activate the plugin using the 'Plugins' menu in your WordPress admin panel.
 3. Plugin settings are located in your WordPress admin panel in "BWS Panel" > "Google Analytics" > "Settings".
 
-[View a PDF version of Step-by-step Instruction on Google Analytics Installation](https://docs.google.com/document/d/1-J7Qk3MGIE6kFgsRjKbjynNbGuiD7yAicqzOWmkaafQ/)
+[View a PDF version of Step-by-step Instruction on Google Analytics Installation](https://docs.google.com/document/d/1-hvn6WRvWnOqj5v5pLUk7Awyu87lq5B_dO-Tv-MC9JQ/)
 
 == Frequently Asked Questions ==
 
-= Can I retrieve statistics using this plugin without having any Google Analytics account? =
+= I want to collect statistic from my blog, what should I do? =
 
-No, you can't. This plugin allows you to retrieve statistics from Google Analytics account. It doesn't generate its own statistics.
+Follow the next steps to enable tracking and collect statistics from your Wordpress blog:
 
-= Can I create a new Google Analytics account or a new webproperty from within the admin area using this plugin? =
+1. Sign in to your Google Analytics account. Click "Admin" in the menu bar at the top of any page.
+2. In the Account column, select the account from the dropdown that you want to add the property to.
+3. In the dropdown in the Property column, click Create new property.
+4. Select Website.
+5. Select a tracking method. Click either Universal Analytics (recommended) or Classic Analytics.
+6. Enter the name of your WordPress blog.
+7. Enter your website URL (for example, bestwebsoft.com).
+8. Select an Industry Category.
+9. Select the Reporting Time Zone.
+10. Click Get Tracking ID.
+11. Copy Tracking ID that looks like UA-xxxxx-y.
+12. Open your Wordpress admin dashboard.
+13. Navigate to the Google Analytics Settings > Tracking Code & Reset tab.
+14. Past the code to the Tracking ID field.
+15. Check Add tracking Code To Your Blog checkbox (if not checked).
+16. Click Save Changes button.
 
-No, you can't. Google Analytics provides developer access to the configuration data through the Management API, which is a read-only API for account and configuration data.
+= I don't have Google Analytics account, can I still retrieve statistics using this plugin? =
+
+No, you can’t. This plugin allows you to retrieve statistics from Google Analytics account. It doesn’t generate its own statistics.
 
 = How can I add tracking code? =
 
-After you have created a new webproperty you will get a tracking code. If you want to add tracking code to your blog you will need to copy Tracking ID that looks like UA-xxxxx-y, paste it to the "Tracking Code" field, check "Add tracking Code To Blog" checkbox (if it is not checked) and click "Save Changes" button.
-
-= I want to collect statistic from my blog, what should I do? =
-
-If you want to enable tracking and collect statistics from your blog, you need to paste tracking code to your blog. To do this you should follow next steps:
-
-1. Sign in to your Google Analytics account. Click Admin in the menu bar at the top of any page.
-2. In the Account column, select the account from the dropdown that you want to add the property to.
-3. In the dropdown in the Property column, click Create new property.
-4. Select Website
-5. Select the tracking method. Click either Universal Analytics or Classic Analytics. We strongly recommend Universal Analytics.
-6. Enter the name of your Wordpress blog.
-7. Enter the Website URL of your blog
-8. Select the Industry Category.
-9. Select the Reporting Time Zone.
-10. Click Get Tracking ID.
-11. Copy Tracking ID that looks like UA-xxxxx-y and paste it to the "Tracking Code" field in the "Settings" tab of this plugin.
-12. Check "Add tracking Code To Blog" checkbox (if it is not checked) and click "Save Changes" button.
+After you have created a new web property you will get a tracking code. If you want to add tracking code to your blog you will need to copy Tracking ID that looks like UA-xxxxx-y, paste it to the Blog Tracking field and click the Enable Tracking button.
 
 = I have added tracking code to my blog using this plugin. Now if I deactivate this plugin, will Google Analytics continue logging my blog? =
 
 No, if you deactivate plugin tracking code will be deleted from your blog.
 
-= Over what period of time I can get the statistics?? =
+= Can I create a new Google Analytics account or a new web property from within the admin area using this plugin? =
+
+No, you can’t. Google Analytics provides the developer with an access to the configuration data through the Management API, which is a read-only API for account and configuration data.
+
+= What is the range of dates that is covered by the chart? =
+
+Line chart displays stats for the last year, 6 months, 3 months, 1 month, 5 days and 1 day.
+
+= Over what period of time I can get the statistics? =
 
 You can select your desired time period in the "Time range" setting block on the plugin settings page. However, the time interval between start and finish dates should not exceed 1000 days.
 
 = I have some problems with the plugin's work. What Information should I provide to receive proper support? =
 
-Please make sure that the problem hasn't been discussed yet on our forum (<http://support.bestwebsoft.com>). If no, please provide the following data along with your problem's description:
-
-1. the link to the page where the problem occurs
-2. the name of the plugin and its version. If you are using a pro version - your order number.
-3. the version of your WordPress installation
-4. copy and paste into the message your system status report. Please read more here: [Instruction on System Status](https://docs.google.com/document/d/1Wi2X8RdRGXk9kMszQy1xItJrpN0ncXgioH935MaBKtc/edit)
+Please make sure that the problem hasn't been discussed yet on our forum (<https://support.bestwebsoft.com>). If no, please provide the following data along with your problem's description:
+- The link to the page where the problem occurs
+- The name of the plugin and its version. If you are using a pro version - your order number.
+- The version of your WordPress installation
+- Copy and paste into the message your system status report. Please read more here: [Instruction on System Status](https://docs.google.com/document/d/1Wi2X8RdRGXk9kMszQy1xItJrpN0ncXgioH935MaBKtc/)
 
 == Screenshots ==
 
@@ -146,6 +147,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<http:
 4. Google Analytics Settings page.
 
 == Changelog ==
+
+= V1.7.1 - 14.04.2017 =
+* Bugfix : Multiple Cross-Site Scripting (XSS) vulnerability was fixed.
 
 = V1.7.0 - 04.11.2016 =
 * Update : 'Line Chart' view mode has been updated.
@@ -214,6 +218,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<http:
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.7.1 =
+* Bugs fixed.
 
 = V1.7.0 =
 * Functionality improved. Appearance improved.

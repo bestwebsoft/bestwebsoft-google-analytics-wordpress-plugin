@@ -1,17 +1,17 @@
 <?php
 /*
 Plugin Name: Google Analytics by BestWebSoft
-Plugin URI: http://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/
+Plugin URI: https://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/
 Description: Add Google Analytics code to WordPress website and track basic stats.
 Author: BestWebSoft
 Text Domain: bws-google-analytics
 Domain Path: /languages
-Version: 1.7.0
-Author URI: http://bestwebsoft.com/
+Version: 1.7.1
+Author URI: https://bestwebsoft.com/
 License: GPLv2 or later
 */
 
-/*  © Copyright 2016  BestWebSoft  ( http://support.bestwebsoft.com )
+/*  © Copyright 2017  BestWebSoft  ( https://support.bestwebsoft.com )
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as
@@ -421,8 +421,8 @@ if ( ! function_exists ( 'gglnltcs_register_plugin_links' ) ) {
 		if ( $file == $this_plugin ) {
 			if ( ! is_network_admin() )
 				$links[] = '<a href="admin.php?page=bws-google-analytics.php">' . __( 'Settings', 'bws-google-analytics' ) . '</a>';
-			$links[] = '<a href="http://wordpress.org/plugins/bws-google-analytics/faq/" target="_blank">' . __( 'FAQ', 'bws-google-analytics' ) . '</a>';
-			$links[] = '<a href="http://support.bestwebsoft.com">' . __( 'Support', 'bws-google-analytics' ) . '</a>';
+			$links[] = '<a href="https://wordpress.org/plugins/bws-google-analytics/faq/" target="_blank">' . __( 'FAQ', 'bws-google-analytics' ) . '</a>';
+			$links[] = '<a href="https://support.bestwebsoft.com">' . __( 'Support', 'bws-google-analytics' ) . '</a>';
 		}
 		return $links;
 	}
@@ -910,10 +910,7 @@ if ( ! function_exists( 'gglnltcs_show_pro_ad' ) ) {
 				</table>
 			</div>
 			<div class="bws_pro_version_tooltip">
-				<div class="bws_info">
-					<?php _e( 'Unlock premium options by upgrading to Pro version', 'bws-google-analytics' ); ?>
-				</div>
-				<a class="bws_button" href="http://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/?k=0ceb29947727cb6b38a01b29102661a3&pn=125&v=<?php echo $gglnltcs_plugin_info["Version"]; ?>&wp_v=<?php echo $wp_version; ?>" target="_blank" title="Google Analytics Pro by BestWebSoft plugin"><?php _e( 'Learn More', 'bws-google-analytics' ); ?></a>
+				<a class="bws_button" href="https://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/?k=0ceb29947727cb6b38a01b29102661a3&pn=125&v=<?php echo $gglnltcs_plugin_info["Version"]; ?>&wp_v=<?php echo $wp_version; ?>" target="_blank" title="Google Analytics Pro by BestWebSoft plugin"><?php _e( 'Learn More', 'bws-google-analytics' ); ?></a>
 				<div class="clear"></div>
 			</div>
 		</div>
