@@ -6,7 +6,7 @@ Description: Add Google Analytics code to WordPress website and track basic stat
 Author: BestWebSoft
 Text Domain: bws-google-analytics
 Domain Path: /languages
-Version: 1.7.1
+Version: 1.7.2
 Author URI: https://bestwebsoft.com/
 License: GPLv2 or later
 */
@@ -26,8 +26,6 @@ License: GPLv2 or later
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-
-require_once( dirname( __FILE__ ) . '/includes/deprecated.php' );
 
 if ( ! function_exists( 'gglnltcs_admin_menu' ) ) {
 	function gglnltcs_admin_menu() {
@@ -57,7 +55,7 @@ if ( ! function_exists( 'gglnltcs_init' ) ) {
 			$gglnltcs_plugin_info = get_plugin_data( __FILE__ );
 		}
 		/* Check if plugin is compatible with current WP version.*/
-		bws_wp_min_version_check( plugin_basename( __FILE__ ), $gglnltcs_plugin_info, '3.8' );
+		bws_wp_min_version_check( plugin_basename( __FILE__ ), $gglnltcs_plugin_info, '3.9' );
 
 		/* Load options only on the frontend or on the plugin page. */
 		if ( ! is_admin() || ( isset( $_REQUEST['page'] ) && "bws-google-analytics.php" == $_REQUEST['page'] ) )
@@ -340,7 +338,7 @@ if ( ! function_exists( 'gglnltcs_scripts' ) ) {
 			wp_enqueue_script( 'gglnltcs_script', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery-ui-datepicker', 'gglnltcs_google_js_api' ), $gglnltcs_plugin_info['Version'] ); /* Load main plugin script. It is important to load google object first.*/
 			/* Script Localization */
 			wp_localize_script( 'gglnltcs_script', 'gglnltcsLocalize', array(
-				'matchPattern' 			=> 	__( 'Date values must match the pattern YYYY-MM-DD.', 'bws-google-analytics' ),
+				'matchPattern' 			=> 	sprintf( __( 'Date values must match the pattern %s.', 'bws-google-analytics' ), 'YYYY-MM-DD' ),
 				'metricsValidation' 	=> 	__( 'Any request must supply at least one metric.', 'bws-google-analytics' ),
 				'invalidDateRange'  	=> 	__( 'Invalid Date Range.', 'bws-google-analytics' ),
 				'chartVisitors' 		=> 	__( 'Unique Visitors', 'bws-google-analytics' ),
@@ -353,6 +351,8 @@ if ( ! function_exists( 'gglnltcs_scripts' ) ) {
 				'ajaxApiError'	 		=> 	__( 'Failed to process the received data correctly', 'bws-google-analytics' ),
 				'gglnltcs_ajax_nonce'	=> wp_create_nonce( 'gglnltcs_ajax_nonce_value' )
 			) );
+
+			bws_enqueue_settings_scripts();
 		}
 	}
 }
@@ -460,14 +460,14 @@ if ( ! function_exists( 'gglnltcs_build_table' ) ) {
 					}
 				} /* close foreach.*/?>
 			</tr>
-		</table><?php
-	}
+		</table>
+	<?php }
 }
 
 /* Line Chart Tab */
 if ( ! function_exists( 'gglnltcs_statistics_tab' ) ) {
 	function gglnltcs_statistics_tab( $analytics, $hide_pro_block ) {
-		global $gglnltcs_plugin_info, $gglnltcs_metrics_data, $gglnltcs_options, $wp_version;
+		global $gglnltcs_plugin_info, $gglnltcs_metrics_data, $gglnltcs_options;
 		try {
 			if ( empty( $gglnltcs_options ) )
 				$gglnltcs_options = get_option( 'gglnltcs_options' );
@@ -507,8 +507,8 @@ if ( ! function_exists( 'gglnltcs_statistics_tab' ) ) {
 					<?php if ( ! $hide_pro_block )
 						gglnltcs_show_pro_ad();
 					gglnltcs_build_table( 'metrics', __( 'Metrics', 'bws-google-analytics' ), $gglnltcs_metrics_data, $settings );
-					$start_date = empty( $settings['gglnltcs_start_date'] ) ? date('Y-m-d', strtotime( "-1 year" ) ) : $settings['gglnltcs_start_date'];
-					$end_date   = empty( $settings['gglnltcs_end_date'] )   ? date('Y-m-d', time() ) : $settings['gglnltcs_end_date']; ?>
+					$start_date = empty( $settings['gglnltcs_start_date'] ) ? date( 'Y-m-d', strtotime( "-1 year" ) ) : $settings['gglnltcs_start_date'];
+					$end_date   = empty( $settings['gglnltcs_end_date'] )   ? date( 'Y-m-d', time() ) : $settings['gglnltcs_end_date']; ?>
 					<table class="form-table gglnltcs">
 						<tr>
 							<th><?php _e( 'Time range', 'bws-google-analytics' ); ?></th>
@@ -521,12 +521,11 @@ if ( ! function_exists( 'gglnltcs_statistics_tab' ) ) {
 									<?php _e( 'to', 'bws-google-analytics' ); ?>&nbsp;
 									<input id="gglnltcs-end-date" class="gglnltcs_to_disable"  name="gglnltcs_end_date" type="text" value="<?php echo $end_date; ?>" />
 								</label>
-								<div id="gglnltcs-date-tooltip" class="bws_help_box dashicons dashicons-editor-help">
-									<div class="bws_hidden_help_text" style="min-width: 150px;">
-										<p class="gglnltcs-date-format"><?php _e( 'Date values must match the pattern YYYY-MM-DD', 'bws-google-analytics' ); ?>.</p>
-										<p class="gglnltcs-max-gap"><?php _e( 'The gap between dates must not be more than 999 days', 'bws-google-analytics' ); ?>.</p>
-									</div>
-								</div>
+								<?php echo bws_add_help_box( 
+									sprintf( __( 'Date values must match the pattern %s.', 'bws-google-analytics' ), 'YYYY-MM-DD' ) .
+									'<br/>' .
+									__( 'The gap between dates must not be more than 999 days.', 'bws-google-analytics' )
+								); ?>
 							</td>
 						</tr>
 						<tr>
@@ -696,22 +695,21 @@ if ( ! function_exists( 'gglnltcs_print_tracking_id_field' ) ) {
 			<div id="gglnltcs-tracking-id-table">
 				<table class="form-table gglnltcs">
 					<tr>
-						<th scope="row">Tracking ID</th>
-						<td>
-							<input type="text" name="gglnltcs_tracking_id" value="<?php echo $tracking_id; ?>" >
-							<div id="gglnltcs-tracking-tooltip" class="bws_help_box dashicons dashicons-editor-help">
-								<div class="bws_hidden_help_text" style="min-width: 200px;">
-									<span><?php _e( 'To enable tracking and collect statistic from your site please', 'bws-google-analytics' ); ?>:</span><br/>
+						<th scope="row">
+							Tracking ID
+							<?php echo bws_add_help_box( 
+								__( 'To enable tracking and collect statistic from your site please', 'bws-google-analytics' ) . ':<br/>
 									<ol>
-										<li><a href="http://www.google.com/accounts/ServiceLogin?service=analytics" target="_blank"><?php _e( 'sign in', 'bws-google-analytics' ); ?></a> <?php _e( 'to your Google Analytics account', 'bws-google-analytics' ); ?></li>
-										<li><?php _e( 'copy your tracking ID and paste it to the "Tracking ID" text field', 'bws-google-analytics' ); ?></li>
-										<li><?php _e( 'mark "Add tracking code to blog" chexbox', 'bws-google-analytics' ); ?></li>
-										<li><?php _e( 'save changes', 'bws-google-analytics' ); ?></li>
-									</ol>
-									<span><?php _e( 'For more info see', 'bws-google-analytics' ); ?> <a href="https://support.google.com/analytics/answer/1009694" target="_blank"><?php _e( 'Add an account', 'bws-google-analytics' ); ?></a>, <a href="https://support.google.com/analytics/answer/1042508" target="_blank"><?php _e( 'Set up a property', 'bws-google-analytics' ); ?></a>, <a href="https://support.google.com/analytics/answer/1032385" target="_blank"><?php _e( 'Find your tracking code, tracking ID, and property number', 'bws-google-analytics' ); ?></a>, <a href="https://support.google.com/analytics/?#topic=3544906" target="_blank"><?php _e( 'Google Analytics Help Center', 'bws-google-analytics' ); ?></a>
-									</span>
-								</div>
-							</div>
+										<li><a href="http://www.google.com/accounts/ServiceLogin?service=analytics" target="_blank">' . __( 'sign in', 'bws-google-analytics' ) . '</a> ' . __( 'to your Google Analytics account', 'bws-google-analytics' ) . '</li>
+										<li>' . __( 'copy your tracking ID and paste it to the "Tracking ID" text field', 'bws-google-analytics' ) . '</li>
+										<li>' . __( 'mark "Add tracking code to blog" chexbox', 'bws-google-analytics' ) . '</li>
+										<li>' . __( 'save changes', 'bws-google-analytics' ) . '</li>
+									</ol>' .
+									__( 'For more info see', 'bws-google-analytics' ) . ' <a href="https://support.google.com/analytics/answer/1009694" target="_blank">' . __( 'Add an account', 'bws-google-analytics' ) . '</a>, <a href="https://support.google.com/analytics/answer/1042508" target="_blank">' . __( 'Set up a property', 'bws-google-analytics' ) . '</a>, <a href="https://support.google.com/analytics/answer/1032385" target="_blank">' . __( 'Find your tracking code, tracking ID, and property number', 'bws-google-analytics' ) . '</a>, <a href="https://support.google.com/analytics/?#topic=3544906" target="_blank">' . __( 'Google Analytics Help Center', 'bws-google-analytics' ) . '</a>'
+							); ?>
+						</th>
+						<td>
+							<input type="text" name="gglnltcs_tracking_id" value="<?php echo $tracking_id; ?>" />							
 							<br />
 							<label><input id='gglnltcs-add-tracking-code-input' type="checkbox" name="gglnltcs_add_tracking_code" value="1" <?php if ( isset( $gglnltcs_options['add_tracking_code'] ) && 1 == $gglnltcs_options['add_tracking_code'] ) echo 'checked="checked"'; ?> /><?php _e( 'Add tracking code to blog', 'bws-google-analytics' ) ?></label>
 						</td>
@@ -746,8 +744,8 @@ if ( ! function_exists( 'gglnltcs_print_log_out_field' ) ) {
 					</form>
 				</td>
 			</tr>
-		</table><?php
-	}
+		</table>
+	<?php }
 }
 
 /* Get Statistic */
@@ -1077,15 +1075,6 @@ if ( ! function_exists( 'gglnltcs_delete_options' ) ) {
 				delete_option( 'gglnltcs_options' );
 			}
 		}
-
-		/**
-		 * @deprecated since 1.7.0
-		 * @todo remove after 01.06.2017
-		 */
-		if ( function_exists( 'gglnltcs_clear_uninstall_option' ) ) {
-			gglnltcs_clear_uninstall_option();
-		}
-		/* deprecated (end) */
 
 		require_once( dirname( __FILE__ ) . '/bws_menu/bws_include.php' );
 		bws_include_init( plugin_basename( __FILE__ ) );

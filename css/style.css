@@ -47,8 +47,7 @@ table.gglnltcs hr:first-of-type {
 /* Error Messages and Notes */
 #gglnltcs-start-date.gglnltcs-validation-failed,
 #gglnltcs-end-date.gglnltcs-validation-failed,
-.gglnltcs-error-message,
-#gglnltcs-main-content .gglnltcs-error-tooltip {
+.gglnltcs-error-message {
 	color: rgb(205, 92, 92);
 }
 .gglnltcs-date .gglnltcs-error-message,
@@ -454,9 +453,6 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 		-o-transform: translate(55px, 70px) scale(1.6, 1.6);
 		-ms-transform: translate(55px, 70px) scale(1.6, 1.6);
 		transform: translate(55px, 70px) scale(1.6, 1.6);
-	}
-	#gglnltcs-tracking-tooltip {
-		margin: 10px 0 !important;
 	}
 }
 

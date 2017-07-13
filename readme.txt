@@ -2,9 +2,9 @@
 Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add tracking code, analytics, display statistic report, google analytics, google analytics plugin, google analytics stats, group statistics, metrics, page views, visit duration, tracking, web properties
-Requires at least: 3.8
-Tested up to: 4.7.3
-Stable tag: 1.7.1
+Requires at least: 3.9
+Tested up to: 4.8
+Stable tag: 1.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,7 +74,7 @@ Some of these translations are not complete. We are constantly adding new featur
 
 = Recommended Plugins =
 
-* [Updater](https://bestwebsoft.com/products/wordpress/plugins/updater/?k=b0536eca91f29f7603d42d53f5fd3990) - Automatically check and update WordPress core with all installed plugins to the latest versions. Manual mode, email notifications and backups of all your files and database before updating.
+* [Updater](https://bestwebsoft.com/products/wordpress/plugins/updater/?k=b0536eca91f29f7603d42d53f5fd3990) - Automatically check and update WordPress website core with all installed plugins and themes to the latest versions.
 
 == Installation ==
 
@@ -148,6 +148,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 
 == Changelog ==
 
+= V1.7.2 - 13.07.2017 =
+* Update : We updated all functionality for WordPress 4.8.
+
 = V1.7.1 - 14.04.2017 =
 * Bugfix : Multiple Cross-Site Scripting (XSS) vulnerability was fixed.
 
@@ -218,6 +221,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.7.2 =
+* The compatibility with new WordPress version updated.
 
 = V1.7.1 =
 * Bugs fixed.

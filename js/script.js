@@ -49,8 +49,6 @@
 			if ( dateValue && ! dateValue.match( rightFormat ) ) {
 				/* highlight the text field */
 				$( this ).addClass( 'gglnltcs-validation-failed' );
-				/* highlight the tooltip */
-				$( '#gglnltcs-date-tooltip, .gglnltcs-date-format' ).addClass( 'gglnltcs-error-tooltip' );
 			/* check both dates */
 			} else if ( startDateValue && endDateValue ) {
 				var start  = new Date( startDateValue ).getTime(),
@@ -69,20 +67,17 @@
 						startDateInput.val( startTime.getFullYear() + '-' + ( '0' + ( startTime.getMonth() + 1 ) ).slice( -2 ) + '-' + ( '0' + startTime.getDate() ).slice( -2 ) );
 					}
 					/* highlight the tooltip */
-					$( '#gglnltcs-date-tooltip, .gglnltcs-max-gap' ).addClass( 'gglnltcs-error-tooltip' );
 				} else if ( start > end ) {
 					/* change the values by places */
 					startDateInput.val( endDateValue );
 					endDateInput.val( startDateValue );
 				} else {
 					if ( dateValue.match( rightFormat ) ) {
-						$( '.gglnltcs-error-tooltip' ).removeClass( 'gglnltcs-error-tooltip' );
 						$( this ).removeClass( 'gglnltcs-validation-failed' );
 					}
 				}
 			} else {
 				$( this ).removeClass( 'gglnltcs-validation-failed' );
-				$( '.gglnltcs-error-tooltip' ).removeClass( 'gglnltcs-error-tooltip' );
 			}
 		} ).datepicker( {
 			dateFormat :     'yy-mm-dd',
@@ -112,7 +107,6 @@
 			}
 
 			if ( ! dateInput.hasClass( 'gglnltcs-validation-failed' ) ) {
-				$( '.gglnltcs-error-tooltip' ).removeClass( 'gglnltcs-error-tooltip' );
 				displayStatistics();
 			}
 		} );
