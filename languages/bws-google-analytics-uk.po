@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bws-google-analytics-pro\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-13 12:51+0300\n"
+"POT-Creation-Date: 2017-12-14 15:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
 "Language-Team: bestwebsoft <plugin@bestwebsoft.com>\n"
@@ -16,23 +16,27 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: bws-google-analytics.php:175
+#: bws-google-analytics.php:195
 msgid ""
 "Tracking code is empty. You must enter a tracking code to add it to your "
 "blog."
 msgstr ""
-"Код відстеження не введено. Введіть код відстеження, щоб додати його на свій "
+"Код відстеження не введено. Введіть код відстеження, щоб додати його в свій "
 "блог."
 
-#: bws-google-analytics.php:180
+#: bws-google-analytics.php:200
 msgid "Settings saved."
 msgstr "Налаштування збережено."
 
-#: bws-google-analytics.php:182
+#: bws-google-analytics.php:202
 msgid "Settings are not saved."
 msgstr "Налаштування не збережено."
 
-#: bws-google-analytics.php:194
+#: bws-google-analytics.php:214
+msgid "All plugin settings were restored."
+msgstr "Усі налаштування плагіну відновлені."
+
+#: bws-google-analytics.php:219
 msgid ""
 "It is impossible to get any information from Google Analytics due to the "
 "fact that cURL has been disabled. Please contact with the administrator of "
@@ -42,28 +46,47 @@ msgstr ""
 "Вашу сервері відключений cURL. Будь-ласка, зверніться до адміністратора "
 "сервера"
 
-#: bws-google-analytics.php:197
+#: bws-google-analytics.php:223
 msgid "Google Analytics Settings"
 msgstr "Налаштування Google Analytics"
 
-#: bws-google-analytics.php:199
+#: bws-google-analytics.php:225
 msgid "Statistics"
 msgstr "Статистика"
 
-#: bws-google-analytics.php:200 bws-google-analytics.php:407
-#: bws-google-analytics.php:423
+#: bws-google-analytics.php:226 bws-google-analytics.php:445
+#: bws-google-analytics.php:462
 msgid "Settings"
 msgstr "Налаштування"
 
-#: bws-google-analytics.php:201
+#: bws-google-analytics.php:227
 msgid "Go PRO"
-msgstr "Перейти на Pro версію"
+msgstr "Оновити до Pro"
 
-#: bws-google-analytics.php:286
+#: bws-google-analytics.php:240
+msgid ""
+"To enable tracking and collect statistic from your site enter Tracking ID"
+msgstr ""
+"Введіть Tracking ID, щоб увімкнути відстеження та збирати статистику з "
+"вашого сайту"
+
+#: bws-google-analytics.php:244
+msgid ""
+"To enable tracking and collect statistic from your site enter Tracking ID in "
+"the"
+msgstr ""
+"Введіть Tracking ID, щоб увімкнути відстеження та збирати статистику з "
+"вашого сайту на"
+
+#: bws-google-analytics.php:245
+msgid "Google Analytics settings"
+msgstr "сторінці налаштувань Google Analytics"
+
+#: bws-google-analytics.php:327
 msgid "Invalid code. Please, try again"
 msgstr "Невірний код. Будь ласка, спробуйте ще раз"
 
-#: bws-google-analytics.php:289
+#: bws-google-analytics.php:330
 msgid ""
 "In order to use Google Analytics by BestWebSoft plugin, you must be signed "
 "in with a registered Google Account email address and password. If you don't "
@@ -72,19 +95,19 @@ msgstr ""
 "Щоб використовувати плагін Google Analytics by BestWebSoft, ви маєте зайти в "
 "свій акаунт Google. Якщо у вас немає акаунта Google, ви можете створити його"
 
-#: bws-google-analytics.php:289
+#: bws-google-analytics.php:330
 msgid "here"
 msgstr "тут"
 
-#: bws-google-analytics.php:290
+#: bws-google-analytics.php:331
 msgid "Authenticate with your Google Account"
 msgstr "Аутентифікація з аккаунтом Google"
 
-#: bws-google-analytics.php:293
+#: bws-google-analytics.php:334
 msgid "Or Click Here If You Have Disabled Javascript"
 msgstr "Або клікніть сюди, якщо у вас вимкнений Javascript"
 
-#: bws-google-analytics.php:296
+#: bws-google-analytics.php:337
 msgid ""
 "When you finish authorization process you will get Google Authentication "
 "Code. You must enter this code in the field below and press \"Start Plugin\" "
@@ -94,129 +117,129 @@ msgstr ""
 "Після завершення процесу авторизації, ви отримаєте код. Вставте цей код в "
 "поле нижче та натисніть \"Вперед\"."
 
-#: bws-google-analytics.php:299
+#: bws-google-analytics.php:340
 msgid "Start Plugin"
 msgstr "Вперед "
 
-#: bws-google-analytics.php:341 bws-google-analytics.php:525
+#: bws-google-analytics.php:379 bws-google-analytics.php:567
 #, php-format
 msgid "Date values must match the pattern %s."
 msgstr "Дата має бути у вигляді %s."
 
-#: bws-google-analytics.php:342
+#: bws-google-analytics.php:380
 msgid "Any request must supply at least one metric."
 msgstr "Необхідно вибрати хоча б один показник"
 
-#: bws-google-analytics.php:343
+#: bws-google-analytics.php:381
 msgid "Invalid Date Range."
 msgstr "Невірний часовий діапазон."
 
-#: bws-google-analytics.php:344 bws-google-analytics.php:987
+#: bws-google-analytics.php:382 bws-google-analytics.php:1031
 msgid "Unique Visitors"
 msgstr "Кількість унікальних відвідувачів"
 
-#: bws-google-analytics.php:345 bws-google-analytics.php:997
+#: bws-google-analytics.php:383 bws-google-analytics.php:1041
 msgid "New Visits"
 msgstr "Нові відвідування"
 
-#: bws-google-analytics.php:346 bws-google-analytics.php:903
-#: bws-google-analytics.php:1008
+#: bws-google-analytics.php:384 bws-google-analytics.php:946
+#: bws-google-analytics.php:1052
 msgid "Visits"
-msgstr "Кількість відвідувань"
+msgstr "Відвідування"
 
-#: bws-google-analytics.php:347 bws-google-analytics.php:1018
+#: bws-google-analytics.php:385 bws-google-analytics.php:1062
 msgid "Bounce Rate"
 msgstr "Показник відмов"
 
-#: bws-google-analytics.php:348 bws-google-analytics.php:1028
+#: bws-google-analytics.php:386 bws-google-analytics.php:1072
 msgid "Average Visit Duration"
 msgstr "Середня тривалість відвідувань"
 
-#: bws-google-analytics.php:349 bws-google-analytics.php:1039
+#: bws-google-analytics.php:387 bws-google-analytics.php:1083
 msgid "Pageviews"
-msgstr "Кількість переглядів сторінки"
+msgstr "Перегляди сторінок"
 
-#: bws-google-analytics.php:350 bws-google-analytics.php:1049
+#: bws-google-analytics.php:388 bws-google-analytics.php:1093
 msgid "Pages / Visit"
 msgstr "Кількість переглянутих сторінок за сеанс "
 
-#: bws-google-analytics.php:351
+#: bws-google-analytics.php:389
 msgid "Failed to process the received data correctly"
 msgstr "Не вдалося коректно обробити отримані дані"
 
-#: bws-google-analytics.php:367
+#: bws-google-analytics.php:404
 msgid ""
 "If you want Google Analytics by BestWebSoft plugin to work correctly, please "
-"enable JavaScript in your browser!"
+"enable JavaScript in your browser."
 msgstr ""
-"Для коректної роботи плагiну Google Analytics by BestWebSoft, необхiдно "
-"включити у браузерi JavaScript!"
+"Для коректної роботи плагіну Google Analytics Pro by BestWebSoft, увімкніть "
+"підтримку JavaScript у своєму браузері."
 
-#: bws-google-analytics.php:424
+#: bws-google-analytics.php:463
 msgid "FAQ"
 msgstr "FAQ"
 
-#: bws-google-analytics.php:425
+#: bws-google-analytics.php:464
 msgid "Support"
 msgstr "Підтримка"
 
-#: bws-google-analytics.php:498
+#: bws-google-analytics.php:539
 msgid "Accounts"
 msgstr "Акаунти"
 
-#: bws-google-analytics.php:509
+#: bws-google-analytics.php:551
 msgid "Metrics"
 msgstr "Показники"
 
-#: bws-google-analytics.php:514
+#: bws-google-analytics.php:556
 msgid "Time range"
 msgstr "Період часу"
 
-#: bws-google-analytics.php:517
+#: bws-google-analytics.php:559
 msgid "From"
 msgstr "З"
 
-#: bws-google-analytics.php:521
+#: bws-google-analytics.php:563
 msgid "to"
 msgstr "по"
 
-#: bws-google-analytics.php:527
+#: bws-google-analytics.php:569
 msgid "The gap between dates must not be more than 999 days."
 msgstr "Різниця між датами не повинна перевищувати 999 днів."
 
-#: bws-google-analytics.php:532
+#: bws-google-analytics.php:574
 msgid "View mode"
 msgstr "Режим перегляду"
 
-#: bws-google-analytics.php:536
+#: bws-google-analytics.php:578
 msgid "Line chart"
 msgstr "Лінійний графік"
 
-#: bws-google-analytics.php:540
+#: bws-google-analytics.php:582
 msgid "Table"
 msgstr "Таблиця"
 
-#: bws-google-analytics.php:547
+#: bws-google-analytics.php:589
 msgid "Get Statistic"
 msgstr "Отримати статистику"
 
-#: bws-google-analytics.php:563
+#: bws-google-analytics.php:605
 msgid "There was an API error"
 msgstr "Виникла помилка"
 
-#: bws-google-analytics.php:664
+#: bws-google-analytics.php:705
 msgid "Webproperties"
 msgstr "Ресурси"
 
-#: bws-google-analytics.php:675 bws-google-analytics.php:804
+#: bws-google-analytics.php:716 bws-google-analytics.php:848
 msgid "There was an Analytics API service error"
-msgstr "Виникла помилка"
+msgstr "Виникла помилка сервісу API Analytics"
 
-#: bws-google-analytics.php:677 bws-google-analytics.php:810
+#: bws-google-analytics.php:718 bws-google-analytics.php:854
 msgid "There was a general API error"
 msgstr "Виникла помилка"
 
-#: bws-google-analytics.php:689
+#: bws-google-analytics.php:730
 msgid ""
 "It seems like you are not registered for Google Analytics or you don't have "
 "any Google Analytics Account"
@@ -224,192 +247,193 @@ msgstr ""
 "Схоже, ви не зареєстровані в Google Analytics або у вас немає жодного "
 "акаунту в Google Analytics"
 
-#: bws-google-analytics.php:690
+#: bws-google-analytics.php:731
 msgid "To gain access to Analytics you must"
 msgstr "Щоб отримати доступ до Analytics, ви маєте"
 
-#: bws-google-analytics.php:690
+#: bws-google-analytics.php:731
 msgid "register for Google Analytics"
 msgstr "зареєструватись для Google Analytics"
 
-#: bws-google-analytics.php:690
+#: bws-google-analytics.php:731
 msgid "and create an Analytics account"
 msgstr "і створити акаунт в Analytics"
 
-#: bws-google-analytics.php:701
+#: bws-google-analytics.php:742
 msgid "To enable tracking and collect statistic from your site please"
 msgstr ""
 "Якщо ви хочете увімкнути відстеження і отримувати статистику з  Вашого "
 "сайту, будь-ласка"
 
-#: bws-google-analytics.php:703
+#: bws-google-analytics.php:744
 msgid "sign in"
 msgstr "увiйдiть"
 
-#: bws-google-analytics.php:703
+#: bws-google-analytics.php:744
 msgid "to your Google Analytics account"
 msgstr "до Вашого акаунту на Google Analytics"
 
-#: bws-google-analytics.php:704
+#: bws-google-analytics.php:745
 msgid "copy your tracking ID and paste it to the \"Tracking ID\" text field"
-msgstr "скопіюйте ваш tracking ID в текстове поле \"Tracking ID\" "
+msgstr ""
+"скопіюйте ваш ідентифікатор відстеження в текстове поле \"Tracking ID\""
 
-#: bws-google-analytics.php:705
+#: bws-google-analytics.php:746
 msgid "mark \"Add tracking code to blog\" chexbox"
-msgstr "відзначте пункт \"Додати код відстеження на блог\""
+msgstr "відзначте опцію \"Додати код відстеження в блог\""
 
-#: bws-google-analytics.php:706
+#: bws-google-analytics.php:747
 msgid "save changes"
 msgstr "збережіть зміни"
 
-#: bws-google-analytics.php:708
+#: bws-google-analytics.php:749
 msgid "For more info see"
 msgstr "Більш детальну інформацію дивіться тут"
 
-#: bws-google-analytics.php:708
+#: bws-google-analytics.php:749
 msgid "Add an account"
 msgstr "Додавання облікового запису"
 
-#: bws-google-analytics.php:708
+#: bws-google-analytics.php:749
 msgid "Set up a property"
 msgstr "Налаштування ресурсу"
 
-#: bws-google-analytics.php:708
+#: bws-google-analytics.php:749
 msgid "Find your tracking code, tracking ID, and property number"
 msgstr "Пошук коду й ідентифікатора відстеження та номера ресурсу"
 
-#: bws-google-analytics.php:708
+#: bws-google-analytics.php:749
 msgid "Google Analytics Help Center"
 msgstr "Довідковий центр Google Analytics"
 
-#: bws-google-analytics.php:714
+#: bws-google-analytics.php:755
 msgid "Add tracking code to blog"
 msgstr "Додати код відстеження на блог"
 
-#: bws-google-analytics.php:720
+#: bws-google-analytics.php:761
 msgid "Save Changes"
 msgstr "Зберегти зміни"
 
-#: bws-google-analytics.php:739
-msgid "Deauthorize & Reset Settings"
-msgstr "Скинути налаштування і вийти"
+#: bws-google-analytics.php:782
+msgid "Deauthorize"
+msgstr "Скинути налаштування"
 
-#: bws-google-analytics.php:743
+#: bws-google-analytics.php:786
 msgid "Log Out"
 msgstr "Вийти"
 
-#: bws-google-analytics.php:778 bws-google-analytics.php:874
+#: bws-google-analytics.php:822 bws-google-analytics.php:917
 msgid "Results"
 msgstr "Результати"
 
-#: bws-google-analytics.php:780
+#: bws-google-analytics.php:824
 msgid "Group by"
 msgstr "Згрупувати по"
 
-#: bws-google-analytics.php:781 bws-google-analytics.php:829
+#: bws-google-analytics.php:825 bws-google-analytics.php:872
 msgid "Year"
 msgstr "Рік"
 
-#: bws-google-analytics.php:782 bws-google-analytics.php:830
+#: bws-google-analytics.php:826 bws-google-analytics.php:873
 msgid "Month"
 msgstr "Місяць"
 
-#: bws-google-analytics.php:783 bws-google-analytics.php:831
+#: bws-google-analytics.php:827 bws-google-analytics.php:874
 msgid "Day"
 msgstr "День"
 
-#: bws-google-analytics.php:838
+#: bws-google-analytics.php:881
 msgid "Jan"
 msgstr "Січ"
 
-#: bws-google-analytics.php:839
+#: bws-google-analytics.php:882
 msgid "Feb"
 msgstr "Лют"
 
-#: bws-google-analytics.php:840
+#: bws-google-analytics.php:883
 msgid "Mar"
 msgstr "Бер"
 
-#: bws-google-analytics.php:841
+#: bws-google-analytics.php:884
 msgid "Apr"
 msgstr "Квіт"
 
-#: bws-google-analytics.php:842
+#: bws-google-analytics.php:885
 msgid "May"
 msgstr "Трав"
 
-#: bws-google-analytics.php:843
+#: bws-google-analytics.php:886
 msgid "Jun"
 msgstr "Черв"
 
-#: bws-google-analytics.php:844
+#: bws-google-analytics.php:887
 msgid "Jul"
 msgstr "Лип"
 
-#: bws-google-analytics.php:845
+#: bws-google-analytics.php:888
 msgid "Aug"
 msgstr "Серп"
 
-#: bws-google-analytics.php:846
+#: bws-google-analytics.php:889
 msgid "Sep"
 msgstr "Вер"
 
-#: bws-google-analytics.php:847
+#: bws-google-analytics.php:890
 msgid "Oct"
 msgstr "Жовт"
 
-#: bws-google-analytics.php:848
+#: bws-google-analytics.php:891
 msgid "Nov"
 msgstr "Лист"
 
-#: bws-google-analytics.php:849
+#: bws-google-analytics.php:892
 msgid "Dec"
 msgstr "Груд"
 
-#: bws-google-analytics.php:875
+#: bws-google-analytics.php:918
 msgid "No results found"
 msgstr "Результатів не знайдено"
 
-#: bws-google-analytics.php:896
+#: bws-google-analytics.php:939
 msgid "Close"
 msgstr "Закрити"
 
-#: bws-google-analytics.php:900
+#: bws-google-analytics.php:943
 msgid "Reporting"
 msgstr "Звіти"
 
-#: bws-google-analytics.php:904
+#: bws-google-analytics.php:947
 msgid "Goals"
 msgstr "Цілі"
 
-#: bws-google-analytics.php:911
+#: bws-google-analytics.php:954
 msgid "Learn More"
 msgstr "Детальніше"
 
-#: bws-google-analytics.php:985
+#: bws-google-analytics.php:1029
 msgid "Total number of visitors for the requested time period."
 msgstr "Загальна кількість відвідувачів за вибраний період часу"
 
-#: bws-google-analytics.php:988 bws-google-analytics.php:998
+#: bws-google-analytics.php:1032 bws-google-analytics.php:1042
 msgid "Visitor"
 msgstr "Відвідувач"
 
-#: bws-google-analytics.php:995
+#: bws-google-analytics.php:1039
 msgid ""
 "The number of visitors whose visit to your property was marked as a first-"
 "time visit."
 msgstr "Кількість унікальних відвідувачів."
 
-#: bws-google-analytics.php:1006
+#: bws-google-analytics.php:1050
 msgid "Counts the total number of sessions."
 msgstr "Підраховує загальну кількість сеансів."
 
-#: bws-google-analytics.php:1009 bws-google-analytics.php:1019
-#: bws-google-analytics.php:1029
+#: bws-google-analytics.php:1053 bws-google-analytics.php:1063
+#: bws-google-analytics.php:1073
 msgid "Session"
 msgstr "Сеанс"
 
-#: bws-google-analytics.php:1016
+#: bws-google-analytics.php:1060
 msgid ""
 "The percentage of single-page visits (i.e., visits in which the person left "
 "your property from the first page)."
@@ -418,27 +442,37 @@ msgstr ""
 "більше однієї сторінки, тобто коли відвідувач покидає сайт відразу після "
 "сторінки входу. "
 
-#: bws-google-analytics.php:1026
+#: bws-google-analytics.php:1070
 msgid "The average duration visitor sessions."
 msgstr "Середня тривалість сеансу."
 
-#: bws-google-analytics.php:1037
+#: bws-google-analytics.php:1081
 msgid "The total number of pageviews for your property."
 msgstr ""
 "Загальна кількість сторінок, що були переглянуті відвідувачами, враховуючи "
 "повторні перегляди."
 
-#: bws-google-analytics.php:1040 bws-google-analytics.php:1050
+#: bws-google-analytics.php:1084 bws-google-analytics.php:1094
 msgid "Page Tracking"
 msgstr "Відстеження сторінок"
 
-#: bws-google-analytics.php:1047
+#: bws-google-analytics.php:1091
 msgid ""
 "The average number of pages viewed during a visit to your property. Repeated "
 "views of a single page are counted."
 msgstr ""
 "Середня кількість переглядів сторінок в ході одиничного відвідування сайту, "
 "враховуючи повторні перегляди."
+
+#~ msgid ""
+#~ "If you want Google Analytics by BestWebSoft plugin to work correctly, "
+#~ "please enable JavaScript in your browser!"
+#~ msgstr ""
+#~ "Для коректної роботи плагiну Google Analytics by BestWebSoft, необхiдно "
+#~ "включити у браузерi JavaScript!"
+
+#~ msgid "Deauthorize & Reset Settings"
+#~ msgstr "Скинути налаштування і вийти"
 
 #~ msgid "Network"
 #~ msgstr "Мережеві"

@@ -55,13 +55,11 @@
 	z-index: 100;
 }
 
-
 /* Interaction Cues
 ----------------------------------*/
 .ui-state-disabled {
 	cursor: default !important;
 }
-
 
 /* Icons
 ----------------------------------*/
@@ -73,7 +71,6 @@
 	overflow: hidden;
 	background-repeat: no-repeat;
 }
-
 
 /* Misc visuals
 ----------------------------------*/
@@ -152,7 +149,6 @@ button.ui-button-icon-only {
 button.ui-button-icons-only {
 	width: 3.7em;
 }
-
 /* button text element */
 .ui-button .ui-button-text {
 	display: block;
@@ -182,7 +178,6 @@ button.ui-button-icons-only {
 input.ui-button {
 	padding: .4em 1em;
 }
-
 /* button icon element(s) */
 .ui-button-icon-only .ui-icon,
 .ui-button-text-icon-primary .ui-icon,
@@ -207,7 +202,6 @@ input.ui-button {
 .ui-button-icons-only .ui-button-icon-secondary {
 	right: .5em;
 }
-
 /* button sets */
 .ui-buttonset {
 	margin-right: 7px;
@@ -216,7 +210,6 @@ input.ui-button {
 	margin-left: 0;
 	margin-right: -.3em;
 }
-
 /* workarounds */
 /* reset extra padding in Firefox, see h5bp.com/l */
 input.ui-button::-moz-focus-inner,
@@ -320,7 +313,6 @@ button.ui-button::-moz-focus-inner {
 .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
 	float: left;
 }
-
 /* with multiple calendars */
 .ui-datepicker.ui-datepicker-multi {
 	width: auto;
@@ -487,7 +479,6 @@ button.ui-button::-moz-focus-inner {
 	font-weight: normal;
 	margin: -1px;
 }
-
 .ui-menu .ui-state-disabled {
 	font-weight: normal;
 	margin: .4em 0 .2em;
@@ -496,7 +487,6 @@ button.ui-button::-moz-focus-inner {
 .ui-menu .ui-state-disabled a {
 	cursor: default;
 }
-
 /* icon support */
 .ui-menu-icons {
 	position: relative;
@@ -505,14 +495,12 @@ button.ui-button::-moz-focus-inner {
 	position: relative;
 	padding-left: 2em;
 }
-
 /* left-aligned */
 .ui-menu .ui-icon {
 	position: absolute;
 	top: .2em;
 	left: .2em;
 }
-
 /* right-aligned */
 .ui-menu .ui-menu-icon {
 	position: static;
@@ -628,13 +616,11 @@ button.ui-button::-moz-focus-inner {
 	border: 0;
 	background-position: 0 0;
 }
-
 /* For IE8 - See #6727 */
 .ui-slider.ui-state-disabled .ui-slider-handle,
 .ui-slider.ui-state-disabled .ui-slider-range {
 	filter: inherit;
 }
-
 .ui-slider-horizontal {
 	height: .8em;
 }
@@ -953,7 +939,6 @@ body .ui-tooltip {
 .ui-state-error-text .ui-icon {
 	background-image: url(../images/ui-icons_cd0a0a_256x240.png);
 }
-
 /* positioning */
 .ui-icon-blank { background-position: 16px 16px; }
 .ui-icon-carat-1-n { background-position: 0 0; }
@@ -1131,7 +1116,6 @@ body .ui-tooltip {
 .ui-icon-grip-solid-horizontal { background-position: -48px -224px; }
 .ui-icon-gripsmall-diagonal-se { background-position: -64px -224px; }
 .ui-icon-grip-diagonal-se { background-position: -80px -224px; }
-
 
 /* Misc visuals
 ----------------------------------*/

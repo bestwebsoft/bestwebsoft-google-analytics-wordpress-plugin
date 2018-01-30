@@ -9,7 +9,6 @@
 	 * Content Processing. This functions will be recalled every time user selects new tab.
 	 */
 	function contentProcessing() {
-
 		/*
 		 * functions for "Tracking Code & Reset" tab
 		 */
@@ -125,7 +124,6 @@
 		} );
 	}
 
-
 	/**
 	 * Display statistical data
 	 * @since   1.6.7
@@ -136,8 +134,9 @@
 		make_ajax = 'undefined' ===  typeof make_ajax ? true : make_ajax;
 		var viewMode   = $( 'input[name="gglnltcs_view_mode"]:checked' ).val(),
 			metrics    = $( '.gglnltcs-metrics' );
-		if ( make_ajax )
+		if ( make_ajax ) {
 			$( '#gglnltcs-results-wrapper' ).children().fadeTo( 200, .3 );
+		}
 		if ( ! $( '.gglnltcs-metrics input:checkbox:checked' ).length ) {
 			$( '.gglnltcs-metrics input:checkbox' ).addClass( 'gglnltcs-validation-failed' );
 			displayError( gglnltcsLocalize.metricsValidation );
@@ -166,18 +165,18 @@
 	 * @rerturn void
 	 */
 	function setChartCurves() {
-		var metrics    = $( '#gglnltcs-metrics' ),
-			checkboxes = metrics.find( 'input:checkbox' ),
-			checked    = metrics.find( 'input:checkbox:checked' ),
-			id         = metrics.attr( 'id' ),
+		var metrics     = $( '#gglnltcs-metrics' ),
+			checkboxes  = metrics.find( 'input:checkbox' ),
+			checked     = metrics.find( 'input:checkbox:checked' ),
+			id          = metrics.attr( 'id' ),
 			chartCurves = {
-				'visitors'			: false,
-				'newVisits'			: false,
-				'visits'			: false,
-				'visitBounceRate'	: false,
-				'avgTimeOnSite'	 	: false,
-				'pageviews'		 	: false,
-				'pageviewsPerVisit' : false
+				'users'					: false,
+				'newUsers'				: false,
+				'sessions'				: false,
+				'bounceRate'			: false,
+				'avgSessionDuration'	: false,
+				'pageviews'				: false,
+				'pageviewsPerSession'	: false
 			}, chartSelectedMetric;
 		if ( metrics.length ) {
 			metrics.data( 'chartCurves', chartCurves );
@@ -296,34 +295,34 @@
 				var chartCurves = $( '#gglnltcs-metrics' ).data( 'chartCurves' ),
 					chartRows   = [];
 					chartDate   = data[0];
-				if ( chartCurves.visitors 		   ) { var visitors   = data[1]; }
-				if ( chartCurves.newVisits		   ) { var newVisits  = data[2]; }
-				if ( chartCurves.visits 		   ) { var visits     = data[3]; }
-				if ( chartCurves.visitBounceRate   ) { var bounceRate = data[4]; }
-				if ( chartCurves.avgTimeOnSite 	   ) { var avgTime 	  = data[5]; }
-				if ( chartCurves.pageviews 		   ) { var pageviews  = data[6]; }
-				if ( chartCurves.pageviewsPerVisit ) { var perVisit   = data[7]; }
+				if ( chartCurves.users               ) { var users = data[1];      }
+				if ( chartCurves.newUsers            ) { var newUsers = data[2];   }
+				if ( chartCurves.sessions            ) { var sessions = data[3];   }
+				if ( chartCurves.bounceRate          ) { var bounceRate = data[4]; }
+				if ( chartCurves.avgSessionDuration  ) { var avgSession = data[5]; }
+				if ( chartCurves.pageviews           ) { var pageviews = data[6];  }
+				if ( chartCurves.pageviewsPerSession ) { var perSession = data[7]; }
 
 				var ajaxChart = new google.visualization.DataTable();
 				ajaxChart.addColumn( 'date', 'Date' );
-				if ( chartCurves.visitors   	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartVisitors   ); }
-				if ( chartCurves.newVisits  	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartNewVisits  ); }
-				if ( chartCurves.visits     	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartVisits     ); }
-				if ( chartCurves.visitBounceRate   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartBounceRate ); }
-				if ( chartCurves.avgTimeOnSite     ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartAvgTime    ); }
-				if ( chartCurves.pageviews  	   ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPageviews  ); }
-				if ( chartCurves.pageviewsPerVisit ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPerVisit   ); }
+				if ( chartCurves.users               ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartUsers      ); }
+				if ( chartCurves.newUsers            ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartNewUsers   ); }
+				if ( chartCurves.sessions            ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartSessions   ); }
+				if ( chartCurves.bounceRate          ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartBounceRate ); }
+				if ( chartCurves.avgSessionDuration  ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartAvgSession ); }
+				if ( chartCurves.pageviews           ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPageviews  ); }
+				if ( chartCurves.pageviewsPerSession ) { ajaxChart.addColumn( 'number', gglnltcsLocalize.chartPerSession ); }
 
 				for ( var i = 0; i < chartDate.length; i++ ) {
 					chartRows = [];
 					chartRows.push( new Date( chartDate[i][0], chartDate[i][1] - 1, chartDate[i][2] ) );
-					if ( chartCurves.visitors   	   ) { chartRows.push( parseInt( visitors[i], 10   ) ) }
-					if ( chartCurves.newVisits  	   ) { chartRows.push( parseInt( newVisits[i], 10  ) ) }
-					if ( chartCurves.visits     	   ) { chartRows.push( parseInt( visits[i], 10     ) ) }
-					if ( chartCurves.visitBounceRate   ) { chartRows.push( parseInt( bounceRate[i], 10 ) ) }
-					if ( chartCurves.avgTimeOnSite     ) { chartRows.push( parseInt( avgTime[i], 10    ) ) }
-					if ( chartCurves.pageviews  	   ) { chartRows.push( parseInt( pageviews[i], 10  ) ) }
-					if ( chartCurves.pageviewsPerVisit ) { chartRows.push( parseInt( perVisit[i], 10   ) ) }
+					if ( chartCurves.users               ) { chartRows.push( parseInt( users[i], 10      ) ) }
+					if ( chartCurves.newUsers            ) { chartRows.push( parseInt( newUsers[i], 10   ) ) }
+					if ( chartCurves.sessions            ) { chartRows.push( parseInt( sessions[i], 10   ) ) }
+					if ( chartCurves.bounceRate          ) { chartRows.push( parseInt( bounceRate[i], 10 ) ) }
+					if ( chartCurves.avgSessionDuration  ) { chartRows.push( parseInt( avgSession[i], 10 ) ) }
+					if ( chartCurves.pageviews           ) { chartRows.push( parseInt( pageviews[i], 10  ) ) }
+					if ( chartCurves.pageviewsPerSession ) { chartRows.push( parseInt( perSession[i], 10 ) ) }
 					ajaxChart.addRows( [ chartRows ] );
 				}
 				chartCanvas.parent().html( '<div id="gglnltcs-chart"></div>' );
@@ -358,7 +357,10 @@
 						pointSize: 2,
 						selectionMode : 'multiple',
 						vAxis: {
-							viewWindowMode: 'pretty'
+							viewWindowMode: 'pretty',
+							viewWindow: {
+									min  : 0
+								}
 						}
 					}
 					var chart = new google.visualization.LineChart( document.getElementById('gglnltcs-chart') );

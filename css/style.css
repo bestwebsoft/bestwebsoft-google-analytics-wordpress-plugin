@@ -30,6 +30,7 @@ table.gglnltcs hr:first-of-type {
 .error-message {
 	border: 1px solid rgb(205, 92, 92);
 }
+
 /* Metrics */
 #gglnltcs-metrics {
 	width: auto;
@@ -44,6 +45,7 @@ table.gglnltcs hr:first-of-type {
 #gglnltcs-main-content .bws_help_box {
 	vertical-align: middle;
 }
+
 /* Error Messages and Notes */
 #gglnltcs-start-date.gglnltcs-validation-failed,
 #gglnltcs-end-date.gglnltcs-validation-failed,
@@ -138,13 +140,6 @@ div.ui-datepicker {
 	float: right;
 }
 /* end for arabic language */
-
-#gglnltcs-tracking-id-table-content {
-	padding-left: 0.5%;
-	padding-right: 0.5%;
-	width: 98%;
-	margin-bottom: 20px;
-}
 #gglnltcs-group-by-Y-M-D div {
 	display: inline-block !important;
 }
@@ -336,7 +331,6 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 #ui-datepicker-div {
 	z-index: 2 !important;
 }
-
 ::-webkit-scrollbar {
 	width: 12px;  /* for vertical scrollbars */
 	height: 12px; /* for horizontal scrollbars */
@@ -349,34 +343,29 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 }
 
 /* Loading Circles */
-#gglnltcs-date .gglnltcs-loading-icon,
-#gglnltcs-tracking-code-nav-tab .gglnltcs-loading-icon,
-.gglnltcs-get-statistics-cell .gglnltcs-loading-icon,
-.nav-tab-wrapper .gglnltcs-loading-icon {
+.gglnltcs-loading-icon {
 	background-image: url(../images/loading.gif);
 	background-repeat: no-repeat;
 	background-size: 100%;
-	position: absolute;
-}
-.nav-tab-wrapper .gglnltcs-loading-icon {
 	display: inline-block !important;
 	height: 21px;
-	opacity: 0.7;
 	position: relative;
 	left: 5px;
+	right: 5px;
 	top: 5px;
 	width: 21px;
 	/* for IE6 and IE7 */
 	zoom: 1;
 	*display: inline !important;
 }
-.nav-tab-wrapper .gglnltcs-loading-icon + .gglnltcs-loading-icon {
+.gglnltcs-loading-icon + .gglnltcs-loading-icon {
 	display: none !important;
 }
-#gglnltcs-date .gglnltcs-loading-icon {
-	bottom: 18px;
+#gglnltcs-tracking-code-nav-tab .gglnltcs-loading-icon {
 	height: 21px;
-	left: 330px;
+	opacity: 0.7;
+	right: -38px;
+	top: 13%;
 	width: 21px;
 }
 .rtl #gglnltcs-date .gglnltcs-loading-icon {
@@ -479,6 +468,7 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 		position: absolute;
 	}
 	#gglnltcs-group-by-Y-M-D span {
+		display: block;
 		padding-top: 8px;
 	}
 	.wp-core-ui .button-primary,
