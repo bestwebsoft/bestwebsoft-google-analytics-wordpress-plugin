@@ -220,6 +220,10 @@ div.ui-datepicker {
 .gglnltcs-results .gglnltcs-bad-results {
 	position: relative;
 }
+.gglnltcs-select {
+	min-width: 55%;
+	max-width: 60%;
+}
 p.gglnltcs-select-wrapper {
 	position: relative;
 }

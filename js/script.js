@@ -37,7 +37,7 @@
 		 * Add Datepicker
 		 */
 		var dateInput = $( '#gglnltcs-start-date, #gglnltcs-end-date' );
-		dateInput.on( 'change', function() {
+		dateInput.on( 'change blur', function() {
 			var dateValue = $( this ).val(),
 				startDateInput = $( '#gglnltcs-start-date' ),
 				endDateInput   = $( '#gglnltcs-end-date' ),
@@ -266,7 +266,7 @@
 
 	/* Ajax Function To Build The Line Chart When User Clicks "Get Statisics" Button */
 	function ajaxBuildLineChart( url ) {
-		var settings      = $( '#gglnltcs-main-form' ).serialize(),
+		var settings      = $( '.bws_form' ).serialize(),
 			toDisable     = $( '.gglnltcs_to_disable' ).attr( 'disabled', true ),
 			loadingCircle = $( '<div>', { 'class': 'gglnltcs-loading-icon' } ).hide().insertAfter( '#gglnltcs-get-statistics-button' ).fadeIn( 500 ),
 			chartCanvas   = $( '#gglnltcs-results-wrapper' ).children(),
@@ -374,6 +374,12 @@
 						drawChart( ajaxChart );
 					}
 				} );
+				$( '.bws-tab-statistics' ).on( 'click', function() {
+					if ( $( this ).width() != width ) {
+						width = $( this ).width();
+						drawChart( ajaxChart );
+					}
+				} )
 				$( '#gglnltcs-results-wrapper' ).css('height', 'auto');
 			} catch ( errorInAjax ) {
 				displayError( gglnltcsLocalize.ajaxApiError + '<br/>' + errorInAjax );
@@ -387,7 +393,7 @@
 
 	/* Ajax Function To Build The Table With Results When User Clicks "Get Statisics" Button */
 	function ajaxBuildTableChart( url ) {
-		var settings      = $( '#gglnltcs-main-form' ).serialize(),
+		var settings      = $( '.bws_form' ).serialize(),
 			toDisable     = $( '.gglnltcs_to_disable' ).attr( 'disabled', true ),
 			loadingCircle = $( '<div>', { 'class': 'gglnltcs-loading-icon' } ).hide().insertAfter( '#gglnltcs-get-statistics-button' ).fadeIn( 500 ),
 			tableWrapper  = $( '#gglnltcs-results-wrapper' ),

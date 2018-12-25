@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add tracking code, analytics, display statistic report, google analytics, google analytics plugin, google analytics stats, group statistics, metrics, page views, visit duration, tracking, web properties
 Requires at least: 3.9
-Tested up to: 4.9.2
-Stable tag: 1.7.3
+Tested up to: 5.0.2
+Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 
 == Changelog ==
 
+= V1.7.4 - 25.12.2018 =
+* Update : The plugin settings page has been updated.
+
 = V1.7.3 - 30.01.2018 =
 * Update : Google Analytics API Client library has been updated to version 2.2.1.
 
@@ -224,6 +227,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.7.4 =
+* Appearance improved.
 
 = V1.7.3 =
 * Update : We updated Google Analytics API Client library.
