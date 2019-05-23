@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bws-google-analytics-pro\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-04 17:20+0200\n"
+"POT-Creation-Date: 2019-05-20 15:25+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
 "Language-Team: bestwebsoft <plugin@bestwebsoft.com>\n"
@@ -12,12 +12,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: _e;__\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: bws-google-analytics.php:39 bws-google-analytics.php:48
-#: bws-google-analytics.php:183 includes/class-gglnltcs-settings.php:89
+#: bws-google-analytics.php:183 includes/class-gglnltcs-settings.php:101
 msgid "Google Analytics Settings"
 msgstr "Налаштування Google Analytics"
 
@@ -38,7 +38,7 @@ msgstr "FAQ"
 msgid "Support"
 msgstr "Підтримка"
 
-#: bws-google-analytics.php:256 includes/class-gglnltcs-settings.php:272
+#: bws-google-analytics.php:256 includes/class-gglnltcs-settings.php:329
 #, php-format
 msgid "Date values must match the pattern %s."
 msgstr "Дата має бути у вигляді %s."
@@ -51,32 +51,32 @@ msgstr "Необхідно вибрати хоча б один показник"
 msgid "Invalid Date Range."
 msgstr "Невірний часовий діапазон."
 
-#: bws-google-analytics.php:259 bws-google-analytics.php:705
+#: bws-google-analytics.php:259 bws-google-analytics.php:706
 msgid "Unique Visitors"
 msgstr "Кількість унікальних відвідувачів"
 
-#: bws-google-analytics.php:260 bws-google-analytics.php:715
+#: bws-google-analytics.php:260 bws-google-analytics.php:716
 msgid "New Visits"
 msgstr "Нові відвідування"
 
-#: bws-google-analytics.php:261 bws-google-analytics.php:726
+#: bws-google-analytics.php:261 bws-google-analytics.php:727
 #: includes/pro_banners.php:38
 msgid "Visits"
 msgstr "Відвідування"
 
-#: bws-google-analytics.php:262 bws-google-analytics.php:736
+#: bws-google-analytics.php:262 bws-google-analytics.php:737
 msgid "Bounce Rate"
 msgstr "Показник відмов"
 
-#: bws-google-analytics.php:263 bws-google-analytics.php:746
+#: bws-google-analytics.php:263 bws-google-analytics.php:747
 msgid "Average Visit Duration"
 msgstr "Середня тривалість відвідувань"
 
-#: bws-google-analytics.php:264 bws-google-analytics.php:757
+#: bws-google-analytics.php:264 bws-google-analytics.php:758
 msgid "Pageviews"
 msgstr "Перегляди сторінок"
 
-#: bws-google-analytics.php:265 bws-google-analytics.php:767
+#: bws-google-analytics.php:265 bws-google-analytics.php:768
 msgid "Pages / Visit"
 msgstr "Кількість переглянутих сторінок за сеанс "
 
@@ -96,13 +96,13 @@ msgstr "Виникла помилка сервісу API Analytics"
 msgid "There was a general API error"
 msgstr "Виникла помилка"
 
-#: bws-google-analytics.php:404 includes/class-gglnltcs-settings.php:161
-#: includes/class-gglnltcs-settings.php:314
+#: bws-google-analytics.php:404 includes/class-gglnltcs-settings.php:217
+#: includes/class-gglnltcs-settings.php:375
 msgid "Deauthorize"
 msgstr "Скинути налаштування"
 
-#: bws-google-analytics.php:408 includes/class-gglnltcs-settings.php:163
-#: includes/class-gglnltcs-settings.php:316
+#: bws-google-analytics.php:408 includes/class-gglnltcs-settings.php:219
+#: includes/class-gglnltcs-settings.php:377
 msgid "Log Out"
 msgstr "Вийти"
 
@@ -126,54 +126,54 @@ msgstr "зареєструватись для Google Analytics"
 msgid "and create an Analytics account"
 msgstr "і створити акаунт в Analytics"
 
-#: bws-google-analytics.php:435 includes/class-gglnltcs-settings.php:108
+#: bws-google-analytics.php:435 includes/class-gglnltcs-settings.php:120
 msgid "To enable tracking and collect statistic from your site please"
 msgstr ""
 "Якщо ви хочете увімкнути відстеження і отримувати статистику з  Вашого "
 "сайту, будь-ласка"
 
-#: bws-google-analytics.php:437 includes/class-gglnltcs-settings.php:110
+#: bws-google-analytics.php:437 includes/class-gglnltcs-settings.php:122
 msgid "sign in"
 msgstr "увiйдiть"
 
-#: bws-google-analytics.php:437 includes/class-gglnltcs-settings.php:110
+#: bws-google-analytics.php:437 includes/class-gglnltcs-settings.php:122
 msgid "to your Google Analytics account"
 msgstr "до Вашого акаунту на Google Analytics"
 
-#: bws-google-analytics.php:438 includes/class-gglnltcs-settings.php:111
+#: bws-google-analytics.php:438 includes/class-gglnltcs-settings.php:123
 msgid "copy your tracking ID and paste it to the \"Tracking ID\" text field"
 msgstr ""
 "скопіюйте ваш ідентифікатор відстеження в текстове поле \"Tracking ID\""
 
-#: bws-google-analytics.php:439 includes/class-gglnltcs-settings.php:112
+#: bws-google-analytics.php:439 includes/class-gglnltcs-settings.php:124
 msgid "mark \"Add tracking code to blog\" chexbox"
 msgstr "відзначте опцію \"Додати код відстеження в блог\""
 
-#: bws-google-analytics.php:440 includes/class-gglnltcs-settings.php:113
+#: bws-google-analytics.php:440 includes/class-gglnltcs-settings.php:125
 msgid "save changes"
 msgstr "збережіть зміни"
 
-#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:115
+#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:127
 msgid "For more info see"
 msgstr "Більш детальну інформацію дивіться тут"
 
-#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:115
+#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:127
 msgid "Add an account"
 msgstr "Додавання облікового запису"
 
-#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:115
+#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:127
 msgid "Set up a property"
 msgstr "Налаштування ресурсу"
 
-#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:115
+#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:127
 msgid "Find your tracking code, tracking ID, and property number"
 msgstr "Пошук коду й ідентифікатора відстеження та номера ресурсу"
 
-#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:115
+#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:127
 msgid "Google Analytics Help Center"
 msgstr "Довідковий центр Google Analytics"
 
-#: bws-google-analytics.php:448 includes/class-gglnltcs-settings.php:121
+#: bws-google-analytics.php:448 includes/class-gglnltcs-settings.php:133
 msgid "Add tracking code to blog"
 msgstr "Додати код відстеження на блог"
 
@@ -253,30 +253,30 @@ msgstr "Груд"
 msgid "No results found"
 msgstr "Результатів не знайдено"
 
-#: bws-google-analytics.php:703
+#: bws-google-analytics.php:704
 msgid "Total number of visitors for the requested time period."
 msgstr "Загальна кількість відвідувачів за вибраний період часу"
 
-#: bws-google-analytics.php:706 bws-google-analytics.php:716
+#: bws-google-analytics.php:707 bws-google-analytics.php:717
 msgid "Visitor"
 msgstr "Відвідувач"
 
-#: bws-google-analytics.php:713
+#: bws-google-analytics.php:714
 msgid ""
 "The number of visitors whose visit to your property was marked as a first-"
 "time visit."
 msgstr "Кількість унікальних відвідувачів."
 
-#: bws-google-analytics.php:724
+#: bws-google-analytics.php:725
 msgid "Counts the total number of sessions."
 msgstr "Підраховує загальну кількість сеансів."
 
-#: bws-google-analytics.php:727 bws-google-analytics.php:737
-#: bws-google-analytics.php:747
+#: bws-google-analytics.php:728 bws-google-analytics.php:738
+#: bws-google-analytics.php:748
 msgid "Session"
 msgstr "Сеанс"
 
-#: bws-google-analytics.php:734
+#: bws-google-analytics.php:735
 msgid ""
 "The percentage of single-page visits (i.e., visits in which the person left "
 "your property from the first page)."
@@ -285,21 +285,21 @@ msgstr ""
 "більше однієї сторінки, тобто коли відвідувач покидає сайт відразу після "
 "сторінки входу. "
 
-#: bws-google-analytics.php:744
+#: bws-google-analytics.php:745
 msgid "The average duration visitor sessions."
 msgstr "Середня тривалість сеансу."
 
-#: bws-google-analytics.php:755
+#: bws-google-analytics.php:756
 msgid "The total number of pageviews for your property."
 msgstr ""
 "Загальна кількість сторінок, що були переглянуті відвідувачами, враховуючи "
 "повторні перегляди."
 
-#: bws-google-analytics.php:758 bws-google-analytics.php:768
+#: bws-google-analytics.php:759 bws-google-analytics.php:769
 msgid "Page Tracking"
 msgstr "Відстеження сторінок"
 
-#: bws-google-analytics.php:765
+#: bws-google-analytics.php:766
 msgid ""
 "The average number of pages viewed during a visit to your property. Repeated "
 "views of a single page are counted."
@@ -323,15 +323,15 @@ msgstr "Користувацький код"
 msgid "Licence Key"
 msgstr "Ліцензійний ключ"
 
-#: includes/class-gglnltcs-settings.php:83
+#: includes/class-gglnltcs-settings.php:95
 msgid "Settings saved"
 msgstr "Налаштування збережено."
 
-#: includes/class-gglnltcs-settings.php:92
+#: includes/class-gglnltcs-settings.php:104
 msgid "Authentication"
 msgstr "Авторизація"
 
-#: includes/class-gglnltcs-settings.php:98
+#: includes/class-gglnltcs-settings.php:110
 msgid ""
 "To enable tracking and collect statistic from your site enter Tracking ID on "
 "the settings page"
@@ -339,30 +339,120 @@ msgstr ""
 "Щоб увімкнути відстеження та збір статистики з вашого сайту, введітьTracking "
 "ID на сторінці налаштувань"
 
-#: includes/class-gglnltcs-settings.php:131
+#: includes/class-gglnltcs-settings.php:140
+msgid "Client ID"
+msgstr "Ідентифікатор"
+
+#: includes/class-gglnltcs-settings.php:142
+msgid "To get authorized with your google account please"
+msgstr "Щоб авторизуватися за допомогою вашого Google аккаунта, будь ласка"
+
+#: includes/class-gglnltcs-settings.php:144
+#, php-format
+msgid "%s Open the %s Google API Console Credentials %s page. %s"
+msgstr "%s Відкрийте сторінку %s Облікові дані в Google API Console. %s %s"
+
+#: includes/class-gglnltcs-settings.php:145
+#, php-format
+msgid ""
+"%s Click %s Select a project%s, then %s NEW PROJECT%s, and enter a name for "
+"the project, and optionally, edit the provided project ID. Click %s Create. "
+"%s"
+msgstr ""
+"%s В меню проектів, що розкривається, виберіть %s Створити проект%s, потім "
+"вкажіть назву проекту і при необхідності змініть його ідентифікатор%s%s, "
+"після чого натисніть кнопку %s Створити. %s"
+
+#: includes/class-gglnltcs-settings.php:146
+#, php-format
+msgid ""
+"%s On the Credentials page, select %s Create credentials%s, then %s OAuth "
+"client ID. %s"
+msgstr ""
+"%s На сторінці \"Облікові дані\" виберіть %s Створити облікові дані%s, а "
+"потім %s Ідентифікатор клієнта OAuth. %s"
+
+#: includes/class-gglnltcs-settings.php:147
+#, php-format
+msgid ""
+"%s You may be prompted to set a product name on the Consent screen; if so, "
+"click %s Configure consent screen%s, supply the requested information, and "
+"click %s Save %s to return to the Credentials screen. %s"
+msgstr ""
+"%s Вам може бути запропоновано вказати назву продукту. В цьому випадку "
+"натисніть %s Настроїти вікно запиту доступу%s, вкажіть потрібну інформацію і "
+"натисніть %s Зберегти %s щоб повернутися до екрану \"Облікові дані\". %s"
+
+#: includes/class-gglnltcs-settings.php:148
+#, php-format
+msgid ""
+"%s Select %s Other %s for the %s Application type %s and enter any "
+"additional information required. %s"
+msgstr ""
+"%s В розділі %s Тип додатка %s виберіть %s Інші типи %s та вкажіть необхідну "
+"інформацію. %s"
+
+#: includes/class-gglnltcs-settings.php:149
+#, php-format
+msgid "%s Click %s Create. %s %s"
+msgstr "%s Натисніть %s Створити. %s %s"
+
+#: includes/class-gglnltcs-settings.php:150
+#, php-format
+msgid ""
+"%s On the page that appears, copy the %s client ID %s and %s client secret "
+"%s to your clipboard, as you will need them when you configure your client "
+"library. %s"
+msgstr ""
+"%s На сторінці, що з'явилася, скопіюйте %s ідентифікатор %s і %s секретний "
+"ключ %s клієнта - вони знадобляться вам при налаштуванні клієнтської "
+"бібліотеки. %s"
+
+#: includes/class-gglnltcs-settings.php:152
+#, php-format
+msgid "For more info see %s OAuth2 Authentication %s"
+msgstr "Щоб дізнатися більше відвідаєте %s Аутентифікація OAuth2 %s"
+
+#: includes/class-gglnltcs-settings.php:163
+msgid "Client Secret"
+msgstr "Секретний ключ"
+
+#: includes/class-gglnltcs-settings.php:171
+msgid "API key"
+msgstr "API ключ"
+
+#: includes/class-gglnltcs-settings.php:175
+msgid "Optional"
+msgstr "Не обов'язково"
+
+#: includes/class-gglnltcs-settings.php:185
 msgid "Google Analytics Statistics"
 msgstr "Статистика Google Analytics"
 
-#: includes/class-gglnltcs-settings.php:148
+#: includes/class-gglnltcs-settings.php:204
+#: includes/class-gglnltcs-settings.php:367
 msgid "Warning: "
 msgstr "Увага:"
 
-#: includes/class-gglnltcs-settings.php:149
+#: includes/class-gglnltcs-settings.php:205
+#: includes/class-gglnltcs-settings.php:368
 msgid ""
 "Authentication Token expired. Authenticate with your Google Account once "
 "again."
 msgstr "Код авторизації сплив. Авторизуйтесь знов."
 
-#: includes/class-gglnltcs-settings.php:169
-#: includes/class-gglnltcs-settings.php:294
+#: includes/class-gglnltcs-settings.php:225
+#: includes/class-gglnltcs-settings.php:351
 msgid "Get Statistic"
 msgstr "Отримати статистику"
 
-#: includes/class-gglnltcs-settings.php:188
+#: includes/class-gglnltcs-settings.php:245
+#: includes/class-gglnltcs-settings.php:394
 msgid "Invalid code. Please, try again"
 msgstr "Невірний код. Будь ласка, спробуйте ще раз"
 
-#: includes/class-gglnltcs-settings.php:192
+#: includes/class-gglnltcs-settings.php:249
+#: includes/class-gglnltcs-settings.php:398
 msgid ""
 "In order to use Google Analytics by BestWebSoft plugin, you must be signed "
 "in with a registered Google Account email address and password. If you don't "
@@ -371,78 +461,78 @@ msgstr ""
 "Щоб використовувати плагін Google Analytics by BestWebSoft, ви маєте зайти в "
 "свій акаунт Google. Якщо у вас немає акаунта Google, ви можете створити його"
 
-#: includes/class-gglnltcs-settings.php:194
+#: includes/class-gglnltcs-settings.php:251
+#: includes/class-gglnltcs-settings.php:400
 msgid "here"
 msgstr "тут"
 
-#: includes/class-gglnltcs-settings.php:197
+#: includes/class-gglnltcs-settings.php:254
+#: includes/class-gglnltcs-settings.php:403
 msgid "Authenticate with your Google Account"
 msgstr "Аутентифікація з аккаунтом Google"
 
-#: includes/class-gglnltcs-settings.php:201
+#: includes/class-gglnltcs-settings.php:258
+#: includes/class-gglnltcs-settings.php:407
 msgid "Or Click Here If You Have Disabled Javascript"
 msgstr "Або клікніть сюди, якщо у вас вимкнений Javascript"
 
-#: includes/class-gglnltcs-settings.php:204
+#: includes/class-gglnltcs-settings.php:261
+#: includes/class-gglnltcs-settings.php:410
 msgid ""
 "When you finish authorization process you will get Google Authentication "
-"Code. You must enter this code in the field below and press \"Start Plugin\" "
+"Code. You must enter this code in the field below and press \"Save Changes\" "
 "button. This code will be used to get an Authentication Token so you can "
 "access your website stats."
 msgstr ""
 "Після завершення процесу авторизації, ви отримаєте код. Вставте цей код в "
-"поле нижче та натисніть \"Вперед\"."
+"поле нижче та натисніть \"Зберегти\".sad"
 
-#: includes/class-gglnltcs-settings.php:236
+#: includes/class-gglnltcs-settings.php:293
 msgid "Accounts"
 msgstr "Акаунти"
 
-#: includes/class-gglnltcs-settings.php:249
-#: includes/class-gglnltcs-settings.php:347 includes/pro_banners.php:15
+#: includes/class-gglnltcs-settings.php:306
+#: includes/class-gglnltcs-settings.php:441 includes/pro_banners.php:15
 msgid "Close"
 msgstr "Закрити"
 
-#: includes/class-gglnltcs-settings.php:256
+#: includes/class-gglnltcs-settings.php:313
 msgid "Metrics"
 msgstr "Показники"
 
-#: includes/class-gglnltcs-settings.php:261
+#: includes/class-gglnltcs-settings.php:318
 msgid "Time range"
 msgstr "Період часу"
 
-#: includes/class-gglnltcs-settings.php:264
+#: includes/class-gglnltcs-settings.php:321
 msgid "From"
 msgstr "З"
 
-#: includes/class-gglnltcs-settings.php:268
+#: includes/class-gglnltcs-settings.php:325
 msgid "to"
 msgstr "по"
 
-#: includes/class-gglnltcs-settings.php:274
+#: includes/class-gglnltcs-settings.php:331
 msgid "The gap between dates must not be more than 999 days."
 msgstr "Різниця між датами не повинна перевищувати 999 днів."
 
-#: includes/class-gglnltcs-settings.php:279
+#: includes/class-gglnltcs-settings.php:336
 msgid "View mode"
 msgstr "Режим перегляду"
 
-#: includes/class-gglnltcs-settings.php:283
+#: includes/class-gglnltcs-settings.php:340
 msgid "Line chart"
 msgstr "Лінійний графік"
 
-#: includes/class-gglnltcs-settings.php:287
+#: includes/class-gglnltcs-settings.php:344
 msgid "Table"
 msgstr "Таблиця"
 
-#: includes/class-gglnltcs-settings.php:307
+#: includes/class-gglnltcs-settings.php:364
 msgid "There was an API error"
 msgstr "Виникла помилка"
 
-#: includes/class-gglnltcs-settings.php:309
-msgid "There was an error"
-msgstr "Помилка."
-
-#: includes/class-gglnltcs-settings.php:331
+#: includes/class-gglnltcs-settings.php:425
 msgid "Please enable JavaScript in your browser."
 msgstr "Будь ласка, увімкніть JavaScript у вашому браузері."
 
@@ -457,6 +547,9 @@ msgstr "Звіти"
 #: includes/pro_banners.php:39
 msgid "Goals"
 msgstr "Цілі"
+
+#~ msgid "There was an error"
+#~ msgstr "Помилка."
 
 #~ msgid ""
 #~ "Tracking code is empty. You must enter a tracking code to add it to your "
@@ -907,9 +1000,6 @@ msgstr "Цілі"
 
 #~ msgid "Select"
 #~ msgstr "Виберіть"
-
-#~ msgid "option"
-#~ msgstr "опція"
 
 #~ msgid "Select a tracking method. Click either"
 #~ msgstr "Виберіть метод відстеження. Клікніть або"

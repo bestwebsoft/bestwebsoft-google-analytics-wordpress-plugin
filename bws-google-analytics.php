@@ -6,12 +6,12 @@ Description: Add Google Analytics code to WordPress website and track basic stat
 Author: BestWebSoft
 Text Domain: bws-google-analytics
 Domain Path: /languages
-Version: 1.7.4
+Version: 1.7.5
 Author URI: https://bestwebsoft.com/
 License: GPLv2 or later
 */
 
-/*  © Copyright 2018  BestWebSoft  ( https://support.bestwebsoft.com )
+/*  © Copyright 2019  BestWebSoft  ( https://support.bestwebsoft.com )
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as
@@ -120,6 +120,9 @@ if ( ! function_exists( 'gglnltcs_default_options' ) ) {
 		$gglnltcs_default_options = array(
 			'plugin_option_version'		=> $gglnltcs_plugin_info["Version"],
 			'tracking_id'				=> '',
+            'client_id'				    => '',
+            'client_secret'             => '',
+            'api_key'                   => '',
 			'add_tracking_code'			=> 1,
 			'display_settings_notice'	=> 1,
 			'first_install'				=> strtotime( "now" ),

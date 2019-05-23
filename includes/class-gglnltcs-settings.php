@@ -39,8 +39,8 @@ if ( ! class_exists( 'Gglnltcs_Settings_Tabs' ) ) {
 				'is_network_options' => is_network_admin(),
 				'tabs' 				 => $tabs,
 				'wp_slug'			 => 'bws-google-analytics',
-                'pro_page'          => 'admin.php?page=bws-google-analytics-pro.php',
-                'bws_license_plugin' => 'bws-google-analytics-pro/bws-google-analytics-pro.php',
+                'pro_page'          => 'admin.php?page=bws-google-analytics.php',
+                'bws_license_plugin' => 'bws-google-analytics/bws-google-analytics.php',
                 'link_key'          => '0ceb29947727cb6b38a01b29102661a3',
                 'link_pn' => '125'
 			) );
@@ -73,6 +73,18 @@ if ( ! class_exists( 'Gglnltcs_Settings_Tabs' ) ) {
 			if ( isset( $_POST['gglnltcs_tracking_id'] ) && ! isset( $_POST['gglnltcs_add_tracking_code'] ) ) {
 			    $this->options['tracking_id'] = trim( stripslashes( esc_html( $_POST['gglnltcs_tracking_id'] ) ) );
 			    $this->options['add_tracking_code'] = 0;
+            }
+            // save client id
+            if ( isset( $_POST['gglnltcs_client_id'] ) ) {
+                $this->options['client_id'] = trim( stripslashes( esc_html( $_POST['gglnltcs_client_id'] ) ) );
+            }
+            // save client secret
+            if ( isset( $_POST['gglnltcs_client_secret'] ) ) {
+                $this->options['client_secret'] = trim( stripslashes( esc_html( $_POST['gglnltcs_client_secret'] ) ) );
+            }
+            // save API key
+            if ( isset( $_POST['gglnltcs_api_key'] ) ) {
+                $this->options['api_key'] = trim( stripslashes( esc_html( $_POST['gglnltcs_api_key'] ) ) );
             }
 			if ( isset( $_POST['gglnltcs_log_out'] ) ) {
 			    unset( $this->options['token'] );
@@ -119,6 +131,48 @@ if ( ! class_exists( 'Gglnltcs_Settings_Tabs' ) ) {
                                 <input type="text" name="gglnltcs_tracking_id" value="<?php echo $tracking_id; ?>" />
                                 <br />
                                 <label><input id='gglnltcs-add-tracking-code-input' type="checkbox" name="gglnltcs_add_tracking_code" value="1" <?php if ( isset( $this->options['add_tracking_code'] ) && 1 == $this->options['add_tracking_code'] ) echo 'checked="checked"'; ?> /><?php _e( 'Add tracking code to blog', 'bws-google-analytics' ) ?></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <?php
+
+                                _e( 'Client ID', 'bws-google-analytics' );
+
+                                $content =  __( 'To get authorized with your google account please', 'bws-google-analytics' ) . ':<br/>';
+                                $content .= '<ol>';
+                                $content .= sprintf( __( '%s Open the %s Google API Console Credentials %s page. %s', 'bws-google-analytics' ), '<li>', '<a href="https://console.developers.google.com/apis/credentials" target="_blank">', '</a>', '</li>' );
+                                $content .= sprintf( __( '%s Click %s Select a project%s, then %s NEW PROJECT%s, and enter a name for the project, and optionally, edit the provided project ID. Click %s Create. %s', 'bws-google-analytics' ), '<li>', '<strong>', '</strong>', '<strong>', '</strong>', '<strong>', '</strong>', '</li>' );
+                                $content .= sprintf( __( '%s On the Credentials page, select %s Create credentials%s, then %s OAuth client ID. %s', 'bws-google-analytics' ), '<li>', '<strong>', '</strong>', '<strong>', '</strong>', '</li>' );
+                                $content .= sprintf( __( '%s You may be prompted to set a product name on the Consent screen; if so, click %s Configure consent screen%s, supply the requested information, and click %s Save %s to return to the Credentials screen. %s', 'bws-google-analytics' ), '<li>', '<strong>', '</strong>', '<strong>', '</strong>', '</li>' );
+                                $content .= sprintf( __( '%s Select %s Other %s for the %s Application type %s and enter any additional information required. %s', 'bws-google-analytics' ), '<li>', '<strong>', '</strong>', '<strong>', '</strong>', '</li>' );
+                                $content .= sprintf( __( '%s Click %s Create. %s %s', 'bws-google-analytics' ), '<li>', '<strong>', '</strong>', '</li>' );
+                                $content .= sprintf( __( '%s On the page that appears, copy the %s client ID %s and %s client secret %s to your clipboard, as you will need them when you configure your client library. %s', 'bws-google-analytics' ), '<li>', '<strong>', '</strong>', '<strong>', '</strong>', '</li>' );
+                                $content .= '</ol>';
+                                $content .= sprintf( __( 'For more info see %s OAuth2 Authentication %s', 'bws-google-analytics' ), '<a href="https://developers.google.com/adwords/api/docs/guides/authentication" target="_blank">', '</a>' );
+
+                                echo bws_add_help_box( $content );
+                                ?>
+                            </th>
+                            <td>
+                                <input<?php echo $this->change_permission_attr; ?> type="text" maxlength="100" name="gglnltcs_client_id" value="<?php echo array_key_exists( 'client_id', $this->options ) ? $this->options['client_id'] : ''; ?>" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <?php _e( 'Client Secret', 'bws-google-analytics' ); ?>
+                            </th>
+                            <td>
+                                <input<?php echo $this->change_permission_attr; ?> type="text" maxlength="100" name="gglnltcs_client_secret" value="<?php echo array_key_exists( 'client_secret', $this->options ) ? $this->options['client_secret'] : ''; ?>" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <?php _e( 'API key', 'bws-google-analytics' ); ?>
+                            </th>
+                            <td>
+                                <input<?php echo $this->change_permission_attr; ?> type="text" maxlength="100" name="gglnltcs_api_key" value="<?php echo array_key_exists( 'api_key', $this->options ) ? $this->options['api_key'] : ''; ?>" />
+                                <span class="bws_info"><?php _e( 'Optional', 'bws-google-analytics' ); ?></span>
                             </td>
                         </tr>
                     </table>
@@ -204,7 +258,7 @@ if ( ! class_exists( 'Gglnltcs_Settings_Tabs' ) ) {
                                    target="_blanket"><?php _e( 'Or Click Here If You Have Disabled Javascript', 'bws-google-analytics' ); ?></a>
                             </div>
                         </noscript>
-                        <p class="gglnltcs-authentication-instructions"><?php _e( 'When you finish authorization process you will get Google Authentication Code. You must enter this code in the field below and press "Start Plugin" button. This code will be used to get an Authentication Token so you can access your website stats.', 'bws-google-analytics' ); ?></p>
+                        <p class="gglnltcs-authentication-instructions"><?php _e( 'When you finish authorization process you will get Google Authentication Code. You must enter this code in the field below and press "Save Changes" button. This code will be used to get an Authentication Token so you can access your website stats.', 'bws-google-analytics' ); ?></p>
                             <p><input id="gglnltcs-authentication-code-input" type="text"
                               name="code" <?php echo $disabled; ?>>
                             </p>
@@ -353,7 +407,7 @@ if ( ! class_exists( 'Gglnltcs_Settings_Tabs' ) ) {
                                target="_blanket"><?php _e( 'Or Click Here If You Have Disabled Javascript', 'bws-google-analytics' ); ?></a>
                         </div>
                     </noscript>
-                    <p class="gglnltcs-authentication-instructions"><?php _e( 'When you finish authorization process you will get Google Authentication Code. You must enter this code in the field below and press "Start Plugin" button. This code will be used to get an Authentication Token so you can access your website stats.', 'bws-google-analytics' ); ?></p>
+                    <p class="gglnltcs-authentication-instructions"><?php _e( 'When you finish authorization process you will get Google Authentication Code. You must enter this code in the field below and press "Save Changes" button. This code will be used to get an Authentication Token so you can access your website stats.', 'bws-google-analytics' ); ?></p>
                     <p><input id="gglnltcs-authentication-code-input" type="text"
                               name="code" <?php echo $disabled; ?>>
                     </p>

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bws-google-analytics\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-10 13:22+0200\n"
+"POT-Creation-Date: 2019-05-20 15:22+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: bestwebsoft.com <plugins@bestwebsoft.com>\n"
 "Language-Team: bestwebsoft <plugin@bestwebsoft.com>\n"
@@ -12,12 +12,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: _e;__;_ex;_x\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: bws-google-analytics.php:39 bws-google-analytics.php:48
-#: bws-google-analytics.php:183 includes/class-gglnltcs-settings.php:89
+#: bws-google-analytics.php:183 includes/class-gglnltcs-settings.php:101
 msgid "Google Analytics Settings"
 msgstr "Google Analytics настройки"
 
@@ -38,7 +38,7 @@ msgstr "FAQ"
 msgid "Support"
 msgstr "Поддержка"
 
-#: bws-google-analytics.php:256 includes/class-gglnltcs-settings.php:275
+#: bws-google-analytics.php:256 includes/class-gglnltcs-settings.php:329
 #, php-format
 msgid "Date values must match the pattern %s."
 msgstr "Дата должна соответствовать шаблону %s."
@@ -96,13 +96,13 @@ msgstr "Произошла ошибка  сервиса API Analytics"
 msgid "There was a general API error"
 msgstr "Произошла ошибка"
 
-#: bws-google-analytics.php:404 includes/class-gglnltcs-settings.php:163
-#: includes/class-gglnltcs-settings.php:321
+#: bws-google-analytics.php:404 includes/class-gglnltcs-settings.php:217
+#: includes/class-gglnltcs-settings.php:375
 msgid "Deauthorize"
 msgstr "Cбросить настройки"
 
-#: bws-google-analytics.php:408 includes/class-gglnltcs-settings.php:165
-#: includes/class-gglnltcs-settings.php:323
+#: bws-google-analytics.php:408 includes/class-gglnltcs-settings.php:219
+#: includes/class-gglnltcs-settings.php:377
 msgid "Log Out"
 msgstr "Выйти"
 
@@ -126,55 +126,55 @@ msgstr "зарегистрироваться в Google Analytics"
 msgid "and create an Analytics account"
 msgstr "и создать Analytics account"
 
-#: bws-google-analytics.php:435 includes/class-gglnltcs-settings.php:108
+#: bws-google-analytics.php:435 includes/class-gglnltcs-settings.php:120
 msgid "To enable tracking and collect statistic from your site please"
 msgstr ""
 "Если вы хотите включить отслеживание вашего блога и просматривать статистику "
 "Вашего сайта, пожалуйста"
 
-#: bws-google-analytics.php:437 includes/class-gglnltcs-settings.php:110
+#: bws-google-analytics.php:437 includes/class-gglnltcs-settings.php:122
 msgid "sign in"
 msgstr "войдите"
 
-#: bws-google-analytics.php:437 includes/class-gglnltcs-settings.php:110
+#: bws-google-analytics.php:437 includes/class-gglnltcs-settings.php:122
 msgid "to your Google Analytics account"
 msgstr "в ваш Google Analytics аккаунт"
 
-#: bws-google-analytics.php:438 includes/class-gglnltcs-settings.php:111
+#: bws-google-analytics.php:438 includes/class-gglnltcs-settings.php:123
 msgid "copy your tracking ID and paste it to the \"Tracking ID\" text field"
 msgstr ""
 "скопируйте Ваш идентификатор отслеживания и вставьте его в текстовое поле "
 "\"Tracking ID\""
 
-#: bws-google-analytics.php:439 includes/class-gglnltcs-settings.php:112
+#: bws-google-analytics.php:439 includes/class-gglnltcs-settings.php:124
 msgid "mark \"Add tracking code to blog\" chexbox"
 msgstr "отметьте опцию \"Добавить код отслеживания в блог\""
 
-#: bws-google-analytics.php:440 includes/class-gglnltcs-settings.php:113
+#: bws-google-analytics.php:440 includes/class-gglnltcs-settings.php:125
 msgid "save changes"
 msgstr "сохраните изменения"
 
-#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:115
+#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:127
 msgid "For more info see"
 msgstr "Более подробную информацию Вы можете найти здесь"
 
-#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:115
+#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:127
 msgid "Add an account"
 msgstr "Как добавить аккаунт"
 
-#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:115
+#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:127
 msgid "Set up a property"
 msgstr "Настройка ресурса"
 
-#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:115
+#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:127
 msgid "Find your tracking code, tracking ID, and property number"
 msgstr "Как найти код отслеживания, идентификатор отслеживания и номер ресурса"
 
-#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:115
+#: bws-google-analytics.php:442 includes/class-gglnltcs-settings.php:127
 msgid "Google Analytics Help Center"
 msgstr "Справочный центр – Google Analytics"
 
-#: bws-google-analytics.php:448 includes/class-gglnltcs-settings.php:121
+#: bws-google-analytics.php:448 includes/class-gglnltcs-settings.php:133
 msgid "Add tracking code to blog"
 msgstr "Добавить код отслеживания в блог"
 
@@ -325,15 +325,15 @@ msgstr "Пользовательский код"
 msgid "Licence Key"
 msgstr "Лицензионный ключ"
 
-#: includes/class-gglnltcs-settings.php:83
+#: includes/class-gglnltcs-settings.php:95
 msgid "Settings saved"
 msgstr "Настройки сохранены"
 
-#: includes/class-gglnltcs-settings.php:92
+#: includes/class-gglnltcs-settings.php:104
 msgid "Authentication"
 msgstr "Авторизация"
 
-#: includes/class-gglnltcs-settings.php:98
+#: includes/class-gglnltcs-settings.php:110
 msgid ""
 "To enable tracking and collect statistic from your site enter Tracking ID on "
 "the settings page"
@@ -341,34 +341,120 @@ msgstr ""
 "Для включения отслеживания и сбора статистики с вашего сайта введите "
 "Tracking ID на странице настроек"
 
-#: includes/class-gglnltcs-settings.php:131
+#: includes/class-gglnltcs-settings.php:140
+msgid "Client ID"
+msgstr "Идентификатор"
+
+#: includes/class-gglnltcs-settings.php:142
+msgid "To get authorized with your google account please"
+msgstr "Чтобы авторизироваться с помощью вашего Google аккаунта, пожалуйста"
+
+#: includes/class-gglnltcs-settings.php:144
+#, php-format
+msgid "%s Open the %s Google API Console Credentials %s page. %s"
+msgstr "%s Откройте страницу %s Учетные данные в Google API Console. %s %s"
+
+#: includes/class-gglnltcs-settings.php:145
+#, php-format
+msgid ""
+"%s Click %s Select a project%s, then %s NEW PROJECT%s, and enter a name for "
+"the project, and optionally, edit the provided project ID. Click %s Create. "
+"%s"
+msgstr ""
+"%s В раскрывающемся меню проектов выберите %s Создать проект%s, затем "
+"укажите название проекта и при необходимости измените его идентификатор%s%s, "
+"после чего нажмите кнопку %s Создать. %s"
+
+#: includes/class-gglnltcs-settings.php:146
+#, php-format
+msgid ""
+"%s On the Credentials page, select %s Create credentials%s, then %s OAuth "
+"client ID. %s"
+msgstr ""
+"%s На странице \"Учетные данные\" выберите %s Создать учетные данные%s, а "
+"затем %s Идентификатор клиента OAuth. %s"
+
+#: includes/class-gglnltcs-settings.php:147
+#, php-format
+msgid ""
+"%s You may be prompted to set a product name on the Consent screen; if so, "
+"click %s Configure consent screen%s, supply the requested information, and "
+"click %s Save %s to return to the Credentials screen. %s"
+msgstr ""
+"%s Вам может быть предложено указать название продукта. В этом случае "
+"нажмите %s Настроить окно запроса доступа%s, укажите запрашиваемую "
+"информацию и нажмите %s Сохранить %s чтобы вернуться к экрану \"Учетные "
+"данные\". %s"
+
+#: includes/class-gglnltcs-settings.php:148
+#, php-format
+msgid ""
+"%s Select %s Other %s for the %s Application type %s and enter any "
+"additional information required. %s"
+msgstr ""
+"%s В разделе %s Тип приложения %s выберите %s Другие типы %s aи укажите "
+"необходимую информацию. %s"
+
+#: includes/class-gglnltcs-settings.php:149
+#, php-format
+msgid "%s Click %s Create. %s %s"
+msgstr "%s Нажмите %s Создать. %s %s"
+
+#: includes/class-gglnltcs-settings.php:150
+#, php-format
+msgid ""
+"%s On the page that appears, copy the %s client ID %s and %s client secret "
+"%s to your clipboard, as you will need them when you configure your client "
+"library. %s"
+msgstr ""
+"%s На появившейся странице скопируйте %s идентификатор %s и %s секретный "
+"ключ %s клиента – они понадобятся вам при настройке клиентской библиотеки. %s"
+
+#: includes/class-gglnltcs-settings.php:152
+#, php-format
+msgid "For more info see %s OAuth2 Authentication %s"
+msgstr "Чтобы узнать больше посетите %s Аутентификация OAuth2 %s"
+
+#: includes/class-gglnltcs-settings.php:163
+msgid "Client Secret"
+msgstr "Секретный ключ"
+
+#: includes/class-gglnltcs-settings.php:171
+msgid "API key"
+msgstr "API ключ"
+
+#: includes/class-gglnltcs-settings.php:175
+msgid "Optional"
+msgstr "Не обязательно"
+
+#: includes/class-gglnltcs-settings.php:185
 msgid "Google Analytics Statistics"
 msgstr "Статистика Google Analytics"
 
-#: includes/class-gglnltcs-settings.php:150
-#: includes/class-gglnltcs-settings.php:313
+#: includes/class-gglnltcs-settings.php:204
+#: includes/class-gglnltcs-settings.php:367
 msgid "Warning: "
-msgstr "Внимание:"
+msgstr "Предупреждение: "
 
-#: includes/class-gglnltcs-settings.php:151
-#: includes/class-gglnltcs-settings.php:314
+#: includes/class-gglnltcs-settings.php:205
+#: includes/class-gglnltcs-settings.php:368
 msgid ""
 "Authentication Token expired. Authenticate with your Google Account once "
 "again."
 msgstr "Код аутентификации истек. Авторизируйтесь заново."
 
-#: includes/class-gglnltcs-settings.php:171
-#: includes/class-gglnltcs-settings.php:297
+#: includes/class-gglnltcs-settings.php:225
+#: includes/class-gglnltcs-settings.php:351
 msgid "Get Statistic"
 msgstr "Получить статистику"
 
-#: includes/class-gglnltcs-settings.php:191
-#: includes/class-gglnltcs-settings.php:340
+#: includes/class-gglnltcs-settings.php:245
+#: includes/class-gglnltcs-settings.php:394
 msgid "Invalid code. Please, try again"
 msgstr "Неверный код. Пожалуйста, попробуйте ещё раз"
 
-#: includes/class-gglnltcs-settings.php:195
-#: includes/class-gglnltcs-settings.php:344
+#: includes/class-gglnltcs-settings.php:249
+#: includes/class-gglnltcs-settings.php:398
 msgid ""
 "In order to use Google Analytics by BestWebSoft plugin, you must be signed "
 "in with a registered Google Account email address and password. If you don't "
@@ -377,79 +463,79 @@ msgstr ""
 "Чтобы использовать плагин Google Analytics by BestWebSoft, вы должны войти "
 "в  Google Account. Если у вас нет гугл аккаунта, можете создать его"
 
-#: includes/class-gglnltcs-settings.php:197
-#: includes/class-gglnltcs-settings.php:346
+#: includes/class-gglnltcs-settings.php:251
+#: includes/class-gglnltcs-settings.php:400
 msgid "here"
 msgstr "здесь"
 
-#: includes/class-gglnltcs-settings.php:200
-#: includes/class-gglnltcs-settings.php:349
+#: includes/class-gglnltcs-settings.php:254
+#: includes/class-gglnltcs-settings.php:403
 msgid "Authenticate with your Google Account"
 msgstr "Аутентификация с аккаунтом Google"
 
-#: includes/class-gglnltcs-settings.php:204
-#: includes/class-gglnltcs-settings.php:353
+#: includes/class-gglnltcs-settings.php:258
+#: includes/class-gglnltcs-settings.php:407
 msgid "Or Click Here If You Have Disabled Javascript"
 msgstr "Или нажмите сюда, если у вас отключен Javascript"
 
-#: includes/class-gglnltcs-settings.php:207
-#: includes/class-gglnltcs-settings.php:356
+#: includes/class-gglnltcs-settings.php:261
+#: includes/class-gglnltcs-settings.php:410
 msgid ""
 "When you finish authorization process you will get Google Authentication "
-"Code. You must enter this code in the field below and press \"Start Plugin\" "
+"Code. You must enter this code in the field below and press \"Save Changes\" "
 "button. This code will be used to get an Authentication Token so you can "
 "access your website stats."
 msgstr ""
 "После завершения процесса авторизации вы получите код аутентификации. Вам "
 "нужно скопировать этот код и вставить его в поле, расположенное ниже, после "
-"чего нажать кнопку \"Вперёд\"."
+"чего нажать кнопку \"Сохранить\"."
 
-#: includes/class-gglnltcs-settings.php:239
+#: includes/class-gglnltcs-settings.php:293
 msgid "Accounts"
 msgstr "Аккаунты"
 
-#: includes/class-gglnltcs-settings.php:252
-#: includes/class-gglnltcs-settings.php:387 includes/pro_banners.php:15
+#: includes/class-gglnltcs-settings.php:306
+#: includes/class-gglnltcs-settings.php:441 includes/pro_banners.php:15
 msgid "Close"
 msgstr "Закрыть"
 
-#: includes/class-gglnltcs-settings.php:259
+#: includes/class-gglnltcs-settings.php:313
 msgid "Metrics"
 msgstr "Показатели"
 
-#: includes/class-gglnltcs-settings.php:264
+#: includes/class-gglnltcs-settings.php:318
 msgid "Time range"
 msgstr "Период времени"
 
-#: includes/class-gglnltcs-settings.php:267
+#: includes/class-gglnltcs-settings.php:321
 msgid "From"
 msgstr "От"
 
-#: includes/class-gglnltcs-settings.php:271
+#: includes/class-gglnltcs-settings.php:325
 msgid "to"
 msgstr "до"
 
-#: includes/class-gglnltcs-settings.php:277
+#: includes/class-gglnltcs-settings.php:331
 msgid "The gap between dates must not be more than 999 days."
 msgstr "Промежуток между датами должен быть не более 999 дней."
 
-#: includes/class-gglnltcs-settings.php:282
+#: includes/class-gglnltcs-settings.php:336
 msgid "View mode"
 msgstr "Режим просмотра"
 
-#: includes/class-gglnltcs-settings.php:286
+#: includes/class-gglnltcs-settings.php:340
 msgid "Line chart"
 msgstr "Линейный график"
 
-#: includes/class-gglnltcs-settings.php:290
+#: includes/class-gglnltcs-settings.php:344
 msgid "Table"
 msgstr "Таблица"
 
-#: includes/class-gglnltcs-settings.php:310
+#: includes/class-gglnltcs-settings.php:364
 msgid "There was an API error"
 msgstr "Произошла ошибка"
 
-#: includes/class-gglnltcs-settings.php:371
+#: includes/class-gglnltcs-settings.php:425
 msgid "Please enable JavaScript in your browser."
 msgstr "Пожалуйста, включите JavaScript в вашем браузере."
 
@@ -909,9 +995,6 @@ msgstr "Цели"
 
 #~ msgid "Select"
 #~ msgstr "Выберите"
-
-#~ msgid "option"
-#~ msgstr "опцию"
 
 #~ msgid "Select a tracking method. Click either"
 #~ msgstr "Выберите метод трекинга. Нажмите"

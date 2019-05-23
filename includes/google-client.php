@@ -3,18 +3,24 @@
  * Contains the extending functionality
  * @since 1.7.4
  */
+
 if ( ! function_exists( 'gglnltcs_get_client' ) ) {
 	function gglnltcs_get_client() {
 		global $gglnltcs_options;
 
+        $client_id      = array_key_exists( 'client_id', $gglnltcs_options ) ? $gglnltcs_options['client_id'] : '';
+        $client_secret  = array_key_exists( 'client_secret', $gglnltcs_options ) ? $gglnltcs_options['client_secret'] : '';
+        $api_key        = array_key_exists( 'api_key', $gglnltcs_options ) ? $gglnltcs_options['api_key'] : '';
+
 		require_once plugin_dir_path( __FILE__ ) .  '../google-api/autoload.php';
 		$client = new Google_Client();
-		$client->setApplicationName( 'Google Analytics by BestWebSoft' );
-		$client->setClientId( '714548546682-ai821bsdfn2th170q8ofprgfmh5ch7cn.apps.googleusercontent.com' );
-		$client->setClientSecret( 'pyBXulcOqPhQGzKiW4kehZZB' );
-		$client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
-		$client->setDeveloperKey( 'AIzaSyDA7L2CZgY4ud4vv6rw0Yu4GUDyfbRw0f0' );
-		$client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly' ) );
+        $client->setApplicationName( 'Google Analytics Pro by BestWebSoft' );
+        $client->setClientId( $client_id );
+        $client->setClientSecret( $client_secret );
+        $client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
+        $client->setDeveloperKey( $api_key );
+        $client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly' ) );
+        $client->setAccessType( 'offline' );
 		if ( ! empty( $gglnltcs_options['token'] ) ) {
 			$client->setAccessToken( $gglnltcs_options['token'] );
 		}
