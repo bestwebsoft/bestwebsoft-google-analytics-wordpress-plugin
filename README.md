@@ -19,7 +19,8 @@
 <li>Visitor
 <ul>
 <li>Unique visitors</li>
-<li>New visits</li>
+<li>
+visits</li>
 </ul>
 </li>
 <li>Session

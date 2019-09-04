@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add tracking code, analytics, display statistic report, google analytics, google analytics plugin, google analytics stats, group statistics, metrics, page views, visit duration, tracking, web properties
 Requires at least: 3.9
-Tested up to: 5.2.1
-Stable tag: 1.7.5
+Tested up to: 5.2.2
+Stable tag: 1.7.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,8 @@ https://www.youtube.com/watch?v=u6GCmG2SYIg
 * Choose statistics metrics:
 	* Visitor
 		* Unique visitors
-		* New visits
+		* 
+ visits
 	* Session
 		* Visits
 		* Bounce rate
@@ -148,6 +149,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 
 == Changelog ==
 
+= V1.7.6 - 04.09.2019 =
+* Update: The deactivation feedback has been changed. Misleading buttons have been removed.
+
 = V1.7.5 - 23.05.2019 =
 * Update : The plugin settings page has been updated.
 * Bugfix : The bug with an hourly reauthorization was fixed.
@@ -231,6 +235,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.7.6 =
+* Usability improved.
 
 = V1.7.5 =
 * Functionality improved. Bugs fixed.
