@@ -14,7 +14,7 @@ if ( ! function_exists( 'gglnltcs_get_client' ) ) {
 
 		require_once plugin_dir_path( __FILE__ ) .  '../google-api/autoload.php';
 		$client = new Google_Client();
-        $client->setApplicationName( 'Google Analytics Pro by BestWebSoft' );
+        $client->setApplicationName( 'Analytics by BestWebSoft' );
         $client->setClientId( $client_id );
         $client->setClientSecret( $client_secret );
         $client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
@@ -44,5 +44,3 @@ if ( ! function_exists( 'gglnltcs_get_analytics' ) ) {
 		return $analytics;
 	}
 }
-
-

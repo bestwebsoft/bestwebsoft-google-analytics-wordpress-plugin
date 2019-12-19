@@ -133,12 +133,12 @@
 	function displayStatistics( make_ajax ) {
 		make_ajax = 'undefined' ===  typeof make_ajax ? true : make_ajax;
 		var viewMode   = $( 'input[name="gglnltcs_view_mode"]:checked' ).val(),
-			metrics    = $( '.gglnltcs-metrics' );
+			metrics    = $( '#gglnltcs-metrics' );
 		if ( make_ajax ) {
 			$( '#gglnltcs-results-wrapper' ).children().fadeTo( 200, .3 );
 		}
-		if ( ! $( '.gglnltcs-metrics input:checkbox:checked' ).length ) {
-			$( '.gglnltcs-metrics input:checkbox' ).addClass( 'gglnltcs-validation-failed' );
+		if ( ! $( '#gglnltcs-metrics input:checkbox:checked' ).length ) {
+			$( '#gglnltcs-metrics input:checkbox' ).addClass( 'gglnltcs-validation-failed' );
 			displayError( gglnltcsLocalize.metricsValidation );
 			return false;
 		}

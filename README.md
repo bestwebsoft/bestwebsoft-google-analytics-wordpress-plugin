@@ -1,7 +1,7 @@
 <a href="https://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/" target=_blank>Google Analytics WordPress Plugin</a>
 ========================
 
-<p>Google Analytics plugin is the best way to view Google Analytics on your WordPress website dashboard. Configure the reporting mode, select the metrics you need, set the time range for your statistic displaying and keep tracking your WordPress website statistics.</p>
+<p>Analytics plugin is the best way to view Google Analytics on your WordPress website dashboard. Configure the reporting mode, select the metrics you need, set the time range for your statistic displaying and keep tracking your WordPress website statistics.</p>
 <p><span class="embed-youtube" style="text-align:center; display: block;"></span></p>
 <h4>Free Features</h4>
 <ul>

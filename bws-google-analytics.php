@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Google Analytics by BestWebSoft
+Plugin Name: Analytics by BestWebSoft
 Plugin URI: https://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/
 Description: Add Google Analytics code to WordPress website and track basic stats.
 Author: BestWebSoft
 Text Domain: bws-google-analytics
 Domain Path: /languages
-Version: 1.7.6
+Version: 1.7.7
 Author URI: https://bestwebsoft.com/
 License: GPLv2 or later
 */
@@ -36,8 +36,8 @@ if ( ! function_exists( 'add_gglnltcs_admin_menu' ) ) {
 
         if ( ! is_plugin_active( 'bws-google-analytics-pro/bws-google-analytics-pro.php' ) ) {
 
-	        $settings = add_menu_page( __( 'Google Analytics Settings', 'bws-google-analytics' ),
-                'Google Analytics',
+	        $settings = add_menu_page( __( 'Analytics Settings', 'bws-google-analytics' ),
+                'Analytics',
                 'manage_options',
                 'bws-google-analytics.php',
                 'gglnltcs_settings_page',
@@ -45,7 +45,7 @@ if ( ! function_exists( 'add_gglnltcs_admin_menu' ) ) {
             );
 
 	        add_submenu_page( 'bws-google-analytics.php',
-                __( 'Google Analytics Settings', 'bws-google-analytics' ),
+                __( 'Analytics Settings', 'bws-google-analytics' ),
                 __( 'Settings', 'bws-google-analytics' ),
                 'manage_options', 'bws-google-analytics.php',
                 'gglnltcs_settings_page'
@@ -62,7 +62,7 @@ if ( ! function_exists( 'add_gglnltcs_admin_menu' ) ) {
 		        $submenu['bws-google-analytics.php'][] = array(
 			        '<span style="color:#d86463"> ' . __( 'Upgrade to Pro', 'custom-search-plugin' ) . '</span>',
 			        'manage_options',
-			        'https://bestwebsoft.com/products/wordpress/plugins/google-analytics/?k=0&pn=0&v=' . $gglnltcs_plugin_info['Version'] . '&wp_v=' . $wp_version
+			        'https://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/?k=0ceb29947727cb6b38a01b29102661a3&pn=125&v=' . $gglnltcs_plugin_info['Version'] . '&wp_v=' . $wp_version
 		        );
 	        }
 	        add_action( 'load-' . $settings, 'gglnltcs_add_tabs' );
@@ -91,7 +91,7 @@ if ( ! function_exists( 'gglnltcs_init' ) ) {
 			$gglnltcs_plugin_info = get_plugin_data( __FILE__ );
 		}
 		/* Check if plugin is compatible with current WP version.*/
-		bws_wp_min_version_check( plugin_basename( __FILE__ ), $gglnltcs_plugin_info, '3.9' );
+		bws_wp_min_version_check( plugin_basename( __FILE__ ), $gglnltcs_plugin_info, '4.5' );
 
 		/* Load options only on the frontend or on the plugin page. */
 		if ( ! is_admin() || ( isset( $_GET['page'] ) && "bws-google-analytics.php" == $_GET['page'] ) ) {
@@ -102,10 +102,18 @@ if ( ! function_exists( 'gglnltcs_init' ) ) {
 
 if ( ! function_exists( 'gglnltcs_admin_init' ) ) {
 	function gglnltcs_admin_init() {
-		global $bws_plugin_info, $gglnltcs_plugin_info;
+		global $pagenow, $bws_plugin_info, $gglnltcs_plugin_info, $gglnltcs_options;
 		/* Add variable for bws_menu */
 		if ( empty( $bws_plugin_info ) ) {
 			$bws_plugin_info = array( 'id' => '125', 'version' => $gglnltcs_plugin_info['Version'] );
+		}
+
+		if ( 'plugins.php' == $pagenow ) {
+			if ( empty( $gglnltcs_options ) ) {
+				gglnltcs_settings();
+			}
+			if ( function_exists( 'bws_plugin_banner_go_pro' ) )
+				bws_plugin_banner_go_pro( $gglnltcs_options, $gglnltcs_plugin_info, 'gglnltcs', 'bws-google-analytics', '938dae82c516792dea3980ff61a6af29', '125', 'bws-google-analytics' );
 		}
 	}
 }
@@ -129,6 +137,7 @@ if ( ! function_exists( 'gglnltcs_default_options' ) ) {
 			'suggest_feature_banner'	=> 1,
 			'hide_premium_options'		=> array()
 		);
+
 		return $gglnltcs_default_options;
 	}
 }
@@ -173,21 +182,15 @@ if ( ! function_exists( 'gglnltcs_plugin_activate' ) ) {
 /* Display settings page */
 if ( ! function_exists( 'gglnltcs_settings_page' ) ) {
 	function gglnltcs_settings_page() {
-	    global $gglnltcs_options, $show_pro;
-	    if ( $gglnltcs_options['hide_premium_options'] == array() ) {
-	        $show_pro = true;
-        } elseif ( $gglnltcs_options['hide_premium_options'] != array() ) {
-	        $show_pro = false;
-        }
-		require_once( dirname( __FILE__ ) . '/includes/pro_banners.php' );
+	    if ( ! class_exists( 'Bws_Settings_Tabs' ) )
+            require_once( dirname( __FILE__ ) . '/bws_menu/class-bws-settings.php' );
 		require_once( dirname( __FILE__ ) . '/includes/class-gglnltcs-settings.php' );
 		$page = new Gglnltcs_Settings_Tabs( plugin_basename( __FILE__ ) ); ?>
         <div class="wrap">
-            <h1><?php _e( 'Google Analytics Settings', 'bws-google-analytics' ); ?></h1>
+            <h1><?php _e( 'Analytics Settings', 'bws-google-analytics' ); ?></h1>
 			<?php $page->display_content(); ?>
         </div>
-		<?php
-	}
+	<?php }
 }
 
 /* Add "Settings" Link On The Plugin Action Page */
@@ -226,29 +229,48 @@ if ( ! function_exists ( 'gglnltcs_register_plugin_links' ) ) {
 if ( ! function_exists( 'gglnltcs_past_tracking_code' ) ) {
 	function gglnltcs_past_tracking_code() {
 		global $gglnltcs_options;
-		if ( isset( $gglnltcs_options['tracking_id'] ) && '' != $gglnltcs_options['tracking_id'] && isset( $gglnltcs_options['add_tracking_code'] ) && 1 == $gglnltcs_options['add_tracking_code'] ) {
-			$tracking_id = json_encode( $gglnltcs_options['tracking_id'] );
-			/* Google tracking code */ ?>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $gglnltcs_options['tracking_id']; ?>"></script>
-            <script id="gglnltcs-tracking-script">
-				window.dataLayer = window.dataLayer || [];
+		
+		if ( 1 == $gglnltcs_options['add_tracking_code'] ) {
+			/* Google tracking code */
+			wp_enqueue_script( 'gglnltcs_googletagmanager', 'https://www.googletagmanager.com/gtag/js?id=' . $gglnltcs_options['tracking_id'], array(), null, true );
+
+			$script = "window.dataLayer = window.dataLayer || [];
 				function gtag(){ dataLayer.push( arguments ); }
 				gtag( 'js', new Date() );
-				gtag( 'config', '<?php echo $gglnltcs_options['tracking_id']; ?>' );
-            </script>
-			<?php
+				gtag( 'config', '" . $gglnltcs_options['tracking_id'] . "' );";
+
+			wp_register_script( 'gglnltcs-tracking-script', '', array(), null, true );
+			wp_enqueue_script( 'gglnltcs-tracking-script' );
+			wp_add_inline_script( 'gglnltcs-tracking-script', sprintf( $script ) );
 		}
 	}
+}
+
+/**
+* Adds async/defer and data attributes to enqueued / registered scripts.
+*
+* @param string $tag    The script tag.
+* @param string $handle The script handle.
+* @return string Script HTML string.
+*/
+if ( ! function_exists( 'gglnltcs_add_data_to_script' ) ) {
+    function gglnltcs_add_data_to_script( $tag, $handle ) {
+        if ( 'gglnltcs_googletagmanager' === $handle ) {
+            $return_string = ' async';
+            $tag = preg_replace( ':(?=></script>):', " $return_string", $tag, 1 );
+        }
+        return $tag;
+    }
 }
 
 /* Load Plugin Scripts For Settings Page */
 if ( ! function_exists( 'gglnltcs_scripts' ) ) {
 	function gglnltcs_scripts() {
+		global $gglnltcs_plugin_info;
 	    // css for displaying an icon
 		wp_enqueue_style( 'gglnltcs_admin_page_stylesheet', plugins_url( 'css/admin_page.css', __FILE__ ) );
 		/* Load plugin styles and scripts only on the plugin settings page */
-		if ( isset( $_REQUEST['page'] ) && "bws-google-analytics.php" == $_REQUEST['page'] ) {
-			global $gglnltcs_plugin_info;
+		if ( isset( $_REQUEST['page'] ) && "bws-google-analytics.php" == $_REQUEST['page'] ) {			
 			/* This function is called from the inside of the function "gglnltcs_admin_menu" */
 			wp_enqueue_script( 'gglnltcs_google_js_api', 'https://www.gstatic.com/charts/loader.js' ); /* Load Google object. It will be used for chart visualization.*/
 			wp_enqueue_style( 'gglnltcs_stylesheet', plugins_url( 'css/style.css', __FILE__ ), array(), $gglnltcs_plugin_info['Version'] );
@@ -278,16 +300,9 @@ if ( ! function_exists( 'gglnltcs_scripts' ) ) {
 /* Add notices when JavaScript disable, adding banner */
 if ( ! function_exists( 'gglnltcs_show_notices' ) ) {
 	function gglnltcs_show_notices() {
-		global $hook_suffix, $gglnltcs_plugin_info, $gglnltcs_options;
+		global $hook_suffix, $gglnltcs_plugin_info;
 
-		if ( 'plugins.php' == $hook_suffix ) {
-
-		    if ( ! $gglnltcs_options ) {
-		        $gglnltcs_options = get_option( 'gglnltcs_options' );
-            }
-            if ( isset( $gglnltcs_options['first_install'] ) && strtotime( '-1 week' ) > $gglnltcs_options['first_install'] ) {
-                bws_plugin_banner( $gglnltcs_plugin_info, 'gglnltcs', 'bws-google-analytics', '22f95b30aa812b6190a4a5a476b6b628', '214', '//ps.w.org/custom-search-plugin/assets/icon-128x128.png' );
-            }
+		if ( 'plugins.php' == $hook_suffix ) {         
             bws_plugin_banner_to_settings( $gglnltcs_plugin_info, 'gglnltcs', 'bws-google-analytics', 'admin.php?page=bws-google-analytics.php' );
         }
 
@@ -306,164 +321,6 @@ if ( ! function_exists( 'gglnltcs_add_tabs' ) ) {
 			'section'	=> '200538749'
 		);
 		bws_help_tab( $screen, $args );
-	}
-}
-
-/* GO PRO Tab */
-if ( ! function_exists( 'gglnltcs_go_pro_tab' ) ) {
-	function gglnltcs_go_pro_tab( $hide_pro_block ) {
-		global $gglnltcs_plugin_info;
-		$plugin_basename = plugin_basename( __FILE__ );
-		$go_pro_result   = bws_go_pro_tab_check( $plugin_basename, 'gglnltcs_options' );
-		if ( ! empty( $go_pro_result['error'] ) ) { ?>
-			<div id="gglnltcs-settings-error" class="error below-h2"><p><strong><?php echo $go_pro_result['error'] ?></strong></p></div>
-		<?php }
-		if ( ! empty( $go_pro_result['message'] ) ) { ?>
-			<div id="gglnltcs-settings-message" class="updated fade below-h2"><p><strong><?php echo $go_pro_result['message'] ?></strong></p></div>
-		<?php }
-		bws_go_pro_tab_show( $hide_pro_block, $gglnltcs_plugin_info, $plugin_basename, 'bws-google-analytics.php', 'bws-google-analytics-pro.php', 'bws-google-analytics-pro/bws-google-analytics-pro.php', 'bws-google-analytics', '0ceb29947727cb6b38a01b29102661a3', '125', isset( $go_pro_result['pro_plugin_is_activated'] ) );
-	}
-}
-
-/* Prints Webproperties List */
-if ( ! function_exists( 'gglnltcs_print_webproperties' ) ) {
-	function gglnltcs_print_webproperties( $analytics, $profile_accounts, $accounts_id, $settings ) {
-		global $gglnltcs_options;
-		$profile_webproperties = array();
-		/* Web Properties: list
-		 * https://developers.google.com/analytics/devguides/config/mgmt/v3/mgmtReference/management/webproperties/list */
-		if ( !empty( $analytics ) ) {
-			try {
-				$output = '';
-				$webproperties = $analytics->management_webproperties->listManagementWebproperties( '~all' );
-
-				$items = $webproperties->getItems();
-				if ( ! count( $items ) ) {
-					return false;
-				}
-
-				$selected_account = $output = $selected = '';
-
-				foreach( $items as $webproperty ) {
-					$account_id  = $webproperty->getAccountId();
-					$property_id = $webproperty->getId();
-
-					$profiles = $analytics->management_profiles->listManagementProfiles( $account_id, $property_id );
-					$profiles = $profiles->getItems();
-
-					if ( ! count( $profiles ) ) {
-						continue;
-					}
-					if ( ! $selected_account && ( ! $gglnltcs_options['tracking_id'] || ( $gglnltcs_options['tracking_id'] && $gglnltcs_options['tracking_id'] == $property_id ) ) ) {
-						$selected_account = $account_id;
-					}
-					$profile_accounts[ $account_id ]['webproperties'][ $property_id ]['name'] = $webproperty->getName();
-
-					foreach ( $profiles as $profile ) {
-						$profile_accounts[ $account_id ]['webproperties'][ $property_id ]['profiles'][ $profile->getId() ] = $profile->getName();
-					}
-				}
-				/* if tracking ID has not been found in the list of accounts, the first account`s data will be displayed */
-				$current_account = array_key_exists( $selected_account, $profile_accounts ) ? $profile_accounts[ $selected_account ] : reset( $profile_accounts );
-				foreach( $current_account['webproperties'] as $property_id => $property ) {
-					$allowed = true;
-					foreach( $property['profiles'] as $profile_id => $profile_name ) {
-						if ( $allowed && $gglnltcs_options['tracking_id'] === $property_id ) {
-							$selected = ' selected="selected"';
-							$allowed  = false;
-						} else {
-							$selected = '';
-						}
-						$output .= "<option{$selected} value=\"ga:{$profile_id}\">{$property['name']} ( {$profile_name} )</option>";
-					}
-				} ?>
-				<tr>
-					<th><?php _e( 'Webproperties', 'bws-google-analytics' ); ?></th>
-					<td>
-						<select id="gglnltcs-webproperties" class="gglnltcs-select" name="gglnltcs_webproperties">
-							<?php echo $output; ?>
-						</select>
-					</td>
-				</tr>
-				<script type="text/javascript">
-					var profileAccounts = <?php echo json_encode( $profile_accounts ); ?>;
-				</script>
-			<?php } catch ( Google_Service_Exception $e ) {
-				echo __( 'There was an Analytics API service error', 'bws-google-analytics' ) . ' ' . $e->getCode() . ':' . $e->getMessage();
-			} catch ( Exception $e ) {
-				echo __( 'There was a general API error', 'bws-google-analytics' ) . ' ' . $e->getCode() . ':' . $e->getMessage();
-			}
-		}
-	}
-}
-
-/* Prints Log Out Form */
-if ( ! function_exists( 'gglnltcs_print_log_out_field' ) ) {
-	function gglnltcs_print_log_out_field() {
-		global $gglnltcs_options;
-		if ( ! empty( $gglnltcs_options['token'] ) ) { ?>
-		<table class="form-table gglnltcs" id="gglnltcs-log-out-field">
-			<tr>
-				<th><?php _e( 'Deauthorize', 'bws-google-analytics' ); ?></th>
-				<td>
-					<form method="post" action="admin.php?page=bws-google-analytics.php">
-						<?php wp_nonce_field( plugin_basename( __FILE__ ), 'gglnltcs_nonce_name' ); ?>
-						<input type="submit" name="gglnltcs_log_out" class="button-secondary" value="<?php _e( 'Log Out', 'bws-google-analytics' ) ?>">
-					</form>
-				</td>
-			</tr>
-		</table>
-	<?php }
-	}
-}
-
-/* Prints Insert tracking Code Form And Input Field */
-if ( ! function_exists( 'gglnltcs_print_tracking_id_field' ) ) {
-	function gglnltcs_print_tracking_id_field( $display_error = false ) {
-		global $gglnltcs_options;
-		if ( $display_error ) { ?>
-            <div class="error below-h2">
-                <p><?php _e( "It seems like you are not registered for Google Analytics or you don't have any Google Analytics Account", 'bws-google-analytics' ); ?>.</p>
-                <p><?php _e( 'To gain access to Analytics you must', 'bws-google-analytics' ); ?> <a href="https://www.google.com/analytics/web/provision?et=&authuser=#provision/CreateAccount/" target="_blank"><?php _e( 'register for Google Analytics', 'bws-google-analytics' ); ?></a> <?php _e( 'and create an Analytics account', 'bws-google-analytics' ); ?>.</p>
-            </div>
-		<?php }
-		$tracking_id = isset( $gglnltcs_options['tracking_id'] ) ? $gglnltcs_options['tracking_id'] : ''; ?>
-        <form id="gglnltcs-tracking-id-form" class="bws_form" method="post" action="admin.php?page=bws-google-analytics.php&action=settings">
-            <div id="gglnltcs-tracking-id-table">
-                <table class="form-table gglnltcs">
-                    <tr>
-                        <th scope="row">
-                            Tracking ID
-							<?php echo bws_add_help_box(
-								__( 'To enable tracking and collect statistic from your site please', 'bws-google-analytics' ) . ':<br/>
-									<ol>
-										<li><a href="http://www.google.com/accounts/ServiceLogin?service=analytics" target="_blank">' . __( 'sign in', 'bws-google-analytics' ) . '</a> ' . __( 'to your Google Analytics account', 'bws-google-analytics' ) . '</li>
-										<li>' . __( 'copy your tracking ID and paste it to the "Tracking ID" text field', 'bws-google-analytics' ) . '</li>
-										<li>' . __( 'mark "Add tracking code to blog" chexbox', 'bws-google-analytics' ) . '</li>
-										<li>' . __( 'save changes', 'bws-google-analytics' ) . '</li>
-									</ol>' .
-								__( 'For more info see', 'bws-google-analytics' ) . ' <a href="https://support.google.com/analytics/answer/1009694" target="_blank">' . __( 'Add an account', 'bws-google-analytics' ) . '</a>, <a href="https://support.google.com/analytics/answer/1042508" target="_blank">' . __( 'Set up a property', 'bws-google-analytics' ) . '</a>, <a href="https://support.google.com/analytics/answer/1032385" target="_blank">' . __( 'Find your tracking code, tracking ID, and property number', 'bws-google-analytics' ) . '</a>, <a href="https://support.google.com/analytics/?#topic=3544906" target="_blank">' . __( 'Google Analytics Help Center', 'bws-google-analytics' ) . '</a>'
-							); ?>
-                        </th>
-                        <td>
-                            <input type="text" name="gglnltcs_tracking_id" value="<?php echo $tracking_id; ?>" />
-                            <br />
-                            <label><input id='gglnltcs-add-tracking-code-input' type="checkbox" name="gglnltcs_add_tracking_code" value="1" <?php if ( isset( $gglnltcs_options['add_tracking_code'] ) && 1 == $gglnltcs_options['add_tracking_code'] ) echo 'checked="checked"'; ?> /><?php _e( 'Add tracking code to blog', 'bws-google-analytics' ) ?></label>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <p class="submit">
-                <input id="bws-submit-button" type="submit" class="button-primary" value="<?php _e( 'Save Changes', 'bws-google-analytics' ); ?>" />
-                <input type="hidden" name="gglnltcs_form_submit" value="submit" />
-            </p>
-			<?php wp_nonce_field( plugin_basename( __FILE__ ), 'gglnltcs_nonce_name' ); ?>
-        </form>
-		<?php
-		bws_form_restore_default_settings( plugin_basename( __FILE__ ) );
-		if ( $display_error ) {
-			exit();
-		}
 	}
 }
 
@@ -493,10 +350,9 @@ if ( ! function_exists( 'gglnltcs_get_statistic' ) ) {
 			 * https://developers.google.com/analytics/devguides/reporting/core/v3/coreDevguide */
 			try { ?>
 				<table id="gglnltcs-group-by-Y-M-D" class="form-table">
-					<tr>
-						<th><?php _e( 'Results', 'bws-google-analytics' ); ?></th>
-						<td class="hide-if-no-js">
-							<span><?php _e( 'Group by', 'bws-google-analytics' ); ?></span>
+					<tr class="hide-if-no-js">
+						<th><?php _e( 'Group by', 'bws-google-analytics' ); ?></th>
+						<td>
 							<input type="button" class="button-secondary" value="<?php _e( 'Year', 'bws-google-analytics' ); ?>">
 							<input type="button" class="button-secondary" value="<?php _e( 'Month', 'bws-google-analytics' ); ?>">
 							<input type="button" class="button-secondary gglnltcs-selected" value="<?php _e( 'Day', 'bws-google-analytics' ); ?>">
@@ -531,43 +387,6 @@ if ( ! function_exists( 'gglnltcs_get_statistic' ) ) {
 				</table>
 			<?php } ?>
 		</div>
-	<?php }
-}
-
-/* Build And Print Metrics or Dimensions Table */
-if ( ! function_exists( 'gglnltcs_build_table' ) ) {
-	function gglnltcs_build_table( $table_type_slug, $table_type, $data, $settings ) {
-		$curr_category = $prev_category = '';
-		$rows_counter = 0;
-		?>
-        <table id="gglnltcs-<?php echo $table_type_slug; ?>" class="form-table gglnltcs gglnltcs-metrics">
-            <tr>
-                <th class="gglnltcs-table-name"><?php echo $table_type; ?></th>
-				<?php foreach ( $data as $item ) {
-					$rows_counter++;
-					$curr_category = $item['category'];
-					if ( $curr_category != $prev_category ) {
-						echo '<td><hr><strong>' . $curr_category . '</strong><hr>';
-						$rows_counter = 0;
-					} /* Build checkboxes for metrics options. */
-					echo '<p><input id="' . $item['id'] . '" class="gglnltcs_metrics_checkbox" name="' . $item['name'] . '" type="checkbox" value="' . $item['value'] .'"';
-					if ( isset( $settings[ $item['name'] ] ) || ( ! $settings && 'gglnltcs-ga-users' == $item['name'] ) ) {
-						echo ' checked = "checked">';
-					} else {
-						echo '>';
-					}
-					echo '<label title="' . $item['title'] . '" for="' . $item['for'] . '"> ' . $item['label'] . '</label></p>';
-					$prev_category = $curr_category;
-					if ( $curr_category != $prev_category ) {
-						echo '</td>';
-					}
-					if ( 10 == $rows_counter ) {
-						echo '</td><td>';
-						$rows_counter = 0;
-					}
-				} /* close foreach.*/?>
-            </tr>
-        </table>
 	<?php }
 }
 
@@ -642,13 +461,15 @@ if ( ! function_exists( 'gglnltcs_process_ajax' ) ) {
 		/* Get options from the database and set them to the global array */
 		gglnltcs_settings();
 		/* Create Analytics Object */
-		require_once( dirname( __FILE__ ) . '/includes/class-gglnltcs-settings.php' );
-        $google_client = new Gglnltcs_Settings_Tabs( plugin_basename( __FILE__ ) );
-		$analytics = $google_client->getAnalytics();
+		$analytics = gglnltcs_get_analytics();
 		/* Parse form data that came from ajax */
 		parse_str( $_POST['settings'], $settings );
+		foreach ( $settings as $key => $value ) {
+			$settings[ $key ] = sanitize_text_field( $value );
+		}
+
 		/* Line Chart Tab */
-		if ( ( 'line_chart' == $_POST['tab'] ) && ( ! empty( $analytics ) ) ) {
+		if ( 'line_chart' == $_POST['tab'] && ! empty( $analytics ) ) {
 			$start_date = empty( $settings['gglnltcs_start_date'] ) ? '365daysAgo'   : $settings['gglnltcs_start_date'];
 			$end_date = empty( $settings['gglnltcs_end_date'] )     ? 'today'        : $settings['gglnltcs_end_date'];
 			$metrics = 'ga:users,ga:newUsers,ga:sessions,ga:bounceRate,ga:avgSessionDuration,ga:pageviews,ga:pageviewsPerSession';
@@ -656,29 +477,32 @@ if ( ! function_exists( 'gglnltcs_process_ajax' ) ) {
 			$results = $analytics->data_ga->get( $settings['gglnltcs_webproperties'], $start_date, $end_date, $metrics, $dimensions );
 			$rows_results = $results->getRows();
 			$chart_data = $chart_date = $chart_users = $chart_new_users = $chart_sessions = $chart_bounce_rate = $chart_avg_session = $chart_pageviews = $chart_per_session = array();
-				foreach ( $rows_results as $row ) {
-					$chart_date[]        = array( $row[0], $row[1], $row[2] );
-					$chart_users[]       = array( $row[3] );
-					$chart_new_users[]   = array( $row[4] );
-					$chart_sessions[]    = array( $row[5] );
-					$chart_bounce_rate[] = array( $row[6] );
-					$chart_avg_session[] = array( $row[7] );
-					$chart_pageviews[]   = array( $row[8] );
-					$chart_per_session[] = array( $row[9] );
-				}
-				array_push( $chart_data,
-					$chart_date,
-					$chart_users,
-					$chart_new_users,
-					$chart_sessions,
-					$chart_bounce_rate,
-					$chart_avg_session,
-					$chart_pageviews,
-					$chart_per_session
-				);
+				
+			foreach ( $rows_results as $row ) {
+				$chart_date[]        = array( $row[0], $row[1], $row[2] );
+				$chart_users[]       = array( $row[3] );
+				$chart_new_users[]   = array( $row[4] );
+				$chart_sessions[]    = array( $row[5] );
+				$chart_bounce_rate[] = array( $row[6] );
+				$chart_avg_session[] = array( $row[7] );
+				$chart_pageviews[]   = array( $row[8] );
+				$chart_per_session[] = array( $row[9] );
+			}
+
+			array_push( $chart_data,
+				$chart_date,
+				$chart_users,
+				$chart_new_users,
+				$chart_sessions,
+				$chart_bounce_rate,
+				$chart_avg_session,
+				$chart_pageviews,
+				$chart_per_session
+			);
+
 			echo '<!-- start bws-ga-results -->' . json_encode( $chart_data ) . '<!-- end bws-ga-results -->';
 		/* Table Tab Chart */
-		} elseif ( ( 'table_chart' == $_POST['tab'] ) && ( ! empty( $analytics ) ) ) {
+		} elseif ( 'table_chart' == $_POST['tab'] && ! empty( $analytics ) ) {
 			/* Load metrics data */
 			$gglnltcs_metrics_data = gglnltcs_load_metrics();
 			gglnltcs_get_statistic( $analytics, $settings, $gglnltcs_metrics_data );
@@ -686,6 +510,7 @@ if ( ! function_exists( 'gglnltcs_process_ajax' ) ) {
 		/* Save updated settings to the database */
 		/* prepare data for update_option - unset unwanted $_POST vars */
 		unset( $settings['gglnltcs_nonce_name'], $settings['_wp_http_referer'] );
+
 		$gglnltcs_options['settings'] = $settings;
 		update_option( 'gglnltcs_options', $gglnltcs_options );
 		die();
@@ -810,12 +635,17 @@ if ( ! function_exists( 'gglnltcs_delete_options' ) ) {
 register_activation_hook( __FILE__, 'gglnltcs_plugin_activate' );
 add_action( 'plugins_loaded', 'gglnltcs_plugins_loaded' );
 add_action( 'admin_menu', 'add_gglnltcs_admin_menu' ); /* Add menu page, add submenu page.*/
+
 add_action( 'init', 'gglnltcs_init' ); /* Load database options.*/
 add_action( 'admin_init', 'gglnltcs_admin_init' ); /* bws_plugin_info, gglnltcs_plugin_info, check WP version, plugin localization */
+
 add_action( 'admin_enqueue_scripts', 'gglnltcs_scripts' );
+add_action( 'wp_enqueue_scripts', 'gglnltcs_past_tracking_code' ); /* Insert tracking code when front page loads.*/
+add_filter( 'script_loader_tag', 'gglnltcs_add_data_to_script', 10, 2 );
 
 add_action( 'admin_notices', 'gglnltcs_show_notices' );
+
 add_filter( 'plugin_action_links', 'gglnltcs_plugin_action_links', 10, 2 ); /* Add "Settings" link to the plugin action page.*/
 add_filter( 'plugin_row_meta', 'gglnltcs_register_plugin_links', 10, 2 ); /* Additional links on the plugin page - "Settings", "FAQ", "Support".*/
-add_action( 'wp_footer', 'gglnltcs_past_tracking_code' ); /* Insert tracking code when front page loads.*/
+
 add_action( 'wp_ajax_gglnltcs_action','gglnltcs_process_ajax' ); /* Ajax processing function.*/

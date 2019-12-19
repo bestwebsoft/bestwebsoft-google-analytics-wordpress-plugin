@@ -1,8 +1,5 @@
 /*** BWS Google Anlytics ***/
 /* Global Styles */
-strong {
-	font-weight: bold;
-}
 table.gglnltcs hr:first-of-type {
 	margin-top: 0;
 }
@@ -26,26 +23,9 @@ table.gglnltcs hr:first-of-type {
 #gglnltcs-start-date.gglnltcs-validation-failed,
 #gglnltcs-end-date.gglnltcs-validation-failed,
 #gglnltcs-metrics input[type=checkbox].gglnltcs-validation-failed,
-#gglnltcs-authentication-code-input.gglnltcs-validation-failed,
-.error-message {
+#gglnltcs-authentication-code-input.gglnltcs-validation-failed {
 	border: 1px solid rgb(205, 92, 92);
 }
-
-/* Metrics */
-#gglnltcs-metrics {
-	width: auto;
-}
-#gglnltcs-metrics td {
-	max-width: 200px;
-	vertical-align: top;
-}
-#gglnltcs-metrics td hr + strong{
-	font-weight: bold;
-}
-#gglnltcs-main-content .bws_help_box {
-	vertical-align: middle;
-}
-
 /* Error Messages and Notes */
 #gglnltcs-start-date.gglnltcs-validation-failed,
 #gglnltcs-end-date.gglnltcs-validation-failed,
@@ -134,10 +114,6 @@ div.ui-datepicker {
 }
 .rtl #gglnltcs-group-by-Y-M-D{
 	right: 310px;
-}
-.rtl .gglnltcs-date,
-.rtl .gglnltcs-view-mode label {
-	float: right;
 }
 /* end for arabic language */
 #gglnltcs-group-by-Y-M-D div {
@@ -273,12 +249,6 @@ span.gglnltcs-tracking-id {
 }
 .gglnltcs-unsuccess-message {
 	color: rgb(205, 92, 92);
-}
-#gglnltcs-tracking-id-table label {
-	display: block;
-}
-#gglnltcs-tracking-id-table #gglnltcs-tracking-id-form label {
-	display: inline;
 }
 #gglnltcs-tracking-id-instructions ol {
 	margin-top: 0;
@@ -437,9 +407,6 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	.rtl #gglnltcs-group-by-Y-M-D {
 		right: 170px;
 	}
-	.gglnltcs-view-mode {
-		margin-bottom: 7px;
-	}
 	.bws-plugins_page_bws-google-analytics #ui-datepicker-div {
 		-webkit-transform: translate(55px, 70px) scale(1.6, 1.6);
 		-moz-transform: translate(55px, 70px) scale(1.6, 1.6);
@@ -488,14 +455,8 @@ noscript .gglnltcs-google-sign-in.gglnltcs-button-primary {
 	.gglnltcs-date .gglnltcs-note {
 		z-index: 5;
 	}
-	#gglnltcs-tracking-id-table th {
-		vertical-align: top;
-	}
 	input[name="gglnltcs_tracking_id"] {
 		display: block;
-	}
-	#gglnltcs-tracking-id-table th {
-		width: 150px;
 	}
 	#gglnltcs-tracking-id-form input[type="submit"] {
 		margin-top: 10px;

@@ -1,10 +1,10 @@
-=== Google Analytics by BestWebSoft ===
+=== Analytics by BestWebSoft ===
 Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add tracking code, analytics, display statistic report, google analytics, google analytics plugin, google analytics stats, group statistics, metrics, page views, visit duration, tracking, web properties
-Requires at least: 3.9
-Tested up to: 5.2.2
-Stable tag: 1.7.6
+Requires at least: 4.5
+Tested up to: 5.3.1
+Stable tag: 1.7.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Add Google Analytics code to WordPress website and track basic stats.
 
 == Description ==
 
-Google Analytics plugin is the best way to view Google Analytics on your WordPress website dashboard. Configure the reporting mode, select the metrics you need, set the time range for your statistic displaying and keep tracking your WordPress website statistics.
+Analytics plugin is the best way to view Google Analytics on your WordPress website dashboard. Configure the reporting mode, select the metrics you need, set the time range for your statistic displaying and keep tracking your WordPress website statistics.
 
 https://www.youtube.com/watch?v=u6GCmG2SYIg
 
@@ -81,9 +81,9 @@ Some of these translations are not complete. We are constantly adding new featur
 
 1. Upload the `bws-google-analytics` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin using the 'Plugins' menu in your WordPress admin panel.
-3. Plugin settings are located in your WordPress admin panel in "BWS Panel" > "Google Analytics" > "Settings".
+3. Plugin settings are located in your WordPress admin panel in "Analytics" > "Settings".
 
-[View a PDF version of Step-by-step Instruction on Google Analytics Installation](https://docs.google.com/document/d/1-hvn6WRvWnOqj5v5pLUk7Awyu87lq5B_dO-Tv-MC9JQ/)
+[View a PDF version of Step-by-step Instruction on Analytics Installation](https://docs.google.com/document/d/1-hvn6WRvWnOqj5v5pLUk7Awyu87lq5B_dO-Tv-MC9JQ/)
 
 == Frequently Asked Questions ==
 
@@ -103,7 +103,7 @@ Follow the next steps to enable tracking and collect statistics from your Wordpr
 10. Click Get Tracking ID.
 11. Copy Tracking ID that looks like UA-xxxxx-y.
 12. Open your Wordpress admin dashboard.
-13. Navigate to the Google Analytics Settings > Tracking Code & Reset tab.
+13. Navigate to the Analytics -> Settings tab.
 14. Past the code to the Tracking ID field.
 15. Check Add tracking Code To Your Blog checkbox (if not checked).
 16. Click Save Changes button.
@@ -142,12 +142,16 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 
 == Screenshots ==
 
-1. Google Analytics Authentication.
-2. Line Chart mode in the plugin Statistic page.
-3. Table Chart mode in the plugin Statistic page.
-4. Google Analytics Settings page.
+1. Analytics Settings page.
+2. Google Analytics Authentication.
+3. Line Chart mode in the plugin Statistic page.
+4. Table Chart mode in the plugin Statistic page.
 
 == Changelog ==
+
+= V1.7.7 - 18.12.2019 =
+* Update : Plugin was renamed.
+* Bugfix : Vulnerabilities and security issues were fixed.
 
 = V1.7.6 - 04.09.2019 =
 * Update: The deactivation feedback has been changed. Misleading buttons have been removed.
@@ -235,6 +239,9 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.7.7 =
+* The compatibility with new WordPress version updated.
 
 = V1.7.6 =
 * Usability improved.
