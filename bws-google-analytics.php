@@ -6,12 +6,12 @@ Description: Add Google Analytics code to WordPress website and track basic stat
 Author: BestWebSoft
 Text Domain: bws-google-analytics
 Domain Path: /languages
-Version: 1.7.7
+Version: 1.7.8
 Author URI: https://bestwebsoft.com/
 License: GPLv2 or later
 */
 
-/*  © Copyright 2019  BestWebSoft  ( https://support.bestwebsoft.com )
+/*  © Copyright 2021  BestWebSoft  ( https://support.bestwebsoft.com )
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as
@@ -34,39 +34,36 @@ if ( ! function_exists( 'add_gglnltcs_admin_menu' ) ) {
     function add_gglnltcs_admin_menu() {
         global $submenu, $wp_version, $gglnltcs_plugin_info;
 
-        if ( ! is_plugin_active( 'bws-google-analytics-pro/bws-google-analytics-pro.php' ) ) {
+        $settings = add_menu_page( __( 'Analytics Settings', 'bws-google-analytics' ),
+            'Analytics',
+            'manage_options',
+            'bws-google-analytics.php',
+            'gglnltcs_settings_page',
+            'none'
+        );
 
-	        $settings = add_menu_page( __( 'Analytics Settings', 'bws-google-analytics' ),
-                'Analytics',
-                'manage_options',
-                'bws-google-analytics.php',
-                'gglnltcs_settings_page',
-                'none'
-            );
+        add_submenu_page( 'bws-google-analytics.php',
+            __( 'Analytics Settings', 'bws-google-analytics' ),
+            __( 'Settings', 'bws-google-analytics' ),
+            'manage_options', 'bws-google-analytics.php',
+            'gglnltcs_settings_page'
+        );
 
-	        add_submenu_page( 'bws-google-analytics.php',
-                __( 'Analytics Settings', 'bws-google-analytics' ),
-                __( 'Settings', 'bws-google-analytics' ),
-                'manage_options', 'bws-google-analytics.php',
-                'gglnltcs_settings_page'
-            );
+        add_submenu_page( 'bws-google-analytics.php',
+            'BWS Panel',
+            'BWS Panel',
+            'manage_options',
+            'gglnltcs-bws-panel',
+            'bws_add_menu_render' );
 
-	        add_submenu_page( 'bws-google-analytics.php',
-                'BWS Panel',
-                'BWS Panel',
-                'manage_options',
-                'gglnltcs-bws-panel',
-                'bws_add_menu_render' );
-
-	        if ( isset( $submenu['bws-google-analytics.php'] ) ) {
-		        $submenu['bws-google-analytics.php'][] = array(
-			        '<span style="color:#d86463"> ' . __( 'Upgrade to Pro', 'custom-search-plugin' ) . '</span>',
-			        'manage_options',
-			        'https://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/?k=0ceb29947727cb6b38a01b29102661a3&pn=125&v=' . $gglnltcs_plugin_info['Version'] . '&wp_v=' . $wp_version
-		        );
-	        }
-	        add_action( 'load-' . $settings, 'gglnltcs_add_tabs' );
+        if ( isset( $submenu['bws-google-analytics.php'] ) ) {
+	        $submenu['bws-google-analytics.php'][] = array(
+		        '<span style="color:#d86463"> ' . __( 'Upgrade to Pro', 'custom-search-plugin' ) . '</span>',
+		        'manage_options',
+		        'https://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/?k=0ceb29947727cb6b38a01b29102661a3&pn=125&v=' . $gglnltcs_plugin_info['Version'] . '&wp_v=' . $wp_version
+	        );
         }
+        add_action( 'load-' . $settings, 'gglnltcs_add_tabs' );
     }
 }
 
@@ -131,7 +128,6 @@ if ( ! function_exists( 'gglnltcs_default_options' ) ) {
             'client_id'				    => '',
             'client_secret'             => '',
             'api_key'                   => '',
-			'add_tracking_code'			=> 1,
 			'display_settings_notice'	=> 1,
 			'first_install'				=> strtotime( "now" ),
 			'suggest_feature_banner'	=> 1,
@@ -230,16 +226,17 @@ if ( ! function_exists( 'gglnltcs_past_tracking_code' ) ) {
 	function gglnltcs_past_tracking_code() {
 		global $gglnltcs_options;
 		
-		if ( 1 == $gglnltcs_options['add_tracking_code'] ) {
+		if ( ! empty( $gglnltcs_options['tracking_id'] ) ) {
 			/* Google tracking code */
-			wp_enqueue_script( 'gglnltcs_googletagmanager', 'https://www.googletagmanager.com/gtag/js?id=' . $gglnltcs_options['tracking_id'], array(), null, true );
+			wp_enqueue_script( 'gglnltcs_googletagmanager', 'https://www.googletagmanager.com/gtag/js?id=' . $gglnltcs_options['tracking_id'] );
 
 			$script = "window.dataLayer = window.dataLayer || [];
-				function gtag(){ dataLayer.push( arguments ); }
-				gtag( 'js', new Date() );
-				gtag( 'config', '" . $gglnltcs_options['tracking_id'] . "' );";
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
 
-			wp_register_script( 'gglnltcs-tracking-script', '', array(), null, true );
+                gtag('config', '{$gglnltcs_options['tracking_id']}');";
+
+			wp_register_script( 'gglnltcs-tracking-script', '//', array( 'gglnltcs_googletagmanager' ) );
 			wp_enqueue_script( 'gglnltcs-tracking-script' );
 			wp_add_inline_script( 'gglnltcs-tracking-script', sprintf( $script ) );
 		}
@@ -443,7 +440,7 @@ if ( ! function_exists( 'gglnltcs_print_results' ) ) {
 			$table .= '</table>
 						</div>';
 		} else {
-			$table .= '<table class="gglnltcs gglnltcs-results">
+			$table = '<table class="gglnltcs gglnltcs-results">
 						<tr>
 							<th><h3>' . _e( 'Results', 'bws-google-analytics' ) . '</h3></th>
 							<td><div class="gglnltcs-bad-results">' . __( 'No results found', 'bws-google-analytics' ) . '.<div></td>

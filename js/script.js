@@ -9,17 +9,6 @@
 	 * Content Processing. This functions will be recalled every time user selects new tab.
 	 */
 	function contentProcessing() {
-		/*
-		 * functions for "Tracking Code & Reset" tab
-		 */
-		/* uncheck "Add tracking Code To Your Blog" checkbox if tracking code is empty */
-		if ( ! $( 'input[name="gglnltcs_tracking_id"]' ).val() ) {
-			$( '#gglnltcs-add-tracking-code-input' ).attr( "checked", false );
-		};
-		/* check/uncheck "Add tracking Code To Your Blog" checkbox depending whether tracking code field is empty */
-		$( 'input[name="gglnltcs_tracking_id"]' ).change( function() {
-			$( '#gglnltcs-add-tracking-code-input' ).attr( "checked", !! $( this ).val() );
-		} );
 		$( '#gglnltcs-tracking-id-form input[name="gglnltcs_tracking_id"], input[name="gglnltcs_tracking_id"], #gglnltcs-authentication-code-input' ).on( 'keypress', function() {
 			$( this ).removeClass( 'gglnltcs-validation-failed' );
 		} );
@@ -127,8 +116,8 @@
 	/**
 	 * Display statistical data
 	 * @since   1.6.7
-	 * @param   boolean  make_ajax
-	 * @rerturn void
+	 * @param {boolean} make_ajax
+	 * @return void
 	 */
 	function displayStatistics( make_ajax ) {
 		make_ajax = 'undefined' ===  typeof make_ajax ? true : make_ajax;
@@ -239,10 +228,10 @@
 			$( '#gglnltcs-group-by-Y-M-D input' ).removeClass( 'gglnltcs-selected' );
 			$( this ).addClass( 'gglnltcs-selected' );
 			if ( ! $( '.gglnltcs-results .gglnltcs-bad-results' ).length ) {
-				var index = $( this ).index();
+				var index = $( this ).index() + 1;
 				var tablesTotal = $( '.gglnltcs-results-table-wrap' );
 				tablesTotal.hide();
-				$( '.gglnltcs-results-table-wrap' ).eq( tablesTotal.length - index ).show();
+				tablesTotal.eq( tablesTotal.length - index ).show();
 				setResultsTableHeight();
 			}
 		} );

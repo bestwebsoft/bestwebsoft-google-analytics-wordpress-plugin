@@ -3,8 +3,8 @@ Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add tracking code, analytics, display statistic report, google analytics, google analytics plugin, google analytics stats, group statistics, metrics, page views, visit duration, tracking, web properties
 Requires at least: 4.5
-Tested up to: 5.3.1
-Stable tag: 1.7.7
+Tested up to: 5.6
+Stable tag: 1.7.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,7 @@ If you have a feature suggestion or idea you'd like to see in the plugin, we'd l
 
 = Documentation & Videos =
 
+* [[Doc] User Guide](https://docs.google.com/document/d/1crUDzT-SASTmoj3M6lJcR4CyRzCp9Ge1l2-BcsUotZY/)
 * [[Doc] Installation](https://docs.google.com/document/d/1-hvn6WRvWnOqj5v5pLUk7Awyu87lq5B_dO-Tv-MC9JQ/)
 * [[Doc] Purchase](https://docs.google.com/document/d/1EUdBVvnm7IHZ6y0DNyldZypUQKpB8UVPToSc_LdOYQI/)
 
@@ -69,6 +70,7 @@ Visit our Help Center if you have any questions, our friendly Support Team is ha
 = Translation =
 
 * Russian (ru_RU)
+* Spanish (es_ES) (thanks to [Jose Bescos](mailto:jmbescos@ibidemgroup.com) - www.ibidemgroup.com)
 * Ukrainian (uk)
 
 Some of these translations are not complete. We are constantly adding new features which should be translated. If you would like to create your own language pack or update the existing one, you can send [the text of PO and MO files](https://codex.wordpress.org/Translating_WordPress) to [BestWebSoft](https://support.bestwebsoft.com/hc/en-us/requests/new) and we'll add it to the plugin. You can download the latest version of the program for work with PO and MO [files Poedit](https://www.poedit.net/download.php).
@@ -148,6 +150,13 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 4. Table Chart mode in the plugin Statistic page.
 
 == Changelog ==
+
+= V1.7.8 - 01.02.2021 =
+* NEW : The Spanish language file is added.
+* Bugfix : We fixed the bug of additional page reload to get Client ID data.
+* Update : We updated all functionality for WordPress 5.6.
+* Update : The plugin settings page has been updated.
+* Update : BWS Panel section was updated.
 
 = V1.7.7 - 18.12.2019 =
 * Update : Plugin was renamed.
@@ -239,6 +248,10 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V1.7.8 =
+* New languages added.
+* Bugs fixed.
 
 = V1.7.7 =
 * The compatibility with new WordPress version updated.

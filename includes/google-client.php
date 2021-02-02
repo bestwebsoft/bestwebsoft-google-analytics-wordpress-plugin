@@ -7,7 +7,9 @@
 if ( ! function_exists( 'gglnltcs_get_client' ) ) {
 	function gglnltcs_get_client() {
 		global $gglnltcs_options;
-
+        if ( ! empty( $_POST['gglnltcs_client_id'] ) ) {
+            $gglnltcs_options['client_id'] = sanitize_text_field( $_POST['gglnltcs_client_id'] );
+        }
         $client_id      = array_key_exists( 'client_id', $gglnltcs_options ) ? $gglnltcs_options['client_id'] : '';
         $client_secret  = array_key_exists( 'client_secret', $gglnltcs_options ) ? $gglnltcs_options['client_secret'] : '';
         $api_key        = array_key_exists( 'api_key', $gglnltcs_options ) ? $gglnltcs_options['api_key'] : '';
