@@ -1,10 +1,11 @@
-=== Analytics by BestWebSoft ===
+=== Analytics by BestWebSoft - Google Analytics Dashboard and Statistic Plugin for WordPress ===
 Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: add tracking code, analytics, display statistic report, google analytics, google analytics plugin, google analytics stats, group statistics, metrics, page views, visit duration, tracking, web properties
-Requires at least: 4.5
-Tested up to: 5.6
-Stable tag: 1.7.8
+Requires at least: 5.6
+Requires PHP: 7.4
+Tested up to: 6.6
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +14,8 @@ Add Google Analytics code to WordPress website and track basic stats.
 == Description ==
 
 Analytics plugin is the best way to view Google Analytics on your WordPress website dashboard. Configure the reporting mode, select the metrics you need, set the time range for your statistic displaying and keep tracking your WordPress website statistics.
+
+[View Demo](https://bestwebsoft.com/demo-analytics/?ref=readme)
 
 https://www.youtube.com/watch?v=u6GCmG2SYIg
 
@@ -23,12 +26,11 @@ https://www.youtube.com/watch?v=u6GCmG2SYIg
 	* Line chart
 	* Table
 * Choose statistics time range
-* Supports several accounts and webproperties for the statistics displaying
+* Supports several webproperties for the statistics displaying
 * Choose statistics metrics:
 	* Visitor
 		* Unique visitors
-		* 
- visits
+		* New visits
 	* Session
 		* Visits
 		* Bounce rate
@@ -44,13 +46,12 @@ https://www.youtube.com/watch?v=u6GCmG2SYIg
 >
 > All features from Free version included plus:
 >
-> * View statistics for goals
-> * Choose goal metrics:
-> 	* Completions
-> 	* Value
-> 	* Conversion rate
-> 	* Abandoned funnels
-> * Configure all subsites on the network
+> * View visual statistics
+> * View visual statistics for URL
+> * Choose statistics metrics:
+> 	* Session
+> 	* Revenue
+> * Save statistics to scv
 > * Get answer to your support question within one business day ([Support Policy](https://bestwebsoft.com/support-policy/))
 >
 > [Upgrade to Pro Now](https://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/?k=5891b1a2761b39cd5706eba26c3af1d4)
@@ -145,11 +146,16 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 == Screenshots ==
 
 1. Analytics Settings page.
-2. Google Analytics Authentication.
-3. Line Chart mode in the plugin Statistic page.
-4. Table Chart mode in the plugin Statistic page.
+2. Google Analytics Statisctic page.
+3. Visual Statistic page.
 
 == Changelog ==
+
+= V2.0 - 15.08.2024 =
+* Update : All functionality has been updated to work with the Google Analytics 4.
+* Update : We updated all functionality for WordPress 6.6.
+* Update : The plugin settings page has been updated.
+* Update : BWS Panel section was updated.
 
 = V1.7.8 - 01.02.2021 =
 * NEW : The Spanish language file is added.
@@ -248,6 +254,11 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * NEW: Ability to retrieve basic statistical information from Google Analytics account was added.
 
 == Upgrade Notice ==
+
+= V2.0 =
+* The compatibility with new WordPress version updated.
+* Usability improved.
+* Functionality improved.
 
 = V1.7.8 =
 * New languages added.

@@ -99,6 +99,10 @@
 			}
 		} );
 
+		$( '.gglnltcs-delete' ).on( 'click', function( event ) {
+			$( this ).parent().remove();
+		});
+
 		setChartCurves();
 		/*
 		 * Display statistics
@@ -201,14 +205,17 @@
 		/* Results table hover highlight cells */
 		$( '.gglnltcs-results td' ).on( 'mouseover', function() {
 			var cellIndex = $( this ).index();
+			if ( 0 == cellIndex ) {
+				return;
+			}
 			$( '.gglnltcs-results tr' ).each( function() {
-				$( this ).find( 'td' ).eq( cellIndex - 2 ).addClass( 'gglnltcs-hovered-cell' );
+				$( this ).find( 'td' ).eq( cellIndex ).addClass( 'gglnltcs-hovered-cell' );
 			} );
 			$( this ).addClass( 'gglnltcs-this-hovered-cell' );
 		} ).on( 'mouseleave', function() {
 			var cellIndex = $( this ).index();
 			$( '.gglnltcs-results tr' ).each( function() {
-				$( this ).find( 'td' ).eq( cellIndex - 2 ).removeClass( 'gglnltcs-hovered-cell' );
+				$( this ).find( 'td' ).eq( cellIndex ).removeClass( 'gglnltcs-hovered-cell' );
 			} );
 			$( this ).removeClass( 'gglnltcs-this-hovered-cell' );
 		} );
@@ -258,7 +265,7 @@
 		var settings      = $( '.bws_form' ).serialize(),
 			toDisable     = $( '.gglnltcs_to_disable' ).attr( 'disabled', true ),
 			loadingCircle = $( '<div>', { 'class': 'gglnltcs-loading-icon' } ).hide().insertAfter( '#gglnltcs-get-statistics-button' ).fadeIn( 500 ),
-			chartCanvas   = $( '#gglnltcs-results-wrapper' ).children(),
+			chartCanvas   = $( '#gglnltcs-results-wrapper' ),
 			data          = {
 				action:         'gglnltcs_action',
 				settings:       settings,
@@ -314,7 +321,7 @@
 					if ( chartCurves.pageviewsPerSession ) { chartRows.push( parseInt( perSession[i], 10 ) ) }
 					ajaxChart.addRows( [ chartRows ] );
 				}
-				chartCanvas.parent().html( '<div id="gglnltcs-chart"></div>' );
+				chartCanvas.html( '<div id="gglnltcs-chart"></div>' );
 				function drawChart( tableData ) {
 					var options = {
 						aggregationTarget: 'series',

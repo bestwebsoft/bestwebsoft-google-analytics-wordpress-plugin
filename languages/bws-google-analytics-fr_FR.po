@@ -1,0 +1,349 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2024-08-15 15:49+0300\n"
+"PO-Revision-Date: 2024-08-15 15:51+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: esc_attr_e;__;_e;esc_html__;esc_html_e;esc_attr__\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: bws_menu\n"
+
+#: bws-google-analytics.php:46 bws-google-analytics.php:56
+#: bws-google-analytics.php:222 includes/class-gglnltcs-settings.php:124
+msgid "Analytics Settings"
+msgstr "Paramètres Analytics"
+
+#: bws-google-analytics.php:57 bws-google-analytics.php:812
+#: bws-google-analytics.php:833 includes/class-gglnltcs-settings.php:28
+msgid "Settings"
+msgstr "Préférences"
+
+#: bws-google-analytics.php:74
+msgid "Upgrade to Pro"
+msgstr "Passer à la version Pro"
+
+#: bws-google-analytics.php:288 includes/class-gglnltcs-settings.php:238
+#, php-format
+msgid "Date values must match the pattern %s."
+msgstr "Les valeurs de la date doivent correspondre au modèle %s."
+
+#: bws-google-analytics.php:289
+msgid "Any request must supply at least one metric."
+msgstr "Toute demande doit fournir au moins un indicateur."
+
+#: bws-google-analytics.php:290
+msgid "Invalid Date Range."
+msgstr "Plage de dates invalide."
+
+#: bws-google-analytics.php:291 bws-google-analytics.php:650
+#: bws-google-analytics.php:726
+msgid "Unique Visitors"
+msgstr "Visiteurs Uniques"
+
+#: bws-google-analytics.php:292 bws-google-analytics.php:653
+#: bws-google-analytics.php:736
+msgid "New Visits"
+msgstr "Nouvelles Visites"
+
+#: bws-google-analytics.php:293 bws-google-analytics.php:656
+#: bws-google-analytics.php:747
+msgid "Visits"
+msgstr "Visites"
+
+#: bws-google-analytics.php:294 bws-google-analytics.php:659
+#: bws-google-analytics.php:757
+msgid "Bounce Rate"
+msgstr "Taux de Rebond"
+
+#: bws-google-analytics.php:295 bws-google-analytics.php:662
+#: bws-google-analytics.php:767
+msgid "Average Visit Duration"
+msgstr "Durée moyenne de la visite"
+
+#: bws-google-analytics.php:296 bws-google-analytics.php:665
+#: bws-google-analytics.php:778
+msgid "Pageviews"
+msgstr "Pages vues"
+
+#: bws-google-analytics.php:297 bws-google-analytics.php:668
+#: bws-google-analytics.php:788
+msgid "Pages / Visit"
+msgstr "Pages par visite"
+
+#: bws-google-analytics.php:298
+msgid "Failed to process the received data correctly"
+msgstr "Impossible de traiter correctement les données reçues"
+
+#: bws-google-analytics.php:351
+msgid "To enable report for statistics please enter Property ID."
+msgstr ""
+"Pour activer le rapport pour les statistiques, saisissez l’ID de la "
+"propriété."
+
+#: bws-google-analytics.php:367
+msgid "There are not enough settings to create a request."
+msgstr "Il n’y a pas assez de paramètres pour créer une demande."
+
+#: bws-google-analytics.php:432
+msgid "Group by"
+msgstr "Regrouper par"
+
+#: bws-google-analytics.php:434
+msgid "Year"
+msgstr "Année"
+
+#: bws-google-analytics.php:435
+msgid "Month"
+msgstr "Mois"
+
+#: bws-google-analytics.php:436
+msgid "Day"
+msgstr "Jour"
+
+#: bws-google-analytics.php:452
+msgid "Results"
+msgstr "Résultats"
+
+#: bws-google-analytics.php:453
+msgid "No results found"
+msgstr "Aucun résultat trouvé"
+
+#: bws-google-analytics.php:622
+msgid "There was an Analytics API service error"
+msgstr "Il y a eu une erreur du service « API Analytics »"
+
+#: bws-google-analytics.php:628
+msgid "There was a general API error"
+msgstr "Il y a eu une erreur générale d'une API"
+
+#: bws-google-analytics.php:648
+msgid "Date"
+msgstr "Date"
+
+#: bws-google-analytics.php:724
+msgid "Total number of visitors for the requested time period."
+msgstr "Nombre total de visiteurs pour la période demandée."
+
+#: bws-google-analytics.php:727 bws-google-analytics.php:737
+msgid "Visitor"
+msgstr "Visiteur"
+
+#: bws-google-analytics.php:734
+msgid ""
+"The number of visitors whose visit to your property was marked as a first-"
+"time visit."
+msgstr ""
+"Le nombre de visiteurs dont la visite a été marquée comme première visite."
+
+#: bws-google-analytics.php:745
+msgid "Counts the total number of sessions."
+msgstr "Compte le nombre total de sessions."
+
+#: bws-google-analytics.php:748 bws-google-analytics.php:758
+#: bws-google-analytics.php:768
+msgid "Session"
+msgstr "Session"
+
+#: bws-google-analytics.php:755
+msgid ""
+"The percentage of single-page visits (i.e., visits in which the person left "
+"your property from the first page)."
+msgstr ""
+"Le pourcentage de visites d'une seule page (c'est-à-dire les visites dans "
+"lesquelles la personne a quitté votre site depuis la première page)."
+
+#: bws-google-analytics.php:765
+msgid "The average duration visitor sessions."
+msgstr "La durée moyenne des sessions des visiteurs."
+
+#: bws-google-analytics.php:776
+msgid "The total number of pageviews for your property."
+msgstr "Le nombre total de pages vues de votre site."
+
+#: bws-google-analytics.php:779 bws-google-analytics.php:789
+msgid "Page Tracking"
+msgstr "Suivi de page"
+
+#: bws-google-analytics.php:786
+msgid ""
+"The average number of pages viewed during a visit to your property. Repeated "
+"views of a single page are counted."
+msgstr ""
+"Le nombre moyen de pages vues lors d'une visite dans votre site. Les vues "
+"répétées d'une seule page sont comptées."
+
+#: bws-google-analytics.php:835
+msgid "FAQ"
+msgstr "FAQ"
+
+#: bws-google-analytics.php:836
+msgid "Support"
+msgstr "Support"
+
+#: includes/class-gglnltcs-settings.php:29
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: includes/class-gglnltcs-settings.php:30
+msgid "Visual Statistics"
+msgstr "Statistiques visuelles"
+
+#: includes/class-gglnltcs-settings.php:31
+msgid "Misc"
+msgstr "Divers"
+
+#: includes/class-gglnltcs-settings.php:32
+msgid "Custom Code"
+msgstr "Code personnalisé"
+
+#: includes/class-gglnltcs-settings.php:33
+msgid "Licence Key"
+msgstr "Clé de la licence"
+
+#: includes/class-gglnltcs-settings.php:64
+msgid ""
+"To enable tracking and collect statistic from your site please enter "
+"Tracking ID."
+msgstr ""
+"Pour activer le suivi et collecter des statistiques à partir de votre site, "
+"saisissez l’ID de suivi."
+
+#: includes/class-gglnltcs-settings.php:68
+msgid "Please enable JavaScript in your browser."
+msgstr "Veuillez activer JavaScript dans votre navigateur."
+
+#: includes/class-gglnltcs-settings.php:86
+msgid "Sorry, your nonce did not verify."
+msgstr "Désolé, votre nonce n' a pas été vérifié."
+
+#: includes/class-gglnltcs-settings.php:108
+#, php-format
+msgid ""
+"Writing to file \"%s\" failed. It is necessary to manually fill the file or "
+"grant write permissions to create the file"
+msgstr ""
+"L’écriture dans le fichier « %s » a échoué. Il est nécessaire de remplir "
+"manuellement le fichier ou d’accorder des autorisations d’écriture pour "
+"créer le fichier"
+
+#: includes/class-gglnltcs-settings.php:113
+msgid "Settings saved"
+msgstr "Paramètres sauvegardés"
+
+#: includes/class-gglnltcs-settings.php:127
+msgid "Authentication"
+msgstr "Authentification"
+
+#: includes/class-gglnltcs-settings.php:130
+msgid "Tracking ID"
+msgstr "Identifiant de suivi"
+
+#: includes/class-gglnltcs-settings.php:133
+msgid "Want to know how to add your tracking ID?"
+msgstr "Vous voulez savoir comment ajouter votre ID de suivi ?"
+
+#: includes/class-gglnltcs-settings.php:133
+#: includes/class-gglnltcs-settings.php:149
+msgid "Learn More"
+msgstr "En savoir plus"
+
+#: includes/class-gglnltcs-settings.php:137
+msgid "Property ID"
+msgstr "Référence du bien"
+
+#: includes/class-gglnltcs-settings.php:149
+msgid "Want to know how to add your property ID?"
+msgstr "Vous voulez savoir comment ajouter votre ID de propriété ?"
+
+#: includes/class-gglnltcs-settings.php:153
+msgid "API Credentials"
+msgstr "Informations d'identification API"
+
+#: includes/class-gglnltcs-settings.php:168
+msgid "Analytics Statistics"
+msgstr "Statistiques analytiques"
+
+#: includes/class-gglnltcs-settings.php:187
+#: includes/class-gglnltcs-settings.php:327
+msgid "Property"
+msgstr "Propriété"
+
+#: includes/class-gglnltcs-settings.php:204
+msgid "Metrics"
+msgstr "Métriques"
+
+#: includes/class-gglnltcs-settings.php:225
+msgid "Time Range"
+msgstr "Intervalle de temps"
+
+#: includes/class-gglnltcs-settings.php:228
+msgid "From"
+msgstr "De"
+
+#: includes/class-gglnltcs-settings.php:232
+msgid "to"
+msgstr "à"
+
+#: includes/class-gglnltcs-settings.php:240
+msgid "The gap between dates must not be more than 999 days."
+msgstr "L'écart entre les dates ne doit pas dépasser 999 jours."
+
+#: includes/class-gglnltcs-settings.php:247
+msgid "View Mode"
+msgstr "Mode d'affichage"
+
+#: includes/class-gglnltcs-settings.php:257
+msgid "Line chart"
+msgstr "Graphique en ligne"
+
+#: includes/class-gglnltcs-settings.php:267
+msgid "Table"
+msgstr "Tableau"
+
+#: includes/class-gglnltcs-settings.php:275
+msgid "Get Statistic"
+msgstr "Obtenir des statistiques"
+
+#: includes/class-gglnltcs-settings.php:279
+#: includes/class-gglnltcs-settings.php:323
+msgid "Close"
+msgstr "Fermer"
+
+#: includes/class-gglnltcs-settings.php:281
+msgid "Save to scv"
+msgstr "Enregistrer dans scv"
+
+#: includes/class-gglnltcs-settings.php:303
+msgid "There was an API error"
+msgstr "Il y a eu une erreur d'une API"
+
+#: includes/class-gglnltcs-settings.php:306
+msgid "Warning: "
+msgstr "Avertissement "
+
+#: includes/class-gglnltcs-settings.php:307
+msgid ""
+"Authentication Token expired. Authenticate with your Google Account once "
+"again."
+msgstr ""
+"Le jeton d’authentification a expiré. Authentifiez-vous à nouveau avec votre "
+"compte Google."
+
+#: includes/class-gglnltcs-settings.php:317
+msgid "Analytics Visual Statistics"
+msgstr "Statistiques visuelles analytiques"
+
+#: includes/class-gglnltcs-settings.php:335
+msgid "Get Statistic for URL"
+msgstr "Obtenir des statistiques pour l’URL"
+
+#: includes/class-gglnltcs-settings.php:343
+msgid "Get Visual Statistic"
+msgstr "Obtenir des statistiques visuelles"

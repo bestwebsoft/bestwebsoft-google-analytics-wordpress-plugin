@@ -5,7 +5,13 @@
     content: "\e911";
     font-family: 'bwsicons' !important;
 }
-#bws_settings_tabs li.bws-tab-statistics a:before {
+#bws_settings_tabs li.bws-tab-statistics a:before,
+#bws_settings_tabs li.bws-tab-visual_statistics a:before {
     content: "\f185";
     font-family: 'dashicons' !important;
+}
+
+#bws_settings_tabs .gglnltcs-delete {
+	display: inline-block;
+	cursor: pointer;
 }

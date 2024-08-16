@@ -2,6 +2,7 @@
 ========================
 
 <p>Analytics plugin is the best way to view Google Analytics on your WordPress website dashboard. Configure the reporting mode, select the metrics you need, set the time range for your statistic displaying and keep tracking your WordPress website statistics.</p>
+<p><a href="https://bestwebsoft.com/demo-analytics/?ref=readme" rel="nofollow ugc">View Demo</a></p>
 <p><span class="embed-youtube" style="text-align:center; display: block;"></span></p>
 <h4>Free Features</h4>
 <ul>
@@ -13,7 +14,7 @@
 </ul>
 </li>
 <li>Choose statistics time range</li>
-<li>Supports several accounts and webproperties for the statistics displaying</li>
+<li>Supports several webproperties for the statistics displaying</li>
 <li>Choose statistics metrics:
 <ul>
 <li>Visitor
@@ -45,16 +46,15 @@
 <p><strong>Pro Features</strong></p>
 <p>All features from Free version included plus:</p>
 <ul>
-<li>View statistics for goals</li>
-<li>Choose goal metrics:
+<li>View visual statistics</li>
+<li>View visual statistics for URL</li>
+<li>Choose statistics metrics:
 <ul>
-<li>Completions</li>
-<li>Value</li>
-<li>Conversion rate</li>
-<li>Abandoned funnels</li>
+<li>Session</li>
+<li>Revenue</li>
 </ul>
 </li>
-<li>Configure all subsites on the network</li>
+<li>Save statistics to scv</li>
 <li>Get answer to your support question within one business day (<a href="https://bestwebsoft.com/support-policy/" rel="nofollow ugc">Support Policy</a>)</li>
 </ul>
 <p><a href="https://bestwebsoft.com/products/wordpress/plugins/bws-google-analytics/?k=5891b1a2761b39cd5706eba26c3af1d4" rel="nofollow ugc">Upgrade to Pro Now</a></p>
@@ -62,14 +62,12 @@
 <p>If you have a feature suggestion or idea you&#8217;d like to see in the plugin, we&#8217;d love to hear about it! <a href="https://support.bestwebsoft.com/hc/en-us/requests/new" rel="nofollow ugc">Suggest a Feature</a></p>
 <h4>Documentation &amp; Videos</h4>
 <ul>
-<li><a href="https://bestwebsoft.com/documentation/analytics/analytics-user-guide/" rel="nofollow ugc">[Doc] User Guide</a></li>
-<li><a href="https://bestwebsoft.com/documentation/how-to-install-a-wordpress-product/how-to-install-a-wordpress-plugin/" rel="nofollow ugc">[Doc] Installation</a></li>
-<li><a href="https://bestwebsoft.com/documentation/how-to-purchase-a-wordpress-plugin/how-to-purchase-wordpress-plugin-from-bestwebsoft/" rel="nofollow ugc">[Doc] Purchase</a></li>
+<li><a href="https://docs.google.com/document/d/1crUDzT-SASTmoj3M6lJcR4CyRzCp9Ge1l2-BcsUotZY/" rel="nofollow ugc">[Doc] User Guide</a></li>
+<li><a href="https://docs.google.com/document/d/1-hvn6WRvWnOqj5v5pLUk7Awyu87lq5B_dO-Tv-MC9JQ/" rel="nofollow ugc">[Doc] Installation</a></li>
+<li><a href="https://docs.google.com/document/d/1EUdBVvnm7IHZ6y0DNyldZypUQKpB8UVPToSc_LdOYQI/" rel="nofollow ugc">[Doc] Purchase</a></li>
 </ul>
 <h4>Help &amp; Support</h4>
 <p>Visit our Help Center if you have any questions, our friendly Support Team is happy to help — <a href="https://support.bestwebsoft.com/" rel="nofollow ugc">https://support.bestwebsoft.com/</a></p>
-<h4>Affiliate Program</h4>
-<p>Earn 20% commission by selling the premium WordPress plugins and themes by BestWebSoft — <a href="https://bestwebsoft.com/affiliate/" rel="nofollow">https://bestwebsoft.com/affiliate/</a></p>
 <h4>Translation</h4>
 <ul>
 <li>Russian (ru_RU)</li>
